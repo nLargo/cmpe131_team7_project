@@ -87,11 +87,11 @@
 5. After 3 minutes of transcribing, the site stops listening and indicates that listening is now off.
 6. The site checks if the user is still there, prompting the user to click the voice dictation button again to continue speech-to-text. 
  
-## Use Cases - <name> (@username)
+## Use Cases - name (@username)
 
-## Use Cases - <name> (@username)
+## Use Cases - name (@username)
 
-## Use Cases - <name> (@username)
+## Use Cases - name (@username)
 
 TEMPLATE FOR USE CASES
 ## Use Cases <Add name of who will write (this specific requirement) and implement (in subsequent milestones) the use case below>
