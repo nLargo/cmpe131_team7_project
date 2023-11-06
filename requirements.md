@@ -96,15 +96,13 @@
 2. User successfully creates an account or logs in with an existing account.
 3. User is prompted with a pop-up to save their information or not now.
 4. User chooses an option and can now use the app.
-- **Primary Postconditions:** User is able to use the app.
-		              - The next time the user logs in, the information is either saved or not.
-					OR
-  			      User does not get to use the app because they were not able to create an account or had the incorrect login information.
-			      - User has to login. 
+- **Primary Postconditions:** User is able to use the app and remain signed in.
 - **Alternate Sequence:** 
 2. User is not able to create an account or has the incorrect login information.
-	a. Screen displays an error message, that login was not successful.
-	b. User is asked to input the correct information.
+
+	**a)** Screen displays an error message, that login was not successful.
+  
+	**b)** User is asked to input the correct information.
 
 ### 2) Allow notifications.
 - **Pre-condition:** User should have downloaded the app and logged in.
@@ -116,15 +114,13 @@
 4. User is asked if they ‘allow’ or ‘don’t allow’ the app to send notifications.
 5. User selects an option.
 6. User can use the notes app.
--**Primary Postconditions:** User can use the app.
-			     - The user receives or doesn't receive notifications from the notes app.
-				OR
-    			     User can’t use the app.
-			     - User has to sign in with the right login information. 
+- **Primary Postconditions:** User can use the app and receives or doesn't receive notifications from the notes app.
 - **Alternate Sequence:** 
 2. User is unable to login or sign up, so user isn’t offered the option or allow or not allow notifications. 
-	a. User received an error message.
-	b. User is prompted to sign in again with the correct information.
+
+  	**a)** User received an error message.
+
+  	**b)** User is prompted to sign in again with the correct information.
 
 ### 3) Search notes app.
 - **Pre-condition:** There should be at least one file with text in the app. 
@@ -135,12 +131,13 @@
 3. User selects the search bar option.
 4. User is able to type in keywords or sentences to search through the existing notes.
 5. User can find any file by pressing enter after typing in the words.
-- **Primary Postconditions:** User is able to find the file they searched for. 
-		              - User can open the file and edit or read it.   
+- **Primary Postconditions:** User is able to find, edit, and read the file that was searched for.  
 - **Alternate Sequence:** 
 4. There are no existing notes to search through. 
-	a. Search result shows no files.
-	b. User has to create new files. 
+
+  	**a)** Search result shows no files.
+  
+	**b)** User has to create new files. 
 
 ### 4) Save file. 
 - **Pre-condition:** The user has created a new file or is editing one.
@@ -150,15 +147,11 @@
 2. User creates a new file or opens an existing one.
 3. User edits the file by adding or modifying text.
 4. The text and edits done in the file are automatically saved within 1 minute.
-- **Primary Postconditions:** The file is the new version with the modified content. 
-			      - There is another version added to the history of the file. 
-					OR
-   			      The file is empty.
-		              - File was not saved.
-   			      - There is no file because empty files don’t get saved. 
+- **Primary Postconditions:** The file is the new version with the modified content and another version is added to the history of the file. 
 - **Alternate Sequence:** 
 3. A file has no text or content.
-	a. The notes app is unable to save anything. 
+  
+	**a)** The notes app is unable to save anything. 
 
 
 ## Use Cases - name (@username)
