@@ -1,10 +1,10 @@
 ## <remove all of the example text and notes in < > such as this one>
 
-## Functional Requirements
-1. requirement <should be 1 sentence that describes requirement>
-2. requirement
-3. requirement
-4. requirement
+## Functional Requirements <should be 1 sentence that describes requirement>
+1. Set notes sorting
+2. Create new folder
+3. Pin notes
+4. Type with voice dication
 5. requirement
 6. requirement
 7. requirement
@@ -23,6 +23,80 @@
 2. non-functional
 
 <each of the 14 requirements will have a use case associated with it>
+##Use Cases - Nathan Largo (@nLargo)
+1. Set notes sorting
+- **Pre-condition:** The user must be logged in and on the notes page. 
+- **Trigger:** The user clicks the ‘Sort By’ dropdown button. 
+- **Primary Sequence:** 
+	1a. The site displays a dropdown menu with the sort options, “Date Edited” (default), “Date Created”, and “Title”. 
+	1b. Beside each option, is an ascending/descending order toggle button. 
+	2. User selects a sort option.
+	3. The dropdown menu closes. 
+	4. Site sorts the notes according to the user’s selection. 
+- **Primary Postconditions:** The user’s notes are ordered according to their selection. 
+- **Alternate Sequence I:**  
+	2*. User toggles the ascending/descending order button beside the current sort option. 
+	3. The dropdown menu closes. 
+	4. Site sorts the notes according to the user’s selection. 
+- **Alternate Sequence II:**  
+	2**. User toggles the ascending/descending order button beside a sort option that isn’t currently selected. 
+	3. Site auto-selects the sort option beside the toggled button. 
+	4. The dropdown menu closes. 
+	5. Site sorts the notes according to the user’s selection. 
+
+2. Note folder creation
+- **Pre-condition:** The user must be logged in and have at least 1 note/folder. 
+- **Trigger:** The user clicks "New Folder" while selecting 1 or more notes/folders. 
+- **Primary Sequence:** 
+	1. The site prompts the user with a textbox to name the new folder.
+	2. User types and enters a name. 
+	3a. Site creates a folder with the given name, in the current folder that the selection exists. 
+	3b. Site displays the folder in the sidebar list, visibly nested in any parent folders. 
+	4. Site moves the selection into the new folder. 
+	5. Site opens the new folder, displaying the selected notes/folders within. 
+- **Primary Postconditions:** The selected notes/folders have been moved into a new folder (a subdirectory). 
+- **Alternate Sequence:**  
+	2* User does not type anything and clicks enter. 
+	3a. Site creates a folder with the default name "New Folder", in the current folder that the selection exists. 
+	3b. Site displays the folder in the sidebar list, visibly nested in any parent folders. 
+	4. Site moves the selection into the new folder. 
+	5. Site opens the new folder, displaying the selected notes/folders within. 
+
+3. Pin notes
+- **Pre-condition:** The user must be logged in and have at least 1 note.
+- **Trigger:** The user clicks "Pin" while selecting 1 or more notes. 
+- **Primary Sequence:** 
+	1. The site designates a 'pinned' section at the top of the list of notes. 
+	2. Site moves the selected note to the pinned section. 
+	3. Site displays a pin icon on the note to indicate that it's pinned. 
+- **Primary Postconditions:** The selected note is pinned to the upper portion of the list. 
+- **Alternate Sequence:**  
+	1*. The pinned section already exists and has pinned notes already. 
+	2a. The site moves the selected note to the pinned section. 
+	2b. Site sorts the pinned section in accordance with the folder's sorting. 
+	3. Site displays a pin icon on the note to indicate that it's pinned. 
+
+4. Type with voice dictation
+- **Pre-condition:** The user must be logged in and have a note open and editable. 
+- **Trigger:** The user clicks the 'voice dication' button. 
+- **Primary Sequence:** 
+	1. The site indicates that it is listening and listening for speech. 
+	2. User speaks. 
+	3. The site transcribes the speech. 
+	4. The user clicks the voice dictation button again. 
+	5. The site indicates that listening is now off and stops listening. 
+- **Primary Postconditions:** The user's speech has been transcribed in real-time to the current note. 
+- **Alternate Sequence:**  
+	4*. The user does not click the voice dictation button again. 
+	5a. After 3 minutes of transcribing, the site stops listening and indicates that listening is now off. 
+	5b. The site checks if the user is still there, prompting the user to click the voice dictation button again to continue speech-to-text. 
+ 
+##Use Cases - <name> (@username)
+
+##Use Cases - <name> (@username)
+
+##Use Cases - <name> (@username)
+
 ## Use Cases <Add name of who will write (this specific requirement) and implement (in subsequent milestones) the use case below>
 1. Use Case Name (Should match functional requirement name)
 - **Pre-condition:** <can be a list or short description>
