@@ -14,9 +14,6 @@ help.>
 
 - Emma worked on coming up with 4 functional requirements and wrote up the use cases for them. Will work on the code to implement these requirements next.
 
-- pair-programming (optional) (25 mins)
-<- Pair program on one part of the project. Driver will be the person responsible
-for that requirement.>
 <summary>
 - The group worked together to handle our respective portions of our
 funtional requirements. We made sure to have no overlaps and double-c
@@ -26,6 +23,9 @@ funtional requirements. We made sure to have no overlaps and double-c
 <only fill in template once you had the meeting>
 <see example on the last date>
 <use date format YYYY-MM-DD at HH:MM>
+- pair-programming (optional) (25 mins)
+<- Pair program on one part of the project. Driver will be the person responsible
+for that requirement.>
 
 ### 2023-11-17 at 18:00
 <meeting template would go here>
