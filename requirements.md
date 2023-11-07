@@ -10,15 +10,15 @@
 9. User will be able to send notes as a PDF via email to a specified recipient
 10. User will be able to add photos from their photo library into the note page
 11. User will be able to add audio files that are playable inside the body of the notes page
-12. requirement
-13. requirement
-14. requirement
+12. Notes app should have user registration and login asking for username and password.
+13. Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
+14. Notes app should allow users to create and delete notes.
 
 <using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
 
 ## Non-functional Requirements
 1. Save file
-2. non-functional
+2. Notes app should include multilingual support.
 
 <each of the 14 requirements will have a use case associated with it>
 ## Use Cases - Nathan Largo (@nLargo)
@@ -86,7 +86,7 @@
 6. The site checks if the user is still there, prompting the user to click the voice dictation button again to continue speech-to-text. 
  
 ## Use Cases - Priya Nahal (@PriyaNahal)
-### 1) Save login information
+### 5) Save login information
 - **Pre-condition:** User has to have an account and the right login information.
 - **Trigger:** User successfully logs in.
 - **Primary Sequence:**
@@ -104,7 +104,7 @@
 	a. Screen displays an error message, that login was not successful.
 	b. User is asked to input the correct information.
 
-### 2) Allow notifications.
+### 6) Allow notifications.
 - **Pre-condition:** User should have downloaded the app and logged in.
 - **Trigger:** User opens the app for the first time. 
 - **Primary Sequence:** 
@@ -124,7 +124,7 @@
 	a. User received an error message.
 	b. User is prompted to sign in again with the correct information.
 
-### 3) Search notes app.
+### 7) Search notes app.
 - **Pre-condition:** There should be at least one file with text in the app. 
 - **Trigger:** User selects the search bar. 
 - **Primary Sequence:** 
@@ -140,7 +140,7 @@
 	a. Search result shows no files.
 	b. User has to create new files. 
 
-### 4) Save file. 
+### 8) Save file. 
 - **Pre-condition:** The user has created a new file or is editing one.
 - **Trigger:** User types content into a file. 
 - **Primary Sequence:** 
@@ -160,7 +160,7 @@
 
 
 ## Use Cases - Emma Dunbach (@edunbach)
-### 8) Split View
+### 9) Split View
 - Summary: user will be able to navigate between multiple, pre-existing notes with the option to view multiple at the at the same time
 - Actors: User and Note App
 - Pre-Condition: User must be logged in with one note page already open and another note file already saved
@@ -177,7 +177,7 @@
 	1. User is able to view multiple notes in split screen mode
 	2. User views newly selected note file in full screen mode
 
-### 9) Send Notes
+### 10) Send Notes
 - Summary: User will be able to send note files via email using an export as PDF feature 
 - Actors: User, note app, recipient
 - Pre-Conditions: User must be logged in 
@@ -197,7 +197,7 @@
 	1. User's note file will be sent to the specified recipient via email in a PDF
 	2. Any unsaved progressed will be sent to the recipient
 
-### 10) Add Photos
+### 11) Add Photos
 - Summary: User will be able to import photos into the open note page
 - Pre-Condition: User must be logged in and have photos on the device
 - Trigger: User selects the photo button 
@@ -212,7 +212,7 @@
 	1. Notes app shows User's photos that were imported into the specified note file
 	2. Photos can be resized and moveable
 
-### 11) Add Audio
+### 12) Add Audio
 - Summary: User will be able to import audio files into the selected note
 - Pre-Condition: User must be logged in and have mp3 files on the device
 - Trigger: User selects button to add audio file
@@ -228,32 +228,72 @@
 - Post Conditions:
 	1. User will have audio file within the body of the note page
 	2. Audio file will be playable
-## Use Cases - name (@username)
+ 3. 
 
-TEMPLATE FOR USE CASES
-## Use Cases <Add name of who will write (this specific requirement) and implement (in subsequent milestones) the use case below>
-### 1) Use Case Name (Should match functional requirement name)
-- **Pre-condition:** <can be a list or short description>
-- **Trigger:** <can be a list or short description>
+## Use Cases - Vinh Huynh (@vinhhuynh09)
+### 13) Notes app should have user registration and login asking for username and password.
+- **Pre-condition:** User launches the notes application.
+- **Trigger:** User enters login information or icon to create an account.
 - **Primary Sequence:**
-1. Ut enim ad minim veniam, quis nostrum e
-2. Et sequi incidunt
-3. Quis aute iure reprehenderit
-4. ...
-5. ...
-6. ...
-7. ...
-8. ...
-9. ...
-10. <Try to stick to a max of 12 steps>
-- **Primary Postconditions:** <can be a list or short description>
-- **Alternate Sequence:** <you can have more than one alternate sequence to
-describe multiple issues that may arise and their outcomes>
-1. Ut enim ad minim veniam, quis nostrum e
-2. Ut enim ad minim veniam, quis nostrum e
-3. ...
-- **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
-1. Ut enim ad minim veniam, quis nostrum e
-2. Ut enim ad minim veniam, quis nostrum e
-3. ...
+1. User clicks on the textbox to enter username and password or “Create Account” icon if they do not have an account.
+2. Ask the user for first name, last name, email/username, and password if creating a new account.
+3. Users enter their username and password if they already have an account.
+4. User clicks on the “LOGIN” icon.
+5. Application checks if username and/or password are correct.
+6. Application logs users into their account if information entered is correct.
+
+- **Primary Postconditions:** The user successfully logs into their account or successfully creates an account
+- **Alternate Sequence:**
+1. User logs in with an incorrect email and/or password or creates an account with an email that already has an existing account.
+	a. Application prompts the user that the information entered is incorrect.
+	b. Application prompts the user that the account has already been created with the given information if the user is trying to create an account.
+
+### 14) Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
+- **Pre-condition:** User successfully logs into their account.
+- **Trigger:** User clicks on their profile and clicks “Edit Profile.”
+- **Primary Sequence:**
+1. Application loads the user’s profile.
+2. Application shows icons saying “Edit” under the user’s names and settings to change the UI color.
+3. Users click on what they want to edit.
+4. Users click on the textbox and edit their name if they want to change their name.
+5. Displays a list of colors if the user chooses to edit the background color of their notes.
+6. User selects a color.
+7. User clicks “Save” after making the changes they want.
+
+- **Primary Postconditions:** The user’s profile makes the changes they inputted.
+- **Alternate Sequence:**
+1. User decides to change their mind and not make any changes.
+	a. User clicks the “Cancel” icon to exit the “Edit Profile” page.
+
+### 15) Notes app should allow users to create and delete notes.
+- **Pre-condition:** User loads all their existing notes.
+- **Trigger:** User clicks on the icon “Create Note” or “Delete Note” icon.
+- **Primary Sequence:**
+1. Application asks users for the name of the note if they want to create a new note.
+2. User enters the name and clicks “OK” to create a new empty note.
+3. Application asks the user to click on the note they want to delete indicated by a small red circle if they want to delete a note.
+4. User clicks on the note they want to delete.
+5. User clicks on the “Delete” icon to delete the note.
+
+- **Primary Postconditions:** The notes application shows the changes according to what the user chose to manage.
+- **Alternate Sequence:**
+1. User decides to change their mind and make no changes to their notes.
+	a. User clicks the “Cancel” icon to exit the “Create Note” or “Delete Note” page.
+
+### 16) Notes app should include multilingual support.
+- **Pre-condition:** User successfully logs into their account.
+- **Trigger:** User selects the “Change Language” icon.
+- **Primary Sequence:**
+1. Display a list of all possible languages that application can translate to
+2. User selects the language they want information to be displayed in
+3. User selects the “OK” icon
+
+- **Primary Postconditions:** The notes application displays information in the new language the user selected.
+- **Alternate Sequence:**
+1. User decides not to change the language that is currently displayed.
+	a. User clicks the “Cancel” icon to exit the “Change Language” page.
+
+
+
+
 
