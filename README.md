@@ -2,4 +2,4 @@
 - Emma Dunbach (@edunbach)
 - Nathan Largo (@nLargo)
 - Priya Nahal (@PriyaNahal)
-- Vinh Huynh (@vinhhuynh09)
+- Vinh Huynh (@vinhhuynh09) (Team Lead)
