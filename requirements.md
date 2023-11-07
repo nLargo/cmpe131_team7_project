@@ -244,9 +244,10 @@
 
 - **Primary Postconditions:** The user successfully logs into their account or successfully creates an account
 - **Alternate Sequence:**
-1. User logs in with an incorrect email and/or password or creates an account with an email that already has an existing account.
-	a. Application prompts the user that the information entered is incorrect.
-	b. Application prompts the user that the account has already been created with the given information if the user is trying to create an account.
+1. User logs in with an incorrect email and/or password.
+2. Application prompts the user that the information entered is incorrect.
+3. User attempts to create an account with an email that already has an existing account.
+4. Application prompts the user that the account has already been created with the given information if the user is trying to create an account.
 
 ### 14) Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
 - **Pre-condition:** User successfully logs into their account.
@@ -262,8 +263,9 @@
 
 - **Primary Postconditions:** The user’s profile makes the changes they inputted.
 - **Alternate Sequence:**
-1. User decides to change their mind and not make any changes.
-	a. User clicks the “Cancel” icon to exit the “Edit Profile” page.
+1. User loads their profile.
+2. User decides to change their mind and not make any changes.
+2. User clicks the “Cancel” icon to exit the “Edit Profile” page.
 
 ### 15) Notes app should allow users to create and delete notes.
 - **Pre-condition:** User loads all their existing notes.
@@ -277,8 +279,9 @@
 
 - **Primary Postconditions:** The notes application shows the changes according to what the user chose to manage.
 - **Alternate Sequence:**
-1. User decides to change their mind and make no changes to their notes.
-	a. User clicks the “Cancel” icon to exit the “Create Note” or “Delete Note” page.
+1. Applicattion loads the "Create Note" or "Delete Note" page depending on what the user selects.
+2. User decides to change their mind and make no changes to their notes.
+3. User clicks the “Cancel” icon to exit the “Create Note” or “Delete Note” page.
 
 ### 16) Notes app should include multilingual support.
 - **Pre-condition:** User successfully logs into their account.
@@ -290,8 +293,9 @@
 
 - **Primary Postconditions:** The notes application displays information in the new language the user selected.
 - **Alternate Sequence:**
-1. User decides not to change the language that is currently displayed.
-	a. User clicks the “Cancel” icon to exit the “Change Language” page.
+1. User looks through all the possible languages.
+2. User decides not to change the language that is currently displayed.
+3. User clicks the “Cancel” icon to exit the “Change Language” page.
 
 
 
