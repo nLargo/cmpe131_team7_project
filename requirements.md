@@ -14,13 +14,18 @@
 13. Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
 14. Notes app should allow users to create and delete notes.
 
-<using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
+[1-4, 9-11](images/ui-home-page-1.png)
+[7, 8, 14](images/ui-home-page-1.png)
+[12](images/ui-login-page.png)
+[6](images/ui-notifications.heic)
+[5](images/ui-save-login.heic)
+[7](images/ui-search-example.png)
+[13](images/ui-settings-page.png)
 
 ## Non-functional Requirements
 1. Save file
 2. Notes app should include multilingual support.
 
-<each of the 14 requirements will have a use case associated with it>
 ## Use Cases - Nathan Largo (@nLargo)
 ### 1) Set notes sorting
 - **Pre-condition:** The user must be logged in and on the notes page. 
