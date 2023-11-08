@@ -1,5 +1,5 @@
 ## Functional Requirements
-1. Set notes sorting
+1. Notes app should allow user to set notes sorting.
 2. Create new folder
 3. Pin notes
 4. Type with voice dication
