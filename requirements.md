@@ -1,4 +1,4 @@
-## Functional Requirements <should be 1 sentence that describes requirement>
+## Functional Requirements
 1. Set notes sorting
 2. Create new folder
 3. Pin notes
