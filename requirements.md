@@ -1,15 +1,15 @@
 ## Functional Requirements
 1. Notes app should allow user to set notes sorting.
-2. Create new folder
-3. Pin notes
-4. Type with voice dication
-5. Save login information
-6. Allow notifications
-7. Search notes app
-8. User will be able to view multiple notes in split-screen mode
-9. User will be able to send notes as a PDF via email to a specified recipient
-10. User will be able to add photos from their photo library into the note page
-11. User will be able to add audio files that are playable inside the body of the notes page
+2. Notes app should allow user to create new folder.
+3. Notes app should allow user to pin notes.
+4. Notes app should allow user to type with voice dication.
+5. Notes app should allow user to save login information.
+6. Notes app should allow user to allow notifications.
+7. Notes app should allow user to search notes app.
+8. User will be able to view multiple notes in split-screen mode.
+9. User will be able to send notes as a PDF via email to a specified recipient.
+10. User will be able to add photos from their photo library into the note page.
+11. User will be able to add audio files that are playable inside the body of the notes page.
 12. Notes app should have user registration and login asking for username and password.
 13. Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
 14. Notes app should allow users to create and delete notes.
@@ -23,7 +23,7 @@
 [13](images/ui-settings-page.png)
 
 ## Non-functional Requirements
-1. Save file
+1. Notes app should allow user to save file.
 2. Notes app should include multilingual support.
 
 ## Use Cases - Nathan Largo (@nLargo)
