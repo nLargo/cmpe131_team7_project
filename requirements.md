@@ -180,6 +180,7 @@
 - Summary: User will be able to send note files via email using an export as PDF feature 
 - Actors: User, note app, recipient
 - Pre-Conditions: User must be logged in 
+- Trigger: User clicks on send icon in window
 - Primary Sequence: 
 	1. Notes app suggests saving the file 
 	2. User saves the file
@@ -227,7 +228,7 @@
 - Post Conditions:
 	1. User will have audio file within the body of the note page
 	2. Audio file will be playable
- 3. 
+  
 
 ## Use Cases - Vinh Huynh (@vinhhuynh09)
 ### 13) Notes app should have user registration and login asking for username and password.
