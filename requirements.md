@@ -10,9 +10,9 @@
 9. User will be able to send notes as a PDF via email to a specified recipient.
 10. User will be able to add photos from their photo library into the note page.
 11. User will be able to add audio files that are playable inside the body of the notes page.
-12. Notes app should have user registration and login asking for username and password.
-13. Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
-14. Notes app should allow users to create and delete notes.
+12. Notes app should allow user to create an account.
+13. Notes app should allow user to log into their account.
+14. Notes app should allow users to create notes.
 
 [1-4, 8-11](images/ui-home-page-1.png)
 [7, 14](images/ui-home-page-1.png)
@@ -92,54 +92,45 @@
  
 ## Use Cases - Priya Nahal (@PriyaNahal)
 ### 5) Save login information
-- **Pre-condition:** User has to have an account and the right login information.
-- **Trigger:** User successfully logs in.
+- **Pre-condition:** User enters valid login information.
+- **Trigger:** User clicks on the "Login" icon.
 - **Primary Sequence:**
-1. User is asked to create an account or sign in.
-2. User successfully creates an account or logs in with an existing account.
-3. User is prompted with a pop-up to save their information or not now.
-4. User chooses an option and can now use the app.
+1. A pop-up asks whether the user wants to save their login information or not.
+2. User selects "Yes" if they do want their information saved.
+3. Application will save the user's login information.
 - **Primary Postconditions:** User is able to use the app and remain signed in.
-- **Alternate Sequence:** 
-2. User is not able to create an account or has the incorrect login information.
-
-	**a)** Screen displays an error message, that login was not successful.
-  
-	**b)** User is asked to input the correct information.
+- **Alternate Sequence:**
+1. A pop-up asks whether the user wants to save their login information or not.
+2. User selects "No" if they do not want their information saved..
+	**a)** Application will not save the user's login information.
 
 ### 6) Allow notifications.
-- **Pre-condition:** User should have downloaded the app and logged in.
-- **Trigger:** User opens the app for the first time. 
-- **Primary Sequence:** 
-1. User opens the notes app for the first time.
-2. User logs into the notes app or creates an account.
-3. User is asked if they want to save their login information.
-4. User is asked if they ‘allow’ or ‘don’t allow’ the app to send notifications.
-5. User selects an option.
-6. User can use the notes app.
-- **Primary Postconditions:** User can use the app and receives or doesn't receive notifications from the notes app.
+- **Pre-condition:** User should have opens the app for the first time.
+- **Trigger:** User creates or logs into their account. 
+- **Primary Sequence:**
+1. User will be asked if they want to "Allow" or "Don't Allow" notifications to be sent from the app.
+2. User selects "Allow".
+3. Application remembers to always send notifications to the user.
+
+- **Primary Postconditions:** User can use the app and will receive nofications.
 - **Alternate Sequence:** 
-2. User is unable to login or sign up, so user isn’t offered the option or allow or not allow notifications. 
-
-  	**a)** User received an error message.
-
-  	**b)** User is prompted to sign in again with the correct information.
+1. User will be asked if they want to "Allow" or "Don't Allow" notifications to be sent from the app.
+2. User selects "Don't Allow".
+3. Application does not send notifications to the user.
 
 ### 7) Search notes app.
 - **Pre-condition:** There should be at least one file with text in the app. 
 - **Trigger:** User selects the search bar. 
-- **Primary Sequence:** 
-1. User opens notes app.
-2. User is successfully signed in.
-3. User selects the search bar option.
-4. User is able to type in keywords or sentences to search through the existing notes.
-5. User can find any file by pressing enter after typing in the words.
-- **Primary Postconditions:** User is able to find, edit, and read the file that was searched for.  
-- **Alternate Sequence:** 
-4. There are no existing notes to search through. 
+- **Primary Sequence:**
+1. User types keywords or sentences to search through the existing notes.
+2. User presses "ENTER" after typing the text.
+3. Application will search for matching keywords or sentences found.
+4. Application displays files with matches found.
 
+- **Primary Postconditions:** User is able to find, select, edit, and read the file that was searched for.  
+- **Alternate Sequence:** 
+4. There are no existing notes to search through or no files were found with such text entered. 
   	**a)** Search result shows no files.
-  
 	**b)** User has to create new files. 
 
 ## Use Cases - Emma Dunbach (@edunbach)
@@ -147,7 +138,7 @@
 - Summary: user will be able to navigate between multiple, pre-existing notes with the option to view multiple at the at the same time
 - Actors: User and Note App
 - Pre-Condition: User must be logged in with one note page already open and another note file already saved
-- Trigger: User clicks on another filefrom the side bar
+- Trigger: User clicks on another file from the side bar
 - Primary Sequence:
 	1. Notes app prompts user to choose to view full screen or split screen
 	2. User chooses to split screen view
@@ -215,57 +206,51 @@
   
 
 ## Use Cases - Vinh Huynh (@vinhhuynh09)
-### 12) Notes app should have user registration and login asking for username and password.
+### 12) Create Account
 - **Pre-condition:** User launches the notes application.
-- **Trigger:** User enters login information or icon to create an account.
+- **Trigger:** User clicks the "Create Account" icon if they do not have an account.
 - **Primary Sequence:**
-1. User clicks on the textbox to enter username and password or “Create Account” icon if they do not have an account.
-2. Ask the user for first name, last name, email/username, and password if creating a new account.
-3. Users enter their username and password if they already have an account.
-4. User clicks on the “LOGIN” icon.
-5. Application checks if username and/or password are correct.
-6. Application logs users into their account if information entered is correct.
+1. Application displays a pop-up that asks for the user's first name, last name, email/username, and password.
+2. User enters these following information.
+3. User clicks on the "Create Account" icon.
 
-- **Primary Postconditions:** The user successfully logs into their account or successfully creates an account
+- **Primary Postconditions:** Application logs the user into their new account and has access to the application.
 - **Alternate Sequence:**
-1. User logs in with an incorrect email and/or password.
-2. Application prompts the user that the information entered is incorrect.
-3. User attempts to create an account with an email that already has an existing account.
-4. Application prompts the user that the account has already been created with the given information if the user is trying to create an account.
+1. Application displays a pop-up that asks for the user's first name, last name, email/username, and password.
+2. User decides not to create an account.
+	a. User clicks on the "X" icon to exit the pop-up.
 
-### 13) Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
-- **Pre-condition:** User successfully logs into their account.
-- **Trigger:** User clicks on their profile and clicks “Edit Profile.”
+### 13) Login Account
+- **Pre-condition:** User launches the notes application.
+- **Trigger:** User hovers over the username text bar and clicks on it.
 - **Primary Sequence:**
-1. Application loads the user’s profile.
-2. Application shows icons saying “Edit” under the user’s names and settings to change the UI color.
-3. Users click on what they want to edit.
-4. Users click on the textbox and edit their name if they want to change their name.
-5. Displays a list of colors if the user chooses to edit the background color of their notes.
-6. User selects a color.
-7. User clicks “Save” after making the changes they want.
+1. User types their username.
+2. User hovers over the password text bar and clicks on it.
+3. User types their password.
+4. User clicks the "LOGIN" icon.
+5. Application successfully logs the user into their account if correct information is entered.
 
-- **Primary Postconditions:** The user’s profile makes the changes they inputted.
+- **Primary Postconditions:** 
 - **Alternate Sequence:**
-1. User loads their profile.
-2. User decides to change their mind and not make any changes.
-2. User clicks the “Cancel” icon to exit the “Edit Profile” page.
+1. User types their username.
+2. User hovers over the password text bar and clicks on it.
+3. User types their password.
+4. User clicks the "LOGIN" icon.
+5. Application prompts user that invalid information is entered and cannot log user in.
 
-### 14) Notes app should allow users to create and delete notes.
+### 14) Create Notes
 - **Pre-condition:** User loads all their existing notes.
-- **Trigger:** User clicks on the icon “Create Note” or “Delete Note” icon.
+- **Trigger:** User clicks on the icon “+” icon to create a new note.
 - **Primary Sequence:**
-1. Application asks users for the name of the note if they want to create a new note.
-2. User enters the name and clicks “OK” to create a new empty note.
-3. Application asks the user to click on the note they want to delete indicated by a small red circle if they want to delete a note.
-4. User clicks on the note they want to delete.
-5. User clicks on the “Delete” icon to delete the note.
+1. Application displays a pop-up that asks the user for the name of the note.
+2. User enters the name of the note.
+3. User clicks “OK”.
 
-- **Primary Postconditions:** The notes application shows the changes according to what the user chose to manage.
+- **Primary Postconditions:** Application creates the new note and can be viewed.
 - **Alternate Sequence:**
-1. Applicattion loads the "Create Note" or "Delete Note" page depending on what the user selects.
-2. User decides to change their mind and make no changes to their notes.
-3. User clicks the “Cancel” icon to exit the “Create Note” or “Delete Note” page.
+1. 1. Application displays a pop-up that asks the user for the name of the note.
+2. User decides to not create a new note.
+3. User clicks “CANCEL”.
 
 
 
