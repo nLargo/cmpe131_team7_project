@@ -248,7 +248,7 @@
 
 - **Primary Postconditions:** Application creates the new note and can be viewed.
 - **Alternate Sequence:**
-1. 1. Application displays a pop-up that asks the user for the name of the note.
+1. Application displays a pop-up that asks the user for the name of the note.
 2. User decides to not create a new note.
 3. User clicks “CANCEL”.
 
