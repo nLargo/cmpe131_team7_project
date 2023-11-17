@@ -23,7 +23,7 @@
 [13](images/ui-settings-page.png)
 
 ## Non-functional Requirements
-1. Notes app should allow user to save file.
+1. Notes app should save file within 30 seconds.
 2. Notes app should include multilingual support.
 
 ## Use Cases - Nathan Largo (@nLargo)
@@ -142,24 +142,8 @@
   
 	**b)** User has to create new files. 
 
-### 8) Save file. 
-- **Pre-condition:** The user has created a new file or is editing one.
-- **Trigger:** User types content into a file. 
-- **Primary Sequence:** 
-1. User opens the notes app and logs in.
-2. User creates a new file or opens an existing one.
-3. User edits the file by adding or modifying text.
-4. The text and edits done in the file are automatically saved within 1 minute.
-- **Primary Postconditions:** The file is the new version with the modified content and another version is added to the history of the file. 
-- **Alternate Sequence:** 
-3. A file has no text or content.
-  
-	**a)** The notes app is unable to save anything. 
-
-
-
 ## Use Cases - Emma Dunbach (@edunbach)
-### 9) Split View
+### 8) Split View
 - Summary: user will be able to navigate between multiple, pre-existing notes with the option to view multiple at the at the same time
 - Actors: User and Note App
 - Pre-Condition: User must be logged in with one note page already open and another note file already saved
@@ -176,7 +160,7 @@
 	1. User is able to view multiple notes in split screen mode
 	2. User views newly selected note file in full screen mode
 
-### 10) Send Notes
+### 9) Send Notes
 - Summary: User will be able to send note files via email using an export as PDF feature 
 - Actors: User, note app, recipient
 - Pre-Conditions: User must be logged in 
@@ -197,7 +181,7 @@
 	1. User's note file will be sent to the specified recipient via email in a PDF
 	2. Any unsaved progressed will be sent to the recipient
 
-### 11) Add Photos
+### 10) Add Photos
 - Summary: User will be able to import photos into the open note page
 - Pre-Condition: User must be logged in and have photos on the device
 - Trigger: User selects the photo button 
@@ -212,7 +196,7 @@
 	1. Notes app shows User's photos that were imported into the specified note file
 	2. Photos can be resized and moveable
 
-### 12) Add Audio
+### 11) Add Audio
 - Summary: User will be able to import audio files into the selected note
 - Pre-Condition: User must be logged in and have mp3 files on the device
 - Trigger: User selects button to add audio file
@@ -231,7 +215,7 @@
   
 
 ## Use Cases - Vinh Huynh (@vinhhuynh09)
-### 13) Notes app should have user registration and login asking for username and password.
+### 12) Notes app should have user registration and login asking for username and password.
 - **Pre-condition:** User launches the notes application.
 - **Trigger:** User enters login information or icon to create an account.
 - **Primary Sequence:**
@@ -249,7 +233,7 @@
 3. User attempts to create an account with an email that already has an existing account.
 4. Application prompts the user that the account has already been created with the given information if the user is trying to create an account.
 
-### 14) Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
+### 13) Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
 - **Pre-condition:** User successfully logs into their account.
 - **Trigger:** User clicks on their profile and clicks “Edit Profile.”
 - **Primary Sequence:**
@@ -267,7 +251,7 @@
 2. User decides to change their mind and not make any changes.
 2. User clicks the “Cancel” icon to exit the “Edit Profile” page.
 
-### 15) Notes app should allow users to create and delete notes.
+### 14) Notes app should allow users to create and delete notes.
 - **Pre-condition:** User loads all their existing notes.
 - **Trigger:** User clicks on the icon “Create Note” or “Delete Note” icon.
 - **Primary Sequence:**
@@ -282,20 +266,6 @@
 1. Applicattion loads the "Create Note" or "Delete Note" page depending on what the user selects.
 2. User decides to change their mind and make no changes to their notes.
 3. User clicks the “Cancel” icon to exit the “Create Note” or “Delete Note” page.
-
-### 16) Notes app should include multilingual support.
-- **Pre-condition:** User successfully logs into their account.
-- **Trigger:** User selects the “Change Language” icon.
-- **Primary Sequence:**
-1. Display a list of all possible languages that application can translate to
-2. User selects the language they want information to be displayed in
-3. User selects the “OK” icon
-
-- **Primary Postconditions:** The notes application displays information in the new language the user selected.
-- **Alternate Sequence:**
-1. User looks through all the possible languages.
-2. User decides not to change the language that is currently displayed.
-3. User clicks the “Cancel” icon to exit the “Change Language” page.
 
 
 
