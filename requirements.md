@@ -14,8 +14,8 @@
 13. Notes app should allow for users to edit their profiles such as their name and notes themes such as color backgrounds.
 14. Notes app should allow users to create and delete notes.
 
-[1-4, 9-11](images/ui-home-page-1.png)
-[7, 8, 14](images/ui-home-page-1.png)
+[1-4, 8-11](images/ui-home-page-1.png)
+[7, 14](images/ui-home-page-1.png)
 [12](images/ui-login-page.png)
 [6](images/ui-notifications.heic)
 [5](images/ui-save-login.heic)
