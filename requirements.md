@@ -14,13 +14,12 @@
 13. Notes app should allow user to log into their account.
 14. Notes app should allow users to create notes.
 
-[1-4, 8-11](images/ui-home-page-1.png)
-[7, 14](images/ui-home-page-1.png)
-[12](images/ui-login-page.png)
-[6](images/ui-notifications.heic)
+[1-4, 9-11](images/ui-home-page-1.png)
 [5](images/ui-save-login.heic)
+[6](images/ui-notifications.heic)
 [7](images/ui-search-example.png)
-[13](images/ui-settings-page.png)
+[7, 8, 14](images/ui-home-page-2.png)
+[12, 13](images/ui-login-page.png)
 
 ## Non-functional Requirements
 1. Notes app should save file within 30 seconds.
