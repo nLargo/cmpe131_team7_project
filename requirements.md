@@ -229,7 +229,7 @@
 4. User clicks the "LOGIN" icon.
 5. Application successfully logs the user into their account if correct information is entered.
 
-- **Primary Postconditions:** 
+- **Primary Postconditions:** User can begin to use the application.
 - **Alternate Sequence:**
 1. User types their username.
 2. User hovers over the password text bar and clicks on it.
