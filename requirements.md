@@ -221,7 +221,7 @@
 
 ### 13) Login Account
 - **Pre-condition:** User launches the notes application.
-- **Trigger:** User hovers over the username text bar and clicks on it.
+- **Trigger:** User hovers over the username text bar on the login page and clicks on it.
 - **Primary Sequence:**
 1. User types their username.
 2. User hovers over the password text bar and clicks on it.
