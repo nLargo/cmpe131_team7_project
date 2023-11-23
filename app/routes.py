@@ -34,3 +34,9 @@ def createaccount():
             return redirect('/')
     return render_template('create_account.html', form=form)
 
+
+
+
+@myapp_obj.route("/home", methods=['GET', 'POST'])
+def index():
+    return render_template('homepage.html')
