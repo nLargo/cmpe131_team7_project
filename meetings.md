@@ -19,3 +19,9 @@
 
 - Each team member also revised the GitHub repository to make sure they know which requirements they are responsible for. The group also worked together to help each other on how to get the project started and determined a timeline of when to get complete each milestone by in order to successfully complete the project in time.
 
+### 2023-11-21 at 11:00
+- All members attended
+
+- We tried resolving all technical difficulties that we were experiencing using Visual Studio code and pushing our changes to our repository. Most problems were resolved by the end of our meeting with some minor challenges still present. The group has been remaining in good contact with each other, and we have set a goal to complete milestone 2 by Sunday night. 
+
+- There will not be another in person meeting until we come back from Thanksgiving; however, we may have an online meeting over the weekend/break. 
