@@ -39,4 +39,4 @@ def createaccount():
 
 @myapp_obj.route("/home", methods=['GET', 'POST'])
 def index():
-    return render_template('homepage.html')
+    return render_template('notes_directory.html')
