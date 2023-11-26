@@ -4,7 +4,7 @@ from flask import flash
 from .forms import LoginForm
 from .forms import CreateAccountForm
 from app import myapp_obj
-from app.models import User
+from app.models import Users
 from app import db
 
 @myapp_obj.route("/")
@@ -14,7 +14,7 @@ def login():
     if form.validate_on_submit():
         print(f'Here we print to terminal the input {form.username.data} and {form.password.data}')
         flash(f'Here we use flash to HTML with the input {form.username.data} and {form.password.data}')
-        found_user = User.query.filter_by(username=form.username.data).first()
+        found_user = Users.query.filter_by(username=form.username.data).first()
         print(found_user)
 
         return redirect('/')
@@ -28,7 +28,7 @@ def createaccount():
             print('do something')
             print(f'this is the username of the user {form.username.data}')
             print(f'this is the password of the user {form.password.data}')
-            u = User(username=form.username.data, password=form.password.data, email=form.email.data)
+            u = Users(username=form.username.data, password=form.password.data, email=form.email.data)
             db.session.add(u)
             db.session.commit()
             return redirect('/')
