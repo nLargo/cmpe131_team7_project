@@ -1,6 +1,105 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home Page - my blog</title>
+        <style>
+            /*base.html (ran into style inheritance issues -- leaving here for now)*/
+            :root {
+                --background: #264653;
+                --background-light: #345360;
+                --text: #F0EAD6; 
+            }
+    
+            body {
+                color: var(--text);
+                background-color: var(--background);
+            }
+            /*base.html END*/
+    
+            /*home_blank.html (ran into style inheritance issues -- leaving here for now)*/
+            #app-container {
+                display: flex;
+                flex-direction: column;
+            }
+    
+            #main-container {
+                display: flex;
+                width: 100vw;
+            }
+    
+            #sidebar {   
+                background-color: var(--background-light);
+            }
+    
+            #main-content {
+                color: #3E424B; /* use variable later*/
+                background-color: var(--text);  /* use better variable later*/
+            
+                flex:3;
+                height: 100vh;
+            
+                padding: 15px;
+            }
+    
+            .column {
+                width: 20vw;
+                height: 100vh;
+    
+                padding: 10px;
+            
+                overflow-y: auto;
+            }
+    
+            .pill-box {
+                cursor: pointer;
+    
+                height: 30px;
+                max-width: 100%;
+    
+                border-radius: 20px; 
+                padding-left: 15px;
+                margin-bottom: 5px;
+    
+                text-align: left;
+                line-height: 30px;   
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+    
+            .pill-box:active {
+                opacity: 0.8;
+            }
+    
+            .exampleItem {          
+                background-color: #DAA520;
+            }
+            /*home_blank.html END*/
+    
+            /*notes_directory.html (ran into style inheritance issues -- leaving here for now)*/
+            #notes-directory {
+                background-color: #3E424B;      
+            }
+    
+            #full-directory-folder { /*All Files Folder mofdfier (temp)*/
+                background-color: #DAA520;
+            }
+    
+            .note {
+                background-color: var(--background-light);
+            }
+    
+            .folder {          
+                background-color: var(--background);
+            }
+    
+            .subfolder {
+                display: none;
+                margin-left: 10px;
+            }  
+            /*notes_directory.html END*/
+    
+        </style>
     </head>
     <body>
         {% with messages = get_flashed_messages() %}

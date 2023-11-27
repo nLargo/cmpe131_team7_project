@@ -1,107 +1,33 @@
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home</title>
-        <style>
-            :root {
-                --background: #264653;
-                --background-light: #345360;
-                --text: #F0EAD6; 
-            }
+{% extends "base.html"%}
 
-            body {
-                color: var(--text);
-                background-color: var(--background);
-            }
-            
-            #app-container {
-                display: flex;
-                flex-direction: column;
-            }
+<head>
+    <title>Home</title>
+</head>
+
+{% block content %}
+    <div id="app-container">
+        <h1>Home</h1>
     
-            #main-container {
-                display: flex;
-                width: 100vw;
-            }
-        
-            #sidebar {   
-                background-color: var(--background-light);
-            }
-
-            #main-content {
-                color: #3E424B; /* use variable later*/
-                background-color: var(--text);  /* use better variable later*/
+        <div id="main-container">  <!--container persists on all pages (main-container)-->
+            <div id="sidebar" class="column">  <!--container persists on all pages (sidebar)-->
             
-                flex:3;
-                height: 100vh;
-            
-                padding: 15px;
-            }
-        
-            .column {
-                width: 20vw;
-                height: 100vh;
-
-                padding: 10px;
-            
-                overflow-y: auto;
-            }
-
-            .pill-box {
-                cursor: pointer;
-
-                height: 30px;
-                max-width: 100%;
-
-                border-radius: 20px; 
-                padding-left: 15px;
-                margin-bottom: 5px;
-
-                text-align: left;
-                line-height: 30px;   
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-
-            .pill-box:active {
-                opacity: 0.8;
-            }
-
-            .exampleItem {          
-                background-color: #DAA520;
-            }
-
-        </style>
-
-    </head>
-    
-    <body>
-        <div id="app-container">
-            <h1>Home / Page Name</h1>
-        
-            <div id="main-container">  <!--container persists on all pages (main-container)-->
-                <div id="sidebar" class="column">  <!--container persists on all pages (sidebar)-->
+                <!-- Pill Folder Example -- chunk can be removed-->
+                <div class= "pill-box exampleItem">
+                    A Pill Box
+                </div>
+                <div class= "pill-box exampleItem">
+                    A Pill Box: The Sequel
+                </div>
+                <!-- Pill Folder Example -->
                 
-                    <!-- Pill Folder Example -- chunk can be removed-->
-                    <div class= "pill-box exampleItem">
-                        A Pill Box
-                    </div>
-                    <div class= "pill-box exampleItem">
-                        A Pill Box: The Sequel
-                    </div>
-                    <!-- Pill Folder Example -->
-                    
-                </div>  <!--container persists on all pages (/sidebar)-->
+            </div>  <!--container persists on all pages (/sidebar)-->
 
-                <!-- Content Portion of Page)-->
-                <div id="main-content">
-                    Shit goes here...
-            
-                </div>  
+            <!-- Content Portion of Page)-->
+            <div id="main-content">
+                Shit goes here...
+        
+            </div>  
 
-            </div>  <!--container persists on all pages (/main-containter)-->
-        </div>  
-
-    </body>
-</html>
+        </div>  <!--container persists on all pages (/main-containter)-->
+    </div>  
+{% endblock %}

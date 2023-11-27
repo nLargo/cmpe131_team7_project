@@ -1,151 +1,63 @@
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home</title>
-        <style>
-            :root {
-                --background: #264653;
-                --background-light: #345360;
-                --text: #F0EAD6; 
-            }
+{% extends "home_blank.html"%}
 
-            body {
-                color: var(--text);
-                background-color: var(--background);
-            }
-            
-            #app-container {
-                display: flex;
-                flex-direction: column;
-            }
+<title>My Notes</title>
+
+<style>
+    #notes-directory {
+        background-color: #3E424B;      
+    }
+
+    #full-directory-folder { /*All Files Folder mofifier (temp)*/
+        background-color: #DAA520;
+    }
+
+    .note {
+        background-color: var(--background-light);
+    }
+
+    .folder {          
+        background-color: var(--background);
+    }
+
+    .subfolder {
+        display: none;
+        margin-left: 10px;
+    }  
+</style>
+
+{% block content %}
+    <div id="app-container">
+        <h1>My Notes</h1>
     
-            #main-container {
-                display: flex;
-                width: 100vw;
-            }
-        
-            #sidebar {   
-                background-color: var(--background-light);
-            }
-        
-            #notes-directory {
-                background-color: #3E424B;      
-            }
-
-            #main-content {
-                color: #3E424B;
-                background-color: var(--text);
+        <div id="main-container">  <!--container persists on all pages (M)-->
+            <div id="sidebar" class="column">  <!--container persists on all pages (S)-->
             
-                flex:3;
-                height: 100vh;
-            
-                padding: 15px;
-            }
-        
-            #full-directory-folder { /*All Files Folder mofifier (temp)*/
-                background-color: #DAA520;
-            }
-        
-            .column {
-                width: 20vw;
-                height: 100vh;
-
-                padding: 10px;
-            
-                overflow-y: auto;
-            }
-
-            .pill-box {
-                cursor: pointer;
-
-                height: 30px;
-                max-width: 100%;
-
-                border-radius: 20px; 
-                padding-left: 15px;
-                margin-bottom: 5px;
-
-                text-align: left;
-                line-height: 30px;   
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-
-            .pill-box:active {
-                opacity: 0.8;
-            }
-        
-            .note {
-                background-color: var(--background-light);
-            }
-        
-            .folder {          
-                background-color: var(--background);
-            }
-
-            .subfolder {
-                display: none;
-                margin-left: 10px;
-            }  
-
-        </style>
-
-    </head>
-    
-    <body>
-        <div id="app-container">
-            <h1>Home</h1>
-        
-            <div id="main-container">  <!--container persists on all pages (M)-->
-                <div id="sidebar" class="column">  <!--container persists on all pages (S)-->
-                
-                    <!-- 'All Notes' Special Folder-->
-                    <div id="full-directory-folder" class= "pill-box folder" onclick="toggleContainer()">
-                        All Notes
-                        <div class="pill-box subfolder folder">
-                            Subfolder 1
-                        </div>
-                        <div class="pill-box subfolder folder">
-                            Subfolder 2
-                        </div>
+                <!-- 'All Notes' Special Folder-->
+                <div id="full-directory-folder" class= "pill-box folder" onclick="toggleContainer()">
+                    All Notes
+                    <div class="pill-box subfolder folder">
+                        Subfolder 1
                     </div>
-                    
-                </div>  <!--container persists on all pages (/S)-->
-            
-
-                <!-- WIP Notes List-->
-                <div id="notes-directory" class="column">
-                    <div class="pill-box note">Note 1</div>
-                    <div class="pill-box note">Note 2</div>
-                    <!--Example Notes^-->
+                    <div class="pill-box subfolder folder">
+                        Subfolder 2
+                    </div>
                 </div>
-            
-
-                <!-- Content Portion of Page (should scale when 'Notes list'^ (notes-directory) is removed)-->
-                <div id="main-content">
-                    Shit goes here...
-            
-                </div>
-            
-
-            </div>  <!--container persists on all pages (/M)-->
-        </div>  
-
-
-        <script>
-            function toggleContainer() {
-                var subfolders = document.getElementsByClassName('subfolder');
-                for (var i = 0; i < subfolders.length; i++) {
-                    var style = window.getComputedStyle(subfolders[i]);
-                    if (subfolders[i].style.display === 'none') {
-                        subfolders[i].style.display = 'block';
-                    } else {
-                        subfolders[i].style.display = 'none';
-                    }
-                }
-            }
-        </script>
-
-    </body>
-</html>
+                
+            </div>  <!--container persists on all pages (/S)-->
+        
+            <!-- WIP Notes List-->
+            <div id="notes-directory" class="column">
+                <div class="pill-box note">Note 1</div>
+                <div class="pill-box note">Note 2</div>
+                <!--Example Notes^-->
+            </div>
+        
+            <!-- Content Portion of Page (should scale when 'Notes list'^ (notes-directory) is removed)-->
+            <div id="main-content">
+                Shit goes here...
+        
+            </div>
+        
+        </div>  <!--container persists on all pages (/M)-->
+    </div>  
+{% endblock %}

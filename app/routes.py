@@ -44,13 +44,3 @@ def home():
 @myapp_obj.route("/my-notes", methods=['GET', 'POST'])
 def my_notes():
     return render_template('notes_directory.html')
-
-
-
-@myapp_obj.route("/home2", methods=['GET', 'POST'])
-def home2():
-    return render_template('home_blank_copy.html')
-
-@myapp_obj.route("/my-notes2", methods=['GET', 'POST'])
-def my_notes2():
-    return render_template('notes_directory_copy.html')
