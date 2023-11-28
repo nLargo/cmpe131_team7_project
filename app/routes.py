@@ -59,4 +59,4 @@ def create_note():
 #route for the split screen feature separately
 @myapp_obj.route('/split_screen', methods=['POST'])
 def split_screen():
-    return render_template('index.html', split=True)
+    return render_template('split.html', split=True)
