@@ -55,3 +55,8 @@ def my_notes():
 @myapp_obj.route('/create_note')
 def create_note():
     return render_template('create_note.html')  # Replace with the actual template name for creating a new note
+
+#route for the split screen feature separately
+@app.route('/split_screen', methods=['POST'])
+def split_screen():
+    return render_template('index.html', split=True)
