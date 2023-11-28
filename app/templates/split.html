@@ -6,11 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Split Screen Example</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <button onclick="splitScreen()">Split Screen</button>
+        <form method="post" action="{{ url_for('split_screen') }}">
+            <button type="submit">Split Screen</button>
+        </form>
         <div id="leftPanel" class="panel">
             <!-- Content for the left panel -->
             <h2>Left Panel Test</h2>
@@ -20,7 +22,5 @@
             <h2>Right Panel Test</h2>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
