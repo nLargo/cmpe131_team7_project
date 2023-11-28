@@ -7,7 +7,7 @@
 6. Notes app should allow user to allow notifications.
 7. Notes app should allow user to search notes app.
 8. User will be able to view multiple notes in split-screen mode.
-9. User will be able to send notes as a PDF via email to a specified recipient.
+9. User will be able to log out of their account using a logout button.
 10. User will be able to add photos from their photo library into the note page.
 11. User will be able to add audio files that are playable inside the body of the notes page.
 12. Notes app should allow user to create an account.
@@ -150,26 +150,24 @@
 	1. User is able to view multiple notes in split screen mode
 	2. User views newly selected note file in full screen mode
 
-### 9) Send Notes
-- Summary: User will be able to send note files via email using an export as PDF feature 
-- Actors: User, note app, recipient
+### 9) Log Out
+- Summary: User will be able to log out of their account using a logout button
+- Actors: User, note app
 - Pre-Conditions: User must be logged in 
-- Trigger: User clicks on send icon in window
+- Trigger: User clicks on logout icon in window
 - Primary Sequence: 
-	1. Notes app suggests saving the file 
+	1. Notes app opens a window asking if the user would like to save the current file(s)
 	2. User saves the file
-	3. Notes app prompts the user to enter the recipient's email address
-	4. Notes app will prompt the user to add a description or message
-	5. Notes app will send a file with the user's name attached as well as the PDF of the note to the recipient
+	3. Notes app shows logout screen
+ 	4. Notes app will have a button to go back to login page
 - Alternative Sequence:
 	1. User does not save the file
 	2. Notes app asks user if they wish to proceed
-	3. Notes app prompts the user to enter the recipient's email address
-	4. Notes app will prompt user to add description or message
-	5. Notes app will send the PDF file of the note page with the user's name attached as well as the note to the recipient
+	3. Notes app shows logout screen
+	4. Notes app will have a button to go back to login page
 - Post Conditions: 
-	1. User's note file will be sent to the specified recipient via email in a PDF
-	2. Any unsaved progressed will be sent to the recipient
+	1. User's account will be logged out
+ 	2. User can log in and log out as many times as they please
 
 ### 10) Add Photos
 - Summary: User will be able to import photos into the open note page
