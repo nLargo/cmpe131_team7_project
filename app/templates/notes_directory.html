@@ -1,85 +1,63 @@
+{% extends "home_blank.html"%}
+
+<title>My Notes</title>
+
+<style>
+    #notes-directory {
+        background-color: #3E424B;      
+    }
+
+    #full-directory-folder { /*All Files Folder mofifier (temp)*/
+        background-color: #DAA520;
+    }
+
+    .note {
+        background-color: var(--background-light);
+    }
+
+    .folder {          
+        background-color: var(--background);
+    }
+
+    .subfolder {
+        display: none;
+        margin-left: 10px;
+    }  
+</style>
+
 {% block content %}
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Courier New, sans-serif;
-        }
-      
-        #app-container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-      
-        #header {
-            background-color: #333333;
-            color: #656d4f;
-            padding: 10px;
-            text-align: center;
-        }
-  
-        #main-container {
-            display: flex;
-            flex: 1;
-        }
-      
-        #sidebar {
-            width: 250px;
-            background-color: #41424C;
-            overflow-y: auto;
-            padding: 10px;
-        }
-      
-        #notes-column {
-            flex:1;
-            padding: 10px;
-        }
-      
-        #workspace {
-            flex: 2;
-            padding: 10px;
-            border-left: 1px solid #333333;
-        }
-      
-        .folder {
-            cursor: pointer;
-            margin-bottom: 5px;
-        }
-      
-        .note {
-            cursor: pointer;
-            margin-bottom: 10px;
-            padding: 5px;
-            background-color: #f0f0f0;
-            border: 1px solid #333333;
-        }
-    </style>
-</head>
-  
-<body>
     <div id="app-container">
-        <h1>Home</h1>
-    </div>
+        <h1>My Notes</h1>
     
-    <div id="main-container">
-        <div id="sidebar">
-            <div class="folder">Folder 1</div>
-            <div class="folder">Folder 2</div>
-            <!--Example Folders^-->
-        </div>
-        <div id="notes-column">
-            <div class="note">Note 1</div>
-            <div class="note">Note 2</div>
-            <!--Example Notes^-->
+        <div id="main-container">  <!--container persists on all pages (M)-->
+            <div id="sidebar" class="column">  <!--container persists on all pages (S)-->
+            
+                <!-- 'All Notes' Special Folder-->
+                <div id="full-directory-folder" class= "pill-box folder" onclick="toggleContainer()">
+                    All Notes
+                    <div class="pill-box subfolder folder">
+                        Subfolder 1
+                    </div>
+                    <div class="pill-box subfolder folder">
+                        Subfolder 2
+                    </div>
+                </div>
+                
+            </div>  <!--container persists on all pages (/S)-->
+        
+            <!-- WIP Notes List-->
+            <div id="notes-directory" class="column">
+                <div class="pill-box note">Note 1</div>
+                <div class="pill-box note">Note 2</div>
+                <!--Example Notes^-->
             </div>
-        <div id="workspace">
-            <!--Editable Notes Area-->
-        </div>
-    </div>
-</body>
-</html>
+        
+            <!-- Content Portion of Page (should scale when 'Notes list'^ (notes-directory) is removed)-->
+            <div id="main-content">
+                Shit goes here...
+        
+            </div>
+        
+        </div>  <!--container persists on all pages (/M)-->
+    </div>  
 {% endblock %}
