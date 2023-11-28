@@ -1,0 +1,62 @@
+{% extends "base.html"%}
+
+<head>
+    <title>Home</title>
+</head>
+
+{% block content %}
+    <div id="app-container">
+        <h1>Home</h1>
+    
+        <div id="main-container">  <!--container persists on all pages (main-container)-->
+            <div id="sidebar" class="column">  <!--container persists on all pages (sidebar)-->
+            
+                <!-- Pill Folder Example -- chunk can be removed-->
+                <div class= "pill-box exampleItem">
+                    A Pill Box
+                </div>
+                <div class= "pill-box exampleItem">
+                    A Pill Box: The Sequel
+                </div>
+                <!-- Pill Folder Example -->
+
+                <!-- "Create Note" icon button -->
+                <div id="create-note-button">
+                    <button>
+                        <!-- <i class="fas fa-sticky-note"></i> Create Note -->
+                        <a href="create_note" class="small-text"> Create Note</a>
+                    </button>
+                </div>
+                
+            </div>  <!--container persists on all pages (/sidebar)-->
+
+            <!-- Content Portion of Page)-->
+            <div id="main-content">
+                Shit goes here...
+        
+            </div>  
+
+        </div>  <!--container persists on all pages (/main-containter)-->
+    </div>  
+
+    <style>
+        #create-note-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        #create-note-button button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #create-note-button button i {
+            margin-right: 5px;
+        }
+    </style>
+{% endblock %}
