@@ -1,23 +1,33 @@
-from flask import render_template
-from flask import redirect
-from flask import flash
+from flask import render_template, redirect, flash
 from .forms import LoginForm
 from .forms import CreateAccountForm
-from app import myapp_obj
+from app import myapp_obj, db
 from app.models import User
-from app import db
+
+from flask import render_template, redirect, url_for, flash
+from .forms import LoginForm
+from .models import User  # Assuming your models are in a file named models.py
+from flask_login import login_user
 
 @myapp_obj.route("/")
-@myapp_obj.route("/hello", methods=['GET', 'POST'])
+@myapp_obj.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print(f'Here we print to terminal the input {form.username.data} and {form.password.data}')
-        flash(f'Here we use flash to HTML with the input {form.username.data} and {form.password.data}')
-        found_user = User.query.filter_by(username=form.username.data).first()
-        print(found_user)
+        username = form.username.data
+        password = form.password.data
 
-        return redirect('/')
+        user = User.query.filter_by(username=username).first()
+
+        if user is not None and user.check_password(password):
+            # Valid login
+            login_user(user, remember=form.remember_me.data)
+            flash(f'Login successful for user: {username}', 'success')
+            return redirect('/home')  
+        else:
+            # Invalid login
+            flash('Invalid username or password. Please try again.', 'error')
+
     return render_template('login.html', form=form)
 
 @myapp_obj.route("/createaccount", methods=['GET', 'POST'])
@@ -31,12 +41,20 @@ def createaccount():
             u = User(username=form.username.data, password=form.password.data, email=form.email.data)
             db.session.add(u)
             db.session.commit()
-            return redirect('/')
-    return render_template('create_account.html', form=form)
-
-
-
+            return redirect('/home')
+    else:
+        if 'email' in form.errors:
+            print('Invalid email format. Please enter a valid email address.')
+        return render_template('create_account.html', form=form)
 
 @myapp_obj.route("/home", methods=['GET', 'POST'])
-def index():
-    return render_template('homepage.html')
+def home():
+    return render_template('home_blank.html')
+
+@myapp_obj.route("/my-notes", methods=['GET', 'POST'])
+def my_notes():
+    return render_template('notes_directory.html')
+
+@myapp_obj.route('/create_note')
+def create_note():
+    return render_template('create_note.html')  # Replace with the actual template name for creating a new note
