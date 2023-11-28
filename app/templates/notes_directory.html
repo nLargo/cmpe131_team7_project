@@ -2,6 +2,7 @@
 
 <title>My Notes</title>
 
+<!--
 <style>
     #notes-directory {
         background-color: #3E424B;      
@@ -24,54 +25,77 @@
         display: none;
         margin-left: 10px;
     }  
+
 </style>
+-->
 
 {% block content %}
     <div id="app-container">
         <h1>My Notes</h1>
     
-        <div id="main-container">  <!--container persists on all pages (M)-->
-            <div id="sidebar" class="column">  <!--container persists on all pages (S)-->
-            
-                <!-- 'All Notes' Special Folder-->
-                <div id="full-directory-folder" class= "pill-box folder">
-                    All Notes
-                    <!--
-                    <div class="pill-box subfolder folder">
-                        Subfolder 1
-                    </div>
-                    <div class="pill-box subfolder folder">
-                        Subfolder 2
-                    </div>
-                    -->
+        <div id="main-container">
+
+            <div id="sidebar" class="column">
+                <div class=hotbar>
+                    <b>My Notes</b>
                 </div>
+
+                <!-- 'All Notes' Special Folder-->
+
+                <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="click_folder('all')" data-folder-id="all">
+                    All Notes
+                </a>
                 {% for folder in folders %}
-                        <div class="pill-box folder">
-                            {{ folder.folder_name }}
-                        </div>
+                    <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="click_folder('{{ folder.folder_id }}')" data-folder-id="{{ folder.folder_id }}">
+                        {{ folder.folder_name }}
+                    </a>
                 {% endfor %}
 
-            </div>  <!--container persists on all pages (/S)-->
+            </div>
         
             <!-- WIP Notes List-->
             <div id="notes-directory" class="column">
+                <div class=hotbar>
+                    <a class="pill-box hotbar-button">
+                        Sort
+                    </a>
+                </div>
                 {% for note in notes %}
-                    <!--
-                    <div class="pill-box note">Note 1</div>
-                    <div class="pill-box note">Note 2</div>
-                    -->
-                    <div class="pill-box note">
+                    <a class="pill-box note" data-folder-id="{{ note.folder_id }}" style="display: none;">
                         {{ note.note_content.splitlines()[0] }}
-                    </div>
+                    </a>
                 {% endfor %}
             </div>
         
-            <!-- Content Portion of Page (should scale when 'Notes list'^ (notes-directory) is removed)-->
+            <!-- Content Portion of Page -->
             <div id="main-content">
+                <div class=hotbar>
+                    *buttons*
+                </div>
+
                 Shit goes here...
+
         
             </div>
         
-        </div>  <!--container persists on all pages (/M)-->
-    </div>  
+        </div>  
+    </div> 
+
+    
+    <script>
+        function click_folder(link) {
+            var allNotes = document.querySelectorAll('.pill-box.note');
+            allNotes.forEach(function (note) {
+                note.style.display = 'none';
+            });
+    
+            var folderNotes = document.querySelectorAll('.pill-box.note[data-folder-id="' + link + '"]');
+            folderNotes.forEach(function (note) {
+                note.style.display = 'block';
+            });
+        }
+    </script>
 {% endblock %}
+
+<!--STOP-->
+<!--STOP2-->
