@@ -3,9 +3,6 @@ from .forms import LoginForm
 from .forms import CreateAccountForm
 from app import myapp_obj, db
 from app.models import User
-
-from flask import render_template, redirect, url_for, flash
-from .forms import LoginForm
 from .models import User  # Assuming your models are in a file named models.py
 from flask_login import login_user
 
