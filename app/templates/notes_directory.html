@@ -15,7 +15,8 @@
         background-color: var(--background-light);
     }
 
-    .folder {          
+    .folder {
+        color: var(--text);          
         background-color: var(--background);
     }
 
@@ -33,23 +34,36 @@
             <div id="sidebar" class="column">  <!--container persists on all pages (S)-->
             
                 <!-- 'All Notes' Special Folder-->
-                <div id="full-directory-folder" class= "pill-box folder" onclick="toggleContainer()">
+                <div id="full-directory-folder" class= "pill-box folder">
                     All Notes
+                    <!--
                     <div class="pill-box subfolder folder">
                         Subfolder 1
                     </div>
                     <div class="pill-box subfolder folder">
                         Subfolder 2
                     </div>
+                    -->
                 </div>
-                
+                {% for folder in folders %}
+                        <div class="pill-box folder">
+                            {{ folder.folder_name }}
+                        </div>
+                {% endfor %}
+
             </div>  <!--container persists on all pages (/S)-->
         
             <!-- WIP Notes List-->
             <div id="notes-directory" class="column">
-                <div class="pill-box note">Note 1</div>
-                <div class="pill-box note">Note 2</div>
-                <!--Example Notes^-->
+                {% for note in notes %}
+                    <!--
+                    <div class="pill-box note">Note 1</div>
+                    <div class="pill-box note">Note 2</div>
+                    -->
+                    <div class="pill-box note">
+                        {{ note.note_content.splitlines()[0] }}
+                    </div>
+                {% endfor %}
             </div>
         
             <!-- Content Portion of Page (should scale when 'Notes list'^ (notes-directory) is removed)-->

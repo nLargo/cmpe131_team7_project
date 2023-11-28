@@ -3,9 +3,10 @@ from flask import redirect
 from flask import flash
 from .forms import LoginForm
 from .forms import CreateAccountForm
+from flask_login import current_user    #Added
 from app import myapp_obj
-from app.models import Users
-from app import db
+from app.models import Users, Notes, Folders    #Updated
+from app import db 
 
 @myapp_obj.route("/")
 @myapp_obj.route("/hello", methods=['GET', 'POST'])
@@ -34,13 +35,15 @@ def createaccount():
             return redirect('/')
     return render_template('create_account.html', form=form)
 
-
-
-
 @myapp_obj.route("/home", methods=['GET', 'POST'])
 def home():
     return render_template('home_blank.html')
 
 @myapp_obj.route("/my-notes", methods=['GET', 'POST'])
 def my_notes():
-    return render_template('notes_directory.html')
+    #user_id = current_user.id if current_user.is_authenticated else None
+    user_id = 1
+    user_notes = Notes.query.filter_by(user_id=user_id).all()
+    user_folders = Folders.query.filter_by(user_id=user_id).all()
+
+    return render_template('notes_directory.html', notes=user_notes, folders=user_folders)
