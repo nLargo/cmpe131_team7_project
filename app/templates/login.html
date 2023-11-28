@@ -1,8 +1,35 @@
 {% extends "base.html"%}
 
 {% block content %}
-<h1>Login</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Text</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .centered-text {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .small-text {
+            font-size: 14px; /* You can adjust the size as needed */
+            color: black;
+        }
+    </style>
+</head>
+
 <form action="" method="POST" novalidate>
+   <h1 class="centered-text">Login</h1>
     {{form.hidden_tag()}}
     <p> {{form.username.label}} <br>
        {{form.username(size=32)}}</p>
@@ -16,8 +43,9 @@
     <p>{{form.submit()}}</p>
 
     <body>
-      <p>Don't have an account?</p>
-      <a href="createaccount"> Create Account</a>
+      <p class="small-text">Don't have an account?</p>
+      <a href="createaccount" class="small-text"> Create Account</a>
     </body>
 </form>
+
 {% endblock %}
