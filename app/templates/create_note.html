@@ -7,7 +7,7 @@
 {% block content %}
     <div id="app-container">
         <h1>Create Note</h1>
-    
+
         <div id="main-container">
             <!-- Content Portion of Page for creating a new note -->
             <div id="create-note-content">
@@ -18,9 +18,12 @@
                 </form>
             </div>
         </div>
-        <form method="post" action="{{ url_for('split_screen') }}">
-            <button type="submit">Split Screen</button>
+
+        <form method="post" action="{{ url_for('create_note') }}">
+            <button type="submit" name="action" value="split_screen">Split Screen</button>
+            <button type="submit" name="action" value="exit_split_screen">Exit Split Screen</button>
         </form>
+
         <div class="button-container">
             <a href="/home"><button type="button" class="cancel-button">Cancel</button></a>
         </div>
