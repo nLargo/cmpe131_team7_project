@@ -1,12 +1,12 @@
-from flask import render_template
-from flask import redirect
-from flask import flash
+from flask import render_template, redirect, flash, request
 from .forms import LoginForm
 from .forms import CreateAccountForm
 from flask_login import current_user    #Added
 from app import myapp_obj
 from app.models import Users, Notes, Folders    #Updated
 from app import db 
+from sqlalchemy import asc, desc
+
 
 @myapp_obj.route("/")
 @myapp_obj.route("/hello", methods=['GET', 'POST'])
@@ -39,11 +39,12 @@ def createaccount():
 def home():
     return render_template('home_blank.html')
 
+
 @myapp_obj.route("/my-notes", methods=['GET', 'POST'])
 def my_notes():
     #user_id = current_user.id if current_user.is_authenticated else None
     user_id = 1
-    user_notes = Notes.query.filter_by(user_id=user_id).all()
-    user_folders = Folders.query.filter_by(user_id=user_id).all()
+    user_notes = Notes.query.filter_by(user_id=user_id).order_by(desc(Notes.modified_at)).all()
+    user_folders = Folders.query.filter_by(user_id=user_id).order_by(asc(Folders.folder_name)).all()
 
     return render_template('notes_directory.html', notes=user_notes, folders=user_folders)

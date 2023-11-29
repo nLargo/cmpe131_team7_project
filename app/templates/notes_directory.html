@@ -2,36 +2,9 @@
 
 <title>My Notes</title>
 
-<!--
-<style>
-    #notes-directory {
-        background-color: #3E424B;      
-    }
-
-    #full-directory-folder { /*All Files Folder mofifier (temp)*/
-        background-color: #DAA520;
-    }
-
-    .note {
-        background-color: var(--background-light);
-    }
-
-    .folder {
-        color: var(--text);          
-        background-color: var(--background);
-    }
-
-    .subfolder {
-        display: none;
-        margin-left: 10px;
-    }  
-
-</style>
--->
-
 {% block content %}
     <div id="app-container">
-        <h1>My Notes</h1>
+        <h1>Large Label</h1>
     
         <div id="main-container">
 
@@ -40,26 +13,30 @@
                     <b>My Notes</b>
                 </div>
 
-                <!-- 'All Notes' Special Folder-->
-
-                <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="click_folder('all')" data-folder-id="all">
+                <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes(); showNotesDir()">
                     All Notes
                 </a>
+
                 {% for folder in folders %}
-                    <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="click_folder('{{ folder.folder_id }}')" data-folder-id="{{ folder.folder_id }}">
+                    <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}'); showNotesDir()" data-folder-id="{{ folder.folder_id }}">
                         {{ folder.folder_name }}
                     </a>
                 {% endfor %}
 
             </div>
         
-            <!-- WIP Notes List-->
+
             <div id="notes-directory" class="column">
                 <div class=hotbar>
-                    <a class="pill-box hotbar-button">
-                        Sort
-                    </a>
+
+                    <select id="sort-by-button" class="pill-box hotbar-button">
+                            <option value="date-edited">Date Edited</option>
+                            <option value="date-created">Date Created</option>
+                            <option value="title">Title</option>
+                    </select>
+
                 </div>
+                
                 {% for note in notes %}
                     <a class="pill-box note" data-folder-id="{{ note.folder_id }}" style="display: none;">
                         {{ note.note_content.splitlines()[0] }}
@@ -67,15 +44,16 @@
                 {% endfor %}
             </div>
         
-            <!-- Content Portion of Page -->
+
             <div id="main-content">
                 <div class=hotbar>
                     *buttons*
                 </div>
 
-                Shit goes here...
+                <div id="current-note">
+                    
+                </div>
 
-        
             </div>
         
         </div>  
@@ -83,17 +61,46 @@
 
     
     <script>
-        function click_folder(link) {
-            var allNotes = document.querySelectorAll('.pill-box.note');
+        var allNotes = document.querySelectorAll('.pill-box.note');
+        var notesArray = Array.from(allNotes);
+
+        function showNotesDir() {
+            var notesDir = document.querySelector('#notes-directory'); 
+            notesDir.style.display = 'block'; 
+        }
+
+        function showAllNotes() {
             allNotes.forEach(function (note) {
-                note.style.display = 'none';
-            });
-    
-            var folderNotes = document.querySelectorAll('.pill-box.note[data-folder-id="' + link + '"]');
-            folderNotes.forEach(function (note) {
                 note.style.display = 'block';
             });
         }
+
+        function showFolderNotes(link) {
+            allNotes.forEach(function (note) {
+                note.style.display = 'block';
+            });
+
+            var excludedNotes = document.querySelectorAll('.pill-box.note:not([data-folder-id="' + link + '"])');
+            excludedNotes.forEach(function (note) { 
+                note.style.display = 'none';
+            });
+        }
+
+        function handleHashChange() {
+        var hash = window.location.hash;
+
+        if (hash.startsWith("#Folder-")) {
+            var folderId = hash.substring("#Folder-".length);
+            showFolderNotes(folderId);
+        } else {
+            showAllNotes();
+        }
+}
+
+        window.onhashchange = handleHashChange;
+
+        handleHashChange();
+
     </script>
 {% endblock %}
 

@@ -47,3 +47,5 @@ class Folders(db.Model):
 
     parent_folder_id = db.Column(db.Integer, db.ForeignKey('folders.folder_id', ondelete='CASCADE'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    
