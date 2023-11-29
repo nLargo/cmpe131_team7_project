@@ -7,8 +7,7 @@ from .models import User  # Assuming your models are in a file named models.py
 from flask_login import login_user
 
 @myapp_obj.route("/")
-def index():
-    return render_template('index.html')
+
 @myapp_obj.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -54,7 +53,7 @@ def home():
 def my_notes():
     return render_template('notes_directory.html')
 
-@myapp_obj.route('/create_note')
+@myapp_obj.route("/create_note")
 def create_note():
     return render_template('create_note.html')  # Replace with the actual template name for creating a new note
 
