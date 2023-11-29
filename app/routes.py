@@ -7,6 +7,8 @@ from .models import User  # Assuming your models are in a file named models.py
 from flask_login import login_user
 
 @myapp_obj.route("/")
+def index():
+    return render_template('index.html')
 @myapp_obj.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -57,6 +59,7 @@ def create_note():
     return render_template('create_note.html')  # Replace with the actual template name for creating a new note
 
 #route for the split screen feature separately
-@myapp_obj.route('/split_screen', methods=['POST'])
+
+@myapp_obj.route("/split_screen", methods=['POST'])
 def split_screen():
-    return render_template('split.html', split=True)
+    return render_template('split.html')
