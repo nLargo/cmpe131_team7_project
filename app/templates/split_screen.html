@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Screen Example</title>
+    <!-- Add any additional styles or meta tags as needed -->
+</head>
+<body>
+    <div id="app-container">
+        <h1>Split Screen</h1>
+
+        <div id="split-screen-content">
+            <!-- Add content for the split-screen layout -->
+            <div id="leftPanel" class="panel">
+                <!-- Content for the left panel -->
+                <h2>Left Panel</h2>
+            </div>
+            <div id="rightPanel" class="panel">
+                <!-- Content for the right panel -->
+                <h2>Right Panel</h2>
+            </div>
+        </div>
+
+        <form method="post" action="{{ url_for('exit_split_screen') }}" id="exit-split-screen-form">
+            <button type="submit">Exit Split Screen</button>
+        </form>
+
+        <div class="button-container">
+            <!-- Add any additional buttons or links as needed -->
+        </div>
+    </div>
+</body>
+</html>
