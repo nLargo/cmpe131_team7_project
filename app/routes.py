@@ -1,4 +1,4 @@
-from flask import render_template, redirect, flash
+from flask import render_template, redirect, flash, request
 from .forms import LoginForm
 from .forms import CreateAccountForm
 from app import myapp_obj, db
@@ -53,12 +53,18 @@ def home():
 def my_notes():
     return render_template('notes_directory.html')
 
-@myapp_obj.route("/create_note")
+@myapp_obj.route("/create_note", methods=['GET', 'POST'])
 def create_note():
-    return render_template('create_note.html')  # Replace with the actual template name for creating a new note
+    if request.method == 'POST':
+        if request.form.get('action') == 'split_screen':
+            # Handle split-screen logic here if needed
+            # You might want to pass any necessary data to the split_screen template
+            return render_template('split_screen.html')
+
+        elif request.form.get('action') == 'exit_split_screen':
+            # Redirect to the create_note page
+            return render_template('create_note.html')
+
+    return render_template('create_note.html')#Replace with the actual template name for creating a new note
 
 #route for the split screen feature separately
-
-@myapp_obj.route("/split_screen", methods=['POST'])
-def split_screen():
-    return render_template('split.html')
