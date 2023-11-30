@@ -38,7 +38,7 @@
                 </div>
                 
                 {% for note in notes %}
-                    <a class="pill-box note" data-folder-id="{{ note.folder_id }}" style="display: none;">
+                    <a class="pill-box note" data-folder-id="{{ note.folder_id }}"> <!--style="display: none;"-->
                         {{ note.note_content.splitlines()[0] }}
                     </a>
                 {% endfor %}
@@ -85,21 +85,6 @@
                 note.style.display = 'none';
             });
         }
-
-        function handleHashChange() {
-        var hash = window.location.hash;
-
-        if (hash.startsWith("#Folder-")) {
-            var folderId = hash.substring("#Folder-".length);
-            showFolderNotes(folderId);
-        } else {
-            showAllNotes();
-        }
-}
-
-        window.onhashchange = handleHashChange;
-
-        handleHashChange();
 
     </script>
 {% endblock %}
