@@ -2,8 +2,7 @@ from flask import render_template, redirect, flash, request
 from .forms import LoginForm
 from .forms import CreateAccountForm
 from app import myapp_obj, db
-from app.models import User
-from .models import User, Notes, Folders    #Updated  
+from .models import Users, Notes, Folders    #Updated  
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import asc, desc
 
