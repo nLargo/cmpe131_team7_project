@@ -4,8 +4,8 @@
 3. Notes app should allow user to pin notes.
 4. Notes app should allow user to type with voice dication.
 5. Notes app should allow user to save login information.
-6. Notes app should allow user to allow notifications.
-7. Notes app should allow user to search notes app.
+6. Notes app should allow user to save notes.
+7. Notes app should allow user to delete notes.
 8. User will be able to view multiple notes in split-screen mode.
 9. User will be able to log out of their account using a logout button.
 10. User will be able to add photos from their photo library into the note page.
@@ -51,15 +51,15 @@
 - **Primary Sequence:**
 1. The site prompts the user with a textbox to name the new folder.
 2. User types and enters a name.
-3. a) Site creates a folder with the given name, in the current folder that the selection exists.b) Site displays the folder in the sidebar list, visibly nested in any parent folders.
+3. a) Site creates a folder with the given name. b) Site displays the folder in the sidebar list.
 4. Site moves the selection into the new folder.
-5. Site opens the new folder, displaying the selected notes/folders within.
-- **Primary Postconditions:** The selected notes/folders have been moved into a new folder (a subfolder).
+5. Site opens the new folder, displaying the selected notes within.
+- **Primary Postconditions:** The selected notes have been moved into a new folder.
 - **Alternate Sequence:**
 2. User does not type anything and clicks enter.
-3. a) Site creates a folder with the default name "New Folder", in the current folder that the selection exists.b) Site displays the folder in the sidebar list, visibly nested in any parent folders.
+3. a) Site creates a folder with the default name "New Folder". b) Site displays the folder in the sidebar list.
 4. Site moves the selection into the new folder.
-5. Site opens the new folder, displaying the selected notes/folders within.
+5. Site opens the new folder, displaying the selected notes within.
 
 ### 3) Pin notes
 - **Pre-condition:** The user must be logged in and have at least 1 note.
@@ -100,37 +100,37 @@
 - **Primary Postconditions:** User is able to use the app and remain signed in.
 - **Alternate Sequence:**
 1. A pop-up asks whether the user wants to save their login information or not.
-2. User selects "No" if they do not want their information saved..
+2. User selects "No" if they do not want their information saved.
+
 	**a)** Application will not save the user's login information.
 
-### 6) Allow notifications.
-- **Pre-condition:** User should have opens the app for the first time.
-- **Trigger:** User creates or logs into their account. 
+### 6) Save notes
+- **Pre-condition:** User creates a note.
+- **Trigger:** User hovers over to the save icon. 
 - **Primary Sequence:**
-1. User will be asked if they want to "Allow" or "Don't Allow" notifications to be sent from the app.
-2. User selects "Allow".
-3. Application remembers to always send notifications to the user.
+1. User clicks the save button.
+2. User adds a title and has text in the note.
+3. Note is saved in the application.
 
-- **Primary Postconditions:** User can use the app and will receive nofications.
+- **Primary Postconditions:** User views the home page with all the saved notes shown.
 - **Alternate Sequence:** 
-1. User will be asked if they want to "Allow" or "Don't Allow" notifications to be sent from the app.
-2. User selects "Don't Allow".
-3. Application does not send notifications to the user.
+1. User clicks the save button.
+2. User enters a title.
+3. Note is not saved because there was no text.
 
-### 7) Search notes app.
-- **Pre-condition:** There should be at least one file with text in the app. 
-- **Trigger:** User selects the search bar. 
+### 7) Delete notes
+- **Pre-condition:** User saves a note. 
+- **Trigger:** User hovers over the delete icon. 
 - **Primary Sequence:**
-1. User types keywords or sentences to search through the existing notes.
-2. User presses "ENTER" after typing the text.
-3. Application will search for matching keywords or sentences found.
-4. Application displays files with matches found.
+1. User clicks on the delete note icon.
+2. User selects note that they want to delete.
+3. Application deletes the note.
 
-- **Primary Postconditions:** User is able to find, select, edit, and read the file that was searched for.  
+- **Primary Postconditions:** User is directed to the home page.  
 - **Alternate Sequence:** 
-4. There are no existing notes to search through or no files were found with such text entered. 
-  	**a)** Search result shows no files.
-	**b)** User has to create new files. 
+1. There are no existing notes to delete or user doesn't create a new note.
+  
+	**a)** User has to create new files. 
 
 ## Use Cases - Emma Dunbach (@edunbach)
 ### 8) Split View
@@ -248,8 +248,3 @@
 1. Application displays a pop-up that asks the user for the name of the note.
 2. User decides to not create a new note.
 3. User clicks “CANCEL”.
-
-
-
-
-
