@@ -1,10 +1,11 @@
-from flask import render_template, redirect, flash
+from flask import render_template, redirect, flash, request
 from .forms import LoginForm
 from .forms import CreateAccountForm
 from app import myapp_obj, db
 from app.models import User
-from .models import User  # Assuming your models are in a file named models.py
+from .models import User, Notes, Folders    #Updated  
 from flask_login import login_user, current_user, logout_user, login_required
+from sqlalchemy import asc, desc
 
 @myapp_obj.route("/", methods=['GET', 'POST'])
 @myapp_obj.route("/login", methods=['GET', 'POST'])
@@ -25,7 +26,6 @@ def login():
 
         # Invalid login
         flash('Invalid username or password. Please try again.', 'error')
-        print('false')
 
     return render_template('login.html', form=form)
 
@@ -37,7 +37,7 @@ def createaccount():
             print('do something')
             print(f'this is the username of the user {form.username.data}')
             print(f'this is the password of the user {form.password.data}')
-            u = User(username=form.username.data, password=form.password.data, email=form.email.data)
+            u = Users(username=form.username.data, password=form.password.data, email=form.email.data)
             db.session.add(u)
             db.session.commit()
             return redirect('/home')
@@ -50,9 +50,6 @@ def createaccount():
 def home():
     return render_template('home_blank.html')
 
-@myapp_obj.route("/my-notes", methods=['GET', 'POST'])
-def my_notes():
-    return render_template('notes_directory.html')
 
 @myapp_obj.route('/create_note')
 def create_note():
@@ -64,3 +61,15 @@ def logout():
     logout_user()
     flash('You have been logged out.', 'success')
     return redirect('/')
+
+
+@myapp_obj.route("/my-notes", methods=['GET', 'POST'])
+def my_notes():
+    #user_id = current_user.id if current_user.is_authenticated else None
+    user_id = 1
+    user_notes = Notes.query.filter_by(user_id=user_id).order_by(desc(Notes.modified_at)).all()
+    user_folders = Folders.query.filter_by(user_id=user_id).order_by(asc(Folders.folder_name)).all()
+
+    return render_template('notes_directory.html', notes=user_notes, folders=user_folders)
+
+

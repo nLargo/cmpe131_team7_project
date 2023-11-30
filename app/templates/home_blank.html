@@ -15,7 +15,10 @@
         <h1>Home</h1>
     
         <div id="main-container">  <!--container persists on all pages (main-container)-->
-            <div id="sidebar" class="column">  <!--container persists on all pages (sidebar)-->
+            <div id="sidebar" class="column">  <!--container persists on all pages (sidebar)--> 
+                <div class=hotbar>
+                    *LABEL*
+                </div>
             
                 <!-- Pill Folder Example -- chunk can be removed-->
                 <div class= "pill-box exampleItem">
@@ -25,20 +28,139 @@
                     A Pill Box: The Sequel
                 </div>
                 <!-- Pill Folder Example -->
-
-                <!-- "Create Note" icon button -->
-                <div id="create-note-button">
-                    <button>
-                        <!-- <i class="fas fa-sticky-note"></i> Create Note -->
-                        <a href="create_note" class="small-text"> Create Note</a>
-                    </button>
-                </div>
                 
+              
             </div>  <!--container persists on all pages (/sidebar)-->
 
-            <!-- Content Portion of Page)-->
-            <div id="main-content">
-                Shit goes here...
+                <div class=hotbar>
+                    *buttons*
+                </div>
+
+          
+
+                <!-- "Create Note" icon button -->
+            <div class="btn">
+                <div> <!-- id="create-note-button"> -->
+                    <button id="create-note-button">
+                        <i class="fas fa-plus"></i>
+                        Create Note
+                        <!-- <i class="fas fa-sticky-note"></i> Create Note -->
+                        <!--<a href="create_note" class="small-text"> Create Note</a>-->
+                    </button>
+                </div>
+            </div>
+        </div>  <!--container persists on all pages (/sidebar)-->
+
+
+                    <!-- Content Portion of Page)-->
+        <div id="main-content">
+            <div id="main">
+
+            </div>
+
+            <script src="https://kit.fontawesome.com/bf520e6492.js"
+                crossorigin="anonymous"> 
+            </script> 
+            <script src="./script.js"></script>
+
+            <script>
+                const addBtn = document.querySelector("#create-note-button"); 
+                const main = document.querySelector("#main"); 
+                
+                // Click event listener 
+                addBtn.addEventListener("click", function () { 
+                    addNote(); 
+                }); 
+  
+                // Save button function 
+                const saveNotes = () => { 
+                
+                    // Select content textareas 
+                    const notes =  
+                        document.querySelectorAll(".note .content");  
+                        
+                    // Select title textareas 
+                    const titles =  
+                        document.querySelectorAll(".note .title");  
+                
+                    const data = []; 
+                
+                    notes.forEach((note, index) => { 
+                        const content = note.value; 
+                        const title = titles[index].value; 
+                        console.log(title); 
+                        if (content.trim() !== "") { 
+                            data.push({ title, content }); 
+                        } 
+                    }); 
+  
+                    const titlesData =  
+                        data.map((item) => item.title); 
+                    console.log(titlesData); 
+                    localStorage.setItem("titles", JSON.stringify(titlesData)); 
+                
+                    const contentData = data.map((item) => item.content); 
+                    localStorage.setItem("notes", JSON.stringify(contentData)); 
+                }; 
+  
+                // Addnote button function 
+                const addNote = (text = "", title = "") => { 
+                    const note = document.createElement("div"); 
+                    note.classList.add("note"); 
+                    note.innerHTML = ` 
+                    <div class="icons"> 
+                        <i class="save fas fa-save" 
+                            style="color:red"> 
+                        </i> 
+                        <i class="trash fas fa-trash" 
+                            style="color:yellow"> 
+                        </i>  
+                    </div> 
+                    <div class="title-div"> 
+                        <textarea class="title" 
+                            placeholder="Write the title ...">${title} 
+                        </textarea> 
+                    </div> 
+                    <textarea class="content" 
+                        placeholder="Note down your thoughts ...">${text} 
+                    </textarea> 
+                    `; 
+                    function handleTrashClick() { 
+                        note.remove(); 
+                        saveNotes(); 
+                    } 
+                    function handleSaveClick() { 
+                        saveNotes(); 
+                    } 
+                    const delBtn = note.querySelector(".trash"); 
+                    const saveButton = note.querySelector(".save"); 
+                    const textareas = note.querySelectorAll("textarea"); 
+                
+                    delBtn.addEventListener("click", handleTrashClick); 
+                    saveButton.addEventListener("click", handleSaveClick); 
+                    main.appendChild(note); 
+                    saveNotes(); 
+                }; 
+  
+                // Loading all the notes those are saved in  
+                // the localstorage 
+                function loadNotes() { 
+                
+                    const titlesData =  
+                        JSON.parse(localStorage.getItem("titles")) || []; 
+                    const contentData =  
+                        JSON.parse(localStorage.getItem("notes")) || []; 
+                        
+                    for (let i = 0;  
+                            i < Math.max( 
+                                titlesData.length, contentData.length); i++) { 
+                        addNote(contentData[i], titlesData[i]); 
+                    } 
+                } 
+                loadNotes();
+            </script>
+        </div>
+                
         
             </div>  
 
@@ -75,5 +197,109 @@
             color: #007bff;
             text-decoration: none;
         }
+    
+        * { 
+            padding: 0; 
+            margin: 0; 
+            box-sizing: border-box; 
+        } 
+            
+        #main { 
+            width: 100%; 
+            min-height: 100vh; 
+            padding-bottom: 50px; 
+          /*  background-color: #81ecec; */
+            display: flex; 
+            flex-wrap: wrap; 
+        } 
+  
+        #addBtn { 
+            position: fixed; 
+            left: 18px; 
+            top: 10px; 
+            background-color: #2d3436; 
+            color: white; 
+            padding: 10px; 
+            border: 0; 
+            outline: 0; 
+            border-radius: 5px; 
+        } 
+  
+        .btn { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: #81ecec; 
+            margin-top: 0px; 
+        } 
+  
+        .note { 
+            width: 380px; 
+            height: 260px; 
+            background-color: white; 
+            margin: 15px; 
+            margin-top: 55px; 
+            border-radius: 10px; 
+            margin-left: 20px; 
+            margin-bottom: 30px; 
+        } 
+  
+        .icons { 
+            position: absolute;
+            top: 0;
+            right: -160;
+            width: 100%; 
+            background-color: #264653; 
+            color: white; 
+            padding: 5px; 
+            display: flex; 
+            justify-content: start; 
+            /*border-radius: 10px 10px 0px 0px; */
+        } 
+  
+        .icons i { 
+            padding: 5px; 
+            cursor: pointer; 
+        } 
+        
+        .note textarea { 
+           position: absolute;
+           /* right: 20;*/
+           bottom: 0;
+            border: none; 
+            width: 700px;
+            height: 100px; 
+        /*    resize: none; */
+        /*    padding: 16px 20px; */
+            font-size: 18px; 
+         /*   border-radius: 15px; */
+            background-color: beige; 
+         /*   border-radius: 0px 0px 10px 10px; */
+        } 
+  
+        .title-div textarea { 
+            position: absolute;
+            top: 30;
+            right: 20;
+            border-radius: 0px 0px 10px 10px; 
+            margin-bottom: -4px; 
+            background-color: #a4cad4; 
+            font-weight: bolder; 
+            font-size: x-large; 
+        } 
+        
+        .heading { 
+            position: fixed; 
+            margin-top: 46px; 
+            color: ivory; 
+        } 
+        
+        .note textarea:focus { 
+            border: 0; 
+            outline: 0; 
+        }
+
     </style>
+
+
 {% endblock %}
