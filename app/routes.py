@@ -4,26 +4,28 @@ from .forms import CreateAccountForm
 from app import myapp_obj, db
 from app.models import User
 from .models import User  # Assuming your models are in a file named models.py
-from flask_login import login_user
+from flask_login import login_user, current_user, logout_user, login_required
 
-@myapp_obj.route("/")
+@myapp_obj.route("/", methods=['GET', 'POST'])
 @myapp_obj.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+
     if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
+        print("Form is valid and submitted")
 
-        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(username=form.username.data).first()
 
-        if user is not None and user.check_password(password):
+        if user and user.check_password(form.password.data):
             # Valid login
             login_user(user, remember=form.remember_me.data)
-            flash(f'Login successful for user: {username}', 'success')
+            print('True')
+            flash(f'Login successful for user: {user.username}', 'success')
             return redirect('/home')  
-        else:
-            # Invalid login
-            flash('Invalid username or password. Please try again.', 'error')
+
+        # Invalid login
+        flash('Invalid username or password. Please try again.', 'error')
+        print('false')
 
     return render_template('login.html', form=form)
 
@@ -55,3 +57,10 @@ def my_notes():
 @myapp_obj.route('/create_note')
 def create_note():
     return render_template('create_note.html')  # Replace with the actual template name for creating a new note
+
+@myapp_obj.route("/logout")
+@login_required  # This decorator ensures that the user is logged in before logging out
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'success')
+    return redirect('/')
