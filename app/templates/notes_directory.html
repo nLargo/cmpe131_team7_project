@@ -12,76 +12,154 @@
             <div id="logout-button" style="display: inline-block;">
                 <a href="/" class="small-text">Logout</a>
             </div>
+            <div class="split-buttons">
+                <button id="split-screen-button" onclick="toggleSplitScreen()">Toggle Split Screen</button>
+                <button id="exit-split-screen-button" onclick="exitSplitScreen()">Exit Split Screen</button>
+            </div>
         </div>
-    
-        <div id="main-container">
-            <div id="sidebar" class="column">
-                <div class=hotbar>
-                    <b>My Notes</b>
-                </div>
-
-                <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes(); showNotesDir()">
-                    All Notes
-                </a>
-
-                {% for folder in folders %}
-                    <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}'); showNotesDir()" data-folder-id="{{ folder.folder_id }}">
-                        {{ folder.folder_name }}
-                    </a>
-                {% endfor %}
-
-                <form method="post" style="max-width: 20px">
-                    {{ form.hidden_tag() }}
-                    {{ form.new_folder_name(size=32, placeholder="New Folder Name", required=true) }}
-                    <button type="submit">Create</button>
-                </form>
-
-            </div>
-        
-
-            <div id="notes-directory" class="column">
-                <div class=hotbar>
-
-                    <select id="sort-by-button" class="pill-box hotbar-button">
-                            <option value="date-edited">Date Edited</option>
-                            <option value="date-created">Date Created</option>
-                            <option value="title">Title</option>
-                    </select>
-
-                </div>
+        <div class="split-container">
+            <div class="split-content">    
                 
-                {% for note in notes %}
-                    <a class="pill-box note" data-folder-id="{{ note.folder_id }}" onclick="showNoteContent(this, '{{ note.note_content }}')"> <!--showNoteContentName(this, '{{ note.note_content.splitlines()[0] }}')"--> <!--style="display: none;"-->
-                        {{ note.note_content.splitlines()[0] }}
-                    </a>
-                {% endfor %} 
+                <div id="main-container">
+                    <div id="sidebar" class="column">
+                        <div class=hotbar>
+                            <b>My Notes</b>
+                        </div>
 
+                        <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes(); showNotesDir()">
+                            All Notes
+                        </a>
 
-                <!--Right Click WIP-->
-                <div id="context-menu">
-                    <ul>
-                      <li onclick="handleContextMenuAction('Option 1')">Option 1</li>
-                      <li onclick="handleContextMenuAction('Option 2')">Option 2</li>
-                      <li onclick="handleContextMenuAction('Option 3')">Option 3</li>
-                    </ul>
-                </div>
-                <!---->
+                        {% for folder in folders %}
+                            <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}'); showNotesDir()" data-folder-id="{{ folder.folder_id }}">
+                                {{ folder.folder_name }}
+                            </a>
+                        {% endfor %}
+
+                        <form method="post" style="max-width: 20px">
+                            {{ form.hidden_tag() }}
+                            {{ form.new_folder_name(size=32, placeholder="New Folder Name", required=true) }}
+                            <button type="submit">Create</button>
+                        </form>
+
+                    </div>
         
 
+                    <div id="notes-directory" class="column">
+                        <div class=hotbar>
+
+                            <select id="sort-by-button" class="pill-box hotbar-button">
+                                    <option value="date-edited">Date Edited</option>
+                                    <option value="date-created">Date Created</option>
+                                    <option value="title">Title</option>
+                            </select>
+
+                        </div>
+                
+                        {% for note in notes %}
+                            <a class="pill-box note" data-folder-id="{{ note.folder_id }}" onclick="showNoteContent(this, '{{ note.note_content }}')"> <!--showNoteContentName(this, '{{ note.note_content.splitlines()[0] }}')"--> <!--style="display: none;"-->
+                                {{ note.note_content.splitlines()[0] }}
+                            </a>
+                        {% endfor %} 
+
+
+                        <!--Right Click WIP-->
+                        <div id="context-menu">
+                            <ul>
+                              <li onclick="handleContextMenuAction('Option 1')">Option 1</li>
+                              <li onclick="handleContextMenuAction('Option 2')">Option 2</li>
+                              <li onclick="handleContextMenuAction('Option 3')">Option 3</li>
+                            </ul>
+                        </div>
+                        <!---->
+        
+
+                    </div>
+        
+
+                    <div id="main-content">
+                        <b><div id="current-note-title" class=hotbar>
+                            Current Note
+                        </div></b>
+                        
+                        <div id="current-note">
+                        </div>
+
+                    </div>
+        
+                </div> 
             </div>
+            <div class="split-content hidden" id="right-side">
+                <div id="main-container">
+                    <div id="sidebar" class="column">
+                        <div class=hotbar>
+                            <b>My Notes</b>
+                        </div>
+
+                        <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes(); showNotesDir()">
+                            All Notes
+                        </a>
+
+                        {% for folder in folders %}
+                            <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}'); showNotesDir()" data-folder-id="{{ folder.folder_id }}">
+                                {{ folder.folder_name }}
+                            </a>
+                        {% endfor %}
+
+                        <form method="post" style="max-width: 20px">
+                            {{ form.hidden_tag() }}
+                            {{ form.new_folder_name(size=32, placeholder="New Folder Name", required=true) }}
+                            <button type="submit">Create</button>
+                        </form>
+
+                    </div>
         
 
-            <div id="main-content">
-                <b><div id="current-note-title" class=hotbar>
-                    Current Note
-                </div></b>
+                    <div id="notes-directory" class="column">
+                        <div class=hotbar>
 
-                <div id="current-note">
+                            <select id="sort-by-button" class="pill-box hotbar-button">
+                                    <option value="date-edited">Date Edited</option>
+                                    <option value="date-created">Date Created</option>
+                                    <option value="title">Title</option>
+                            </select>
+
+                        </div>
+                
+                        {% for note in notes %}
+                            <a class="pill-box note" data-folder-id="{{ note.folder_id }}" onclick="showNoteContent(this, '{{ note.note_content }}')"> <!--showNoteContentName(this, '{{ note.note_content.splitlines()[0] }}')"--> <!--style="display: none;"-->
+                                {{ note.note_content.splitlines()[0] }}
+                            </a>
+                        {% endfor %} 
+
+
+                        <!--Right Click WIP-->
+                        <div id="context-menu">
+                            <ul>
+                              <li onclick="handleContextMenuAction('Option 1')">Option 1</li>
+                              <li onclick="handleContextMenuAction('Option 2')">Option 2</li>
+                              <li onclick="handleContextMenuAction('Option 3')">Option 3</li>
+                            </ul>
+                        </div>
+                        <!---->
+        
+
+                    </div>
+        
+
+                    <div id="main-content">
+                        <b><div id="current-note-title" class=hotbar>
+                            Current Note
+                        </div></b>
+                        
+                        <div id="current-note">
+                        </div>
+
+                    </div>
+        
                 </div>
-
             </div>
-        
-        </div>  
+        </div> 
     </div> 
 
     
@@ -158,6 +236,15 @@
         });
         function handleContextMenuAction(option) {
             
+        }
+        function toggleSplitScreen() {
+            const rightSide = document.getElementById('right-side');
+            rightSide.classList.toggle('hidden');
+        }
+
+        function exitSplitScreen() {
+            const rightSide = document.getElementById('right-side');
+            rightSide.classList.add('hidden');
         }
         /* Right Click WIP END */
 

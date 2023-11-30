@@ -18,6 +18,8 @@
     
             /*home_blank.html (ran into style inheritance issues -- leaving here for now)*/
             #app-container {
+                width: 100vw;
+                height: 100vh;
                 display: flex;
                 flex-direction: column;
             }
@@ -35,12 +37,39 @@
                 color: #3E424B; /* use variable later*/
                 background-color: var(--text);  /* use better variable later*/
             
-                flex:3;
+                flex:1;
+                overflow: auto;
                 height: 100vh;
             
                 padding: 10px;
             }
     
+            .split-buttons {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                background-color: #f0f0f0;
+            }
+
+            .split-container {
+                display: flex;
+                width: 100%;
+                flex: 1;
+                overflow: hidden;
+            }
+
+            .split-content {
+                flex: 1;
+                height: 100%;
+                overflow: auto;
+                border: 1px solid #ccc; /* Optional: Add border between the two sides */
+            }
+            
+            /* Initially hide the right side */
+            .hidden {
+                display: none;
+            }
+
             .column {
                 width: 20vw;
                 height: 100vh;
