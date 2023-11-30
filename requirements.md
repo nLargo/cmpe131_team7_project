@@ -4,8 +4,8 @@
 3. Notes app should allow user to pin notes.
 4. Notes app should allow user to type with voice dication.
 5. Notes app should allow user to save login information.
-6. Notes app should allow user to allow notifications.
-7. Notes app should allow user to search notes app.
+6. Notes app should allow user to save notes.
+7. Notes app should allow user to delete notes.
 8. User will be able to view multiple notes in split-screen mode.
 9. User will be able to log out of their account using a logout button.
 10. User will be able to add photos from their photo library into the note page.
@@ -103,34 +103,40 @@
 2. User selects "No" if they do not want their information saved..
 	**a)** Application will not save the user's login information.
 
-### 6) Allow notifications.
-- **Pre-condition:** User should have opens the app for the first time.
-- **Trigger:** User creates or logs into their account. 
+### 6) Save notes
+- **Pre-condition:** User creates a note.
+- **Trigger:** User clicks the save icon. 
 - **Primary Sequence:**
-1. User will be asked if they want to "Allow" or "Don't Allow" notifications to be sent from the app.
-2. User selects "Allow".
-3. Application remembers to always send notifications to the user.
+1. User logs into the application.
+2. User selects "Create Note".
+3. User adds a title and text to the note.
+4. User clicks the save button.
+5. Note is saved in the application.
 
-- **Primary Postconditions:** User can use the app and will receive nofications.
+- **Primary Postconditions:** User has saved the note and go back to look at it.
 - **Alternate Sequence:** 
-1. User will be asked if they want to "Allow" or "Don't Allow" notifications to be sent from the app.
-2. User selects "Don't Allow".
-3. Application does not send notifications to the user.
+1. User selects "Create Note".
+2. User doesn't type any text.
+3. User tries to save file by clicking the save button.
+4. Note is not saved because there was no text.
 
-### 7) Search notes app.
-- **Pre-condition:** There should be at least one file with text in the app. 
-- **Trigger:** User selects the search bar. 
+### 7) Delete notes
+- **Pre-condition:** User saves a note. 
+- **Trigger:** User clicks the delete icon. 
 - **Primary Sequence:**
-1. User types keywords or sentences to search through the existing notes.
-2. User presses "ENTER" after typing the text.
-3. Application will search for matching keywords or sentences found.
-4. Application displays files with matches found.
+1. User logs into the application.
+2. User selects "Create Note".
+3. User adds a title and text to the note.
+4. User clicks the save button.
+5. Note is saved in the application.
+6. User goes back to the note by clicking on it.
+7. User clicks the delete button.
+8. Note is deleted from the application.
 
-- **Primary Postconditions:** User is able to find, select, edit, and read the file that was searched for.  
+- **Primary Postconditions:** User deletes note and get rid of unwanted text.  
 - **Alternate Sequence:** 
-4. There are no existing notes to search through or no files were found with such text entered. 
-  	**a)** Search result shows no files.
-	**b)** User has to create new files. 
+4. There are no existing notes to delete or user doesn't create a new note. 
+	**a)** User has to create new files. 
 
 ## Use Cases - Emma Dunbach (@edunbach)
 ### 8) Split View
