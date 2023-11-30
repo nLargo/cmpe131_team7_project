@@ -6,6 +6,12 @@
 
 {% block content %}
     <div id="app-container">
+        <div id="app-container">
+            <!-- Add Logout Button -->
+            <div id="logout-button">
+                <a href="/" class="small-text">Logout</a>
+            </div>
+
         <h1>Home</h1>
     
         <div id="main-container">  <!--container persists on all pages (main-container)-->
@@ -57,6 +63,17 @@
 
         #create-note-button button i {
             margin-right: 5px;
+        }
+
+        #logout-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        #logout-button a {
+            color: #007bff;
+            text-decoration: none;
         }
     </style>
 {% endblock %}
