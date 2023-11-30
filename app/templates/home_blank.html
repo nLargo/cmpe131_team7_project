@@ -1,24 +1,23 @@
 {% extends "base.html"%}
 
-<head>
-    <title>Home</title>
-</head>
+ <title>Home</title>
 
 {% block content %}
-        <div id="app-container">
-            <!-- Add Logout Button -->
-            <div id="logout-button">
-                <a href="/" class="small-text">Logout</a>
-            </div>
+    <div id="app-container">
+        <!-- Add Logout Button -->
+        <div id="logout-button">
+            <a href="/" class="small-text">Logout</a>
+        </div>
 
         <h1>Home</h1>
     
-        <div id="main-container">  <!--container persists on all pages (main-container)-->
-            <div id="sidebar" class="column">  <!--container persists on all pages (sidebar)--> 
+        <div id="main-container">  
+            <div id="sidebar" class="column"> 
                 <div class=hotbar>
-                    *LABEL*
+                    <b>(LABEL)</b>
                 </div>
             
+
                 <!-- Pill Folder Example -- chunk can be removed-->
                 <div class= "pill-box exampleItem">
                     A Pill Box
@@ -29,23 +28,23 @@
                 <!-- Pill Folder Example -->
 
 
-            
                 <!-- "Create Note" icon button -->
-            <div class="btn">
-                <div> 
+                <div class="btn">
                     <button id="create-note-button">
                         <i class="fas fa-plus"></i>
                         Create Note
                     </button>
                 </div>
-            </div>
-        </div>  <!--container persists on all pages (/sidebar)-->
+            </div> 
 
-                    <!-- Content Portion of Page)-->
-        <div id="main-content">
-            <div id="main">
+            <div id="main-content">
+                <div class=hotbar></div>
+                <div id="main">
+                </div>
 
-            </div>
+                <script src="https://kit.fontawesome.com/bf520e6492.js"
+                    crossorigin="anonymous"> 
+                </script> 
 
             <script src="https://kit.fontawesome.com/bf520e6492.js" crossorigin="anonymous"> 
             </script> 
@@ -73,74 +72,88 @@
                             data.push({ title, content }); 
                         } 
                     }); 
-  
-                    const titlesData = data.map((item) => item.title); 
+    
+                    const saveNotes = () => {  
+                        const notes = document.querySelectorAll(".note .content");  
+                    
+                        const data = []; 
+                    
+                        notes.forEach((note, index) => { 
+                            const content = note.value; 
+                            const title = titles[index].value; 
+                            console.log(title); 
+                            if (content.trim() !== "") { 
+                                data.push({ title, content }); 
+                            } 
+                        }); 
+    
+                        const titlesData = data.map((item) => item.title); 
 
-                    console.log(titlesData); 
-                    localStorage.setItem("titles", JSON.stringify(titlesData)); 
-                
-                    const contentData = data.map((item) => item.content); 
-                    localStorage.setItem("notes", JSON.stringify(contentData)); 
-                }; 
-  
-                const addNote = (text = "", title = "") => { 
-                    const note = document.createElement("div"); 
-                    note.classList.add("note"); 
-                    note.innerHTML = ` 
-                    <div class="icons"> 
-                        <i class="save fas fa-save" 
-                            style="color:blue"> 
-                        </i> 
-                        <i class="trash fas fa-trash" 
-                            style="color:grey"> 
-                        </i>  
-                    </div> 
-                    <div class="title-div"> 
-                        <textarea class="title" 
-                            placeholder="Write the title ...">${title} 
+                        console.log(titlesData); 
+                        localStorage.setItem("titles", JSON.stringify(titlesData)); 
+                    
+                        const contentData = data.map((item) => item.content); 
+                        localStorage.setItem("notes", JSON.stringify(contentData)); 
+                    }; 
+    
+                    const addNote = (text = "", title = "") => { 
+                        const note = document.createElement("div"); 
+                        note.classList.add("note"); 
+                        note.innerHTML = ` 
+                        <div class="icons"> 
+                            <i class="save fas fa-save" 
+                                style="color:blue"> 
+                            </i> 
+                            <i class="trash fas fa-trash" 
+                                style="color:grey"> 
+                            </i>  
+                        </div> 
+                        <div class="title-div"> 
+                            <textarea class="title" 
+                                placeholder="Write the title ...">${title} 
+                            </textarea> 
+                        </div> 
+                        <textarea class="content" 
+                            placeholder="Note down your thoughts ...">${text} 
                         </textarea> 
-                    </div> 
-                    <textarea class="content" 
-                        placeholder="Note down your thoughts ...">${text} 
-                    </textarea> 
-                    `; 
+                        `; 
 
+                        function trashCan() { 
+                            note.remove(); 
+                            saveNotes(); 
+                        } 
 
-                    function trashCan() { 
-                        note.remove(); 
+                        function saveIcon() { 
+                            saveNotes(); 
+                        } 
+
+                        const deleteB = note.querySelector(".trash"); 
+                        const saveB = note.querySelector(".save"); 
+                        const textareas = note.querySelectorAll("textarea"); 
+                    
+                        deleteB.addEventListener("click", trashCan); 
+                        saveB.addEventListener("click", saveIcon); 
+                    
+                        main.appendChild(note); 
                         saveNotes(); 
+                    }; 
+    
+                    function loadNotes() { 
+                    
+                        const titlesData = JSON.parse(localStorage.getItem("titles")) || []; 
+                        const contentData = JSON.parse(localStorage.getItem("notes")) || []; 
+                            
+                        for (let i = 0; i < Math.max(titlesData.length, contentData.length); i++) { 
+                            addNote(contentData[i], titlesData[i]); 
+                        } 
                     } 
 
-                    function saveIcon() { 
-                        saveNotes(); 
-                    } 
+                    loadNotes();
 
-                    const deleteB = note.querySelector(".trash"); 
-                    const saveB = note.querySelector(".save"); 
-                    const textareas = note.querySelectorAll("textarea"); 
-                
-                    deleteB.addEventListener("click", trashCan); 
-                    saveB.addEventListener("click", saveIcon); 
-                  
-                    main.appendChild(note); 
-                    saveNotes(); 
-                }; 
-  
-                function loadNotes() { 
-                
-                    const titlesData = JSON.parse(localStorage.getItem("titles")) || []; 
-                    const contentData = JSON.parse(localStorage.getItem("notes")) || []; 
-                        
-                    for (let i = 0; i < Math.max(titlesData.length, contentData.length); i++) { 
-                        addNote(contentData[i], titlesData[i]); 
-                    } 
-                } 
-
-                loadNotes();
-
-            </script>
+                </script>
+            </div>
         </div>
-    </div>  <!--container persists on all pages (/main-containter)-->
+    </div> 
 </div>  
 
     <style>
@@ -167,11 +180,13 @@
             position: fixed;
             top: 20px;
             right: 20px;
+            display: inline-block;
         }
 
         #logout-button a {
             color: #007bff;
             text-decoration: none;
+            display: inline-block;
         }
     
         * { 
@@ -206,7 +221,7 @@
             padding: 0px;
             width: 1280px; 
             height: 130px; 
-            background-color: white; 
+            background-color: var(--background-light);
             margin-bottom: 0px; 
         } 
   
@@ -241,7 +256,29 @@
             background-color: #4c6bc7; 
             font-weight: bolder; 
             font-size: x-large; 
+        }
+  
+        .title-div textarea { 
+            position: absolute;
+            top: 30;
+            right: 20;
+            border-radius: 0px 0px 10px 10px; 
+            margin-bottom: -4px; 
+            background-color: #a4cad4; 
+            font-weight: bolder; 
+            font-size: x-large; 
         } 
+        
+        .heading { 
+            position: fixed; 
+            margin-top: 46px; 
+            color: ivory; 
+        } 
+        
+        .note textarea:focus { 
+            border: 0; 
+            outline: 0; 
+        }
 
     </style>
           
