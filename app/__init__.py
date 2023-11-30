@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
+from flask_login import LoginManager
 
 myapp_obj = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(myapp_obj)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -19,3 +22,7 @@ with myapp_obj.app_context():
     db.create_all()
 
 from app import routes
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
