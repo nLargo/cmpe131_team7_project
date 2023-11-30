@@ -35,7 +35,7 @@
                 <div> 
                     <button id="create-note-button">
                         <i class="fas fa-plus"></i>
-
+                        Create Note
                     </button>
                 </div>
             </div>
@@ -47,8 +47,7 @@
 
             </div>
 
-            <script src="https://kit.fontawesome.com/bf520e6492.js"
-                crossorigin="anonymous"> 
+            <script src="https://kit.fontawesome.com/bf520e6492.js" crossorigin="anonymous"> 
             </script> 
             <script src="./script.js"></script>
 
@@ -61,7 +60,8 @@
                 }); 
   
                 const saveNotes = () => {  
-                    const notes = document.querySelectorAll(".note .content");  
+                    const notes = document.querySelectorAll(".note .content");
+                    const titles = document.querySelectorAll(".note .title");
                 
                     const data = []; 
                 
@@ -180,15 +180,6 @@
             box-sizing: border-box; 
 
         } 
-            
-        #main { 
-            width: 100%; 
-            min-height: 100vh; 
-            padding-bottom: 50px; 
-          /*  background-color: #81ecec; */
-            display: flex; 
-            flex-wrap: wrap; 
-        } 
   
         #addBtn { 
             position: fixed; 
@@ -217,16 +208,6 @@
             height: 130px; 
             background-color: white; 
             margin-bottom: 0px; 
-          /* old settings before merge
-            width: 380px; 
-            height: 260px; 
-            background-color: white; 
-            margin: 15px; 
-            margin-top: 55px; 
-            border-radius: 10px; 
-            margin-left: 20px; 
-            margin-bottom: 30px; 
-          */
         } 
   
         .icons { 
@@ -261,45 +242,6 @@
             font-weight: bolder; 
             font-size: x-large; 
         } 
-        
-        /* old settings before merge
-        .note textarea { 
-           position: absolute;
-           /* right: 20;*/
-           bottom: 0;
-            border: none; 
-            width: 700px;
-            height: 100px; 
-        /*    resize: none; */
-        /*    padding: 16px 20px; */
-            font-size: 18px; 
-         /*   border-radius: 15px; */
-            background-color: beige; 
-         /*   border-radius: 0px 0px 10px 10px; */
-        } 
-  
-        .title-div textarea { 
-            position: absolute;
-            top: 30;
-            right: 20;
-            border-radius: 0px 0px 10px 10px; 
-            margin-bottom: -4px; 
-            background-color: #a4cad4; 
-            font-weight: bolder; 
-            font-size: x-large; 
-        } 
-        
-        .heading { 
-            position: fixed; 
-            margin-top: 46px; 
-            color: ivory; 
-        } 
-        
-        .note textarea:focus { 
-            border: 0; 
-            outline: 0; 
-        }
-        */
 
     </style>
           
