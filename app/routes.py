@@ -49,10 +49,6 @@ def createaccount():
 def home():
     return render_template('home_blank.html')
 
-@myapp_obj.route("/home", methods=['GET', 'POST'])
-def home():
-    return render_template('home_blank.html')
-
 @myapp_obj.route("/create_note", methods=['GET', 'POST'])
 def create_note():
     if request.method == 'POST':
