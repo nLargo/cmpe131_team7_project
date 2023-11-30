@@ -106,37 +106,29 @@
 
 ### 6) Save notes
 - **Pre-condition:** User creates a note.
-- **Trigger:** User clicks the save icon. 
+- **Trigger:** User hovers over to the save icon. 
 - **Primary Sequence:**
-1. User logs into the application.
-2. User selects "Create Note".
-3. User adds a title and text to the note.
-4. User clicks the save button.
-5. Note is saved in the application.
+1. User clicks the save button.
+2. User adds a title and has text in the note.
+3. Note is saved in the application.
 
-- **Primary Postconditions:** User has saved the note and go back to look at it.
+- **Primary Postconditions:** User views the home page with all the saved notes shown.
 - **Alternate Sequence:** 
-1. User selects "Create Note".
-2. User doesn't type any text.
-3. User tries to save file by clicking the save button.
-4. Note is not saved because there was no text.
+1. User clicks the save button.
+2. User enters a title.
+3. Note is not saved because there was no text.
 
 ### 7) Delete notes
 - **Pre-condition:** User saves a note. 
-- **Trigger:** User clicks the delete icon. 
+- **Trigger:** User hovers over the delete icon. 
 - **Primary Sequence:**
-1. User logs into the application.
-2. User selects "Create Note".
-3. User adds a title and text to the note.
-4. User clicks the save button.
-5. Note is saved in the application.
-6. User goes back to the note by clicking on it.
-7. User clicks the delete button.
-8. Note is deleted from the application.
+1. User clicks on the delete note icon.
+2. User selects note that they want to delete.
+3. Application deletes the note.
 
-- **Primary Postconditions:** User deletes note and get rid of unwanted text.  
+- **Primary Postconditions:** User is directed to the home page.  
 - **Alternate Sequence:** 
-4. There are no existing notes to delete or user doesn't create a new note.
+1. There are no existing notes to delete or user doesn't create a new note.
   
 	**a)** User has to create new files. 
 
@@ -256,8 +248,3 @@
 1. Application displays a pop-up that asks the user for the name of the note.
 2. User decides to not create a new note.
 3. User clicks “CANCEL”.
-
-
-
-
-
