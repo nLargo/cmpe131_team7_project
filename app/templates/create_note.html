@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+<head>
+    <title>Create Note</title>
+</head>
+
+{% block content %}
+    <div id="app-container">
+        <h1>Create Note</h1>
+    
+        <div id="main-container">
+            <!-- Content Portion of Page for creating a new note -->
+            <div id="create-note-content">
+                <form method="post">
+                    <!-- Add form fields for the note content -->
+                    <textarea name="note_content" rows="20" cols="70" placeholder="Type your note here"></textarea>
+                    <br>
+                </form>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a href="/home"><button type="button" class="cancel-button">Cancel</button></a>
+        </div>
+    </div>
+{% endblock %}

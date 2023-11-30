@@ -21,7 +21,7 @@ class Users(db.Model, UserMixin):
 
     def __repr__(self):
         return f'<user {self.id}: {self.username}>'
-    
+
     notes = db.relationship('Notes', backref='user', lazy=True)
     folders = db.relationship('Folders', backref='user', lazy=True)
 

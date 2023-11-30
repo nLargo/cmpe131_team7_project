@@ -6,17 +6,20 @@
 
 {% block content %}
     <div id="app-container">
+        <div id="app-container">
+            <!-- Add Logout Button -->
+            <div id="logout-button">
+                <a href="/" class="small-text">Logout</a>
+            </div>
+
         <h1>Home</h1>
     
         <div id="main-container">  <!--container persists on all pages (main-container)-->
-            <div id="sidebar" class="column">  <!--container persists on all pages (sidebar)-->
-              
-              
+            <div id="sidebar" class="column">  <!--container persists on all pages (sidebar)--> 
                 <div class=hotbar>
                     *LABEL*
                 </div>
             
-              
                 <!-- Pill Folder Example -- chunk can be removed-->
                 <div class= "pill-box exampleItem">
                     A Pill Box
@@ -158,13 +161,11 @@
             </script>
         </div>
                 
-
         
             </div>  
 
         </div>  <!--container persists on all pages (/main-containter)-->
     </div>  
-
 
     <style>
         #create-note-button {
@@ -186,6 +187,17 @@
             margin-right: 5px;
         }
 
+        #logout-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        #logout-button a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    
         * { 
             padding: 0; 
             margin: 0; 
