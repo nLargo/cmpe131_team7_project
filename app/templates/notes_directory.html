@@ -23,6 +23,10 @@
                     </a>
                 {% endfor %}
 
+                <a id="new-folder-button" class="pill-box">
+                    New Folder
+                </a>
+
             </div>
         
 
@@ -38,20 +42,32 @@
                 </div>
                 
                 {% for note in notes %}
-                    <a class="pill-box note" data-folder-id="{{ note.folder_id }}"> <!--style="display: none;"-->
+                    <a class="pill-box note" data-folder-id="{{ note.folder_id }}" onclick="showNoteContent(this, '{{ note.note_content }}')"> <!--showNoteContentName(this, '{{ note.note_content.splitlines()[0] }}')"--> <!--style="display: none;"-->
                         {{ note.note_content.splitlines()[0] }}
                     </a>
-                {% endfor %}
+                {% endfor %} 
+
+
+                <!--Right Click WIP-->
+                <div id="context-menu">
+                    <ul>
+                      <li onclick="handleContextMenuAction('Option 1')">Option 1</li>
+                      <li onclick="handleContextMenuAction('Option 2')">Option 2</li>
+                      <li onclick="handleContextMenuAction('Option 3')">Option 3</li>
+                    </ul>
+                </div>
+                <!---->
+        
+
             </div>
         
 
             <div id="main-content">
-                <div class=hotbar>
-                    *buttons*
-                </div>
+                <b><div id="current-note-title" class=hotbar>
+                    Current Note
+                </div></b>
 
                 <div id="current-note">
-                    
                 </div>
 
             </div>
@@ -85,6 +101,44 @@
                 note.style.display = 'none';
             });
         }
+
+
+        function showNoteContent(selectedNote, content) {
+            var currentNoteContainer = document.getElementById('current-note');
+            
+            currentNoteContainer.innerHTML = content;
+
+            selectedNote.classList.add('selected');
+        }
+
+        /* Display Content Name WIP */
+        function showNoteContentName(selectedNote, noteTitle) {
+            var currentNoteContainer = document.getElementById('current-note-title');
+            
+            currentNoteContainer.innerHTML = noteTitle;
+
+            selectedNote.classList.add('selected');
+        }
+        /* Display Content Name WIP END */
+
+
+        /* Right Click WIP */
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            const contextMenu = document.getElementById('context-menu');
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = e.pageX + 'px';
+            contextMenu.style.top = e.pageY + 'px';
+
+            document.addEventListener('click', function hideContextMenu() {
+            contextMenu.style.display = 'none';
+            document.removeEventListener('click', hideContextMenu);
+            });
+        });
+        function handleContextMenuAction(option) {
+            
+        }
+        /* Right Click WIP END */
 
     </script>
 {% endblock %}

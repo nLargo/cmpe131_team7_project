@@ -48,3 +48,4 @@ def my_notes():
     user_folders = Folders.query.filter_by(user_id=user_id).order_by(asc(Folders.folder_name)).all()
 
     return render_template('notes_directory.html', notes=user_notes, folders=user_folders)
+

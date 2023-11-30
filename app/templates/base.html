@@ -126,6 +126,20 @@
             #full-directory-folder { /*All Files Folder mofdfier (temp)*/
                 background-color: #DAA520;
             }
+
+            #new-folder-button {
+                display: flex;
+                color: var(--text);
+                background-color: rgba(127, 127, 127, 0.25);
+
+                height: 20px;
+                width: fit-content;
+                margin: 5px;
+
+                text-align:center;
+                align-items: center;
+                justify-content: center;
+            }
     
             .note {
                 background-color: var(--background-light);
@@ -140,6 +154,15 @@
                 margin-left: 10px;
             }  
             /*notes_directory.html END*/
+            #context-menu {
+                display: none;
+                position: absolute;
+                background-color: #3E424B;
+                border: none;
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 8px;
+                z-index: 1000;
+            }
     
         </style>
     </head>
