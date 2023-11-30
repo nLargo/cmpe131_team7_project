@@ -51,15 +51,15 @@
 - **Primary Sequence:**
 1. The site prompts the user with a textbox to name the new folder.
 2. User types and enters a name.
-3. a) Site creates a folder with the given name, in the current folder that the selection exists.b) Site displays the folder in the sidebar list, visibly nested in any parent folders.
+3. a) Site creates a folder with the given name. b) Site displays the folder in the sidebar list.
 4. Site moves the selection into the new folder.
-5. Site opens the new folder, displaying the selected notes/folders within.
-- **Primary Postconditions:** The selected notes/folders have been moved into a new folder (a subfolder).
+5. Site opens the new folder, displaying the selected notes within.
+- **Primary Postconditions:** The selected notes have been moved into a new folder.
 - **Alternate Sequence:**
 2. User does not type anything and clicks enter.
-3. a) Site creates a folder with the default name "New Folder", in the current folder that the selection exists.b) Site displays the folder in the sidebar list, visibly nested in any parent folders.
+3. a) Site creates a folder with the default name "New Folder". b) Site displays the folder in the sidebar list.
 4. Site moves the selection into the new folder.
-5. Site opens the new folder, displaying the selected notes/folders within.
+5. Site opens the new folder, displaying the selected notes within.
 
 ### 3) Pin notes
 - **Pre-condition:** The user must be logged in and have at least 1 note.
