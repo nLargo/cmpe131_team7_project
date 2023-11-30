@@ -19,7 +19,7 @@ myapp_obj.config.from_mapping(
 db = SQLAlchemy(myapp_obj)
 
 login_manager = LoginManager(myapp_obj)
-login_manager.login_view = '/hello'
+login_manager.login_view = '/home'
 
 with myapp_obj.app_context():
     from app.models import Users, Notes, Folders
@@ -29,4 +29,4 @@ from app import routes
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return Users.query.get(int(user_id))

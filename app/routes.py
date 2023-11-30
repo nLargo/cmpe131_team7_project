@@ -21,7 +21,6 @@ def login():
             # Valid login
             login_user(user, remember=form.remember_me.data)
             print('True')
-            flash(f'Login successful for user: {user.username}', 'success')
             return redirect('/home')  
 
         # Invalid login
@@ -38,6 +37,7 @@ def createaccount():
             print(f'this is the username of the user {form.username.data}')
             print(f'this is the password of the user {form.password.data}')
             u = Users(username=form.username.data, password=form.password.data, email=form.email.data)
+            u.set_password(form.password.data)
             db.session.add(u)
             db.session.commit()
             return redirect('/home')
@@ -47,6 +47,7 @@ def createaccount():
         return render_template('create_account.html', form=form)
 
 @myapp_obj.route("/home", methods=['GET', 'POST'])
+#@login_required
 def home():
     return render_template('home_blank.html')
 
