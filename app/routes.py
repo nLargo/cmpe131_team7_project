@@ -47,7 +47,7 @@ def createaccount():
         return render_template('create_account.html', form=form)
 
 @myapp_obj.route("/home", methods=['GET', 'POST'])
-#@login_required
+@login_required
 def home():
     return render_template('home_blank.html')
 
