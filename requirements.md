@@ -100,7 +100,8 @@
 - **Primary Postconditions:** User is able to use the app and remain signed in.
 - **Alternate Sequence:**
 1. A pop-up asks whether the user wants to save their login information or not.
-2. User selects "No" if they do not want their information saved..
+2. User selects "No" if they do not want their information saved.
+
 	**a)** Application will not save the user's login information.
 
 ### 6) Save notes
@@ -135,7 +136,8 @@
 
 - **Primary Postconditions:** User deletes note and get rid of unwanted text.  
 - **Alternate Sequence:** 
-4. There are no existing notes to delete or user doesn't create a new note. 
+4. There are no existing notes to delete or user doesn't create a new note.
+  
 	**a)** User has to create new files. 
 
 ## Use Cases - Emma Dunbach (@edunbach)
