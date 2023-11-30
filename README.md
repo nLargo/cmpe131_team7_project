@@ -37,4 +37,5 @@ Some of the available features include:
 3. Split screen view allowing you to view two different notes at the same time for convenience if needed.
 4. Sorting notes to make it easy to look for a certain note if needed.
 5. Adding images to notes if needed.
-6. Logout which allows you to sign out and login the next time when you are finished using the app for the time being.
+6. Deleting notes to get rid of text that is no longer needed.
+7. Logout which allows you to sign out and login the next time when you are finished using the app for the time being.
