@@ -24,4 +24,18 @@
 
 - We tried resolving all technical difficulties that we were experiencing using Visual Studio code and pushing our changes to our repository. Most problems were resolved by the end of our meeting with some minor challenges still present. The group has been remaining in good contact with each other, and we have set a goal to complete milestone 2 by Sunday night. 
 
-- There will not be another in person meeting until we come back from Thanksgiving; however, we may have an online meeting over the weekend/break. 
+- There will not be another in person meeting until we come back from Thanksgiving; however, we may have an online meeting over the weekend/break.
+
+### 2023-11-27 at 20:30
+- All members attended
+
+- Each team member gave updates on what requirements they have completed and which ones they are currently working on. Vinh completed the create account and create note requirements 100% and is troubleshooting an issue he is facing with the login requirement. Nathan has been working on the creating folders requirements and sorting the notes. He successfully created the home_blank.html and notes_directory.html pages. Emma has been working on split screen view requirement and adding photos to the notes requirement. Lastly, Priya has been working on creating a search bar to search for notes and saving notes. Each team member has pushed their code to the repository on a separate branches for each requirement they have completed.
+
+- The group will meet up another day to discuss the further progress made by each individual in hopes of making progress of completing atleast 9 functional requirements by the deadline.
+
+### 2023-11-28 at 21:00
+- All members attended
+
+- Further progress was made on the project as the group discussed the requirements they are done with and almost done with. Vinh has completed the create account, create note, logout, and still making progress on the login requirements. Nathan has made progress and almost completed creating folders for the notes and sorting the notes according. Emma has successfully implemented the split-view notes requirement and is currently working on adding given photos to notes. Lastly, Priya is currently in the process of implementing saving a note. 
+
+- Each individual is striving to complete their respective requirements they are responsible for and successfully complete milestone 2.
