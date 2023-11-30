@@ -4,10 +4,17 @@
 
 {% block content %}
     <div id="app-container">
-        <h1>Large Label</h1>
+        <div style="display: inline-block;">
+            <h1 style="display: inline-block;">Home</h1>
+
+            <input type="text" id="search-bar" placeholder="Search notes..." oninput="searchNotes()" style="display: inline-block;">
+
+            <div id="logout-button" style="display: inline-block;">
+                <a href="/" class="small-text">Logout</a>
+            </div>
+        </div>
     
         <div id="main-container">
-
             <div id="sidebar" class="column">
                 <div class=hotbar>
                     <b>My Notes</b>
@@ -23,9 +30,11 @@
                     </a>
                 {% endfor %}
 
-                <a id="new-folder-button" class="pill-box">
-                    New Folder
-                </a>
+                <form method="post" style="max-width: 20px">
+                    {{ form.hidden_tag() }}
+                    {{ form.new_folder_name(size=32, placeholder="New Folder Name", required=true) }}
+                    <button type="submit">Create</button>
+                </form>
 
             </div>
         
@@ -111,6 +120,18 @@
             selectedNote.classList.add('selected');
         }
 
+        function searchNotes() {
+        var searchInput = document.getElementById('search-bar').value.toLowerCase();
+
+        allNotes.forEach(function (note) {
+            var noteContent = note.innerText.toLowerCase();
+            if (noteContent.includes(searchInput)) {
+                note.style.display = 'block';
+            } else {
+                note.style.display = 'none';
+            }
+        });
+    }
         /* Display Content Name WIP */
         function showNoteContentName(selectedNote, noteTitle) {
             var currentNoteContainer = document.getElementById('current-note-title');

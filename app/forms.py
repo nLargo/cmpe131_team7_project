@@ -15,3 +15,7 @@ class CreateAccountForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm  = PasswordField('Repeat Password',validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
     submit = SubmitField('Create Account')
+
+class NewFolderForm(FlaskForm):
+    new_folder_name = StringField('New Folder Name', validators=[DataRequired()])
+    submit = SubmitField('Create Folder')
