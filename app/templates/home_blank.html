@@ -7,34 +7,41 @@
 {% block content %}
     <div id="app-container">
         <h1>Home</h1>
-    
-        <div id="main-container">  <!--container persists on all pages (main-container)-->
-            <div id="sidebar" class="column">  <!--container persists on all pages (sidebar)-->
-                <div class=hotbar>
+
+        <div id="main-container">
+            <div id="sidebar" class="column">
+                <div class="hotbar">
                     *LABEL*
                 </div>
-            
-                <!-- Pill Folder Example -- chunk can be removed-->
-                <div class= "pill-box exampleItem">
+
+                <div class="pill-box exampleItem">
                     A Pill Box
                 </div>
-                <div class= "pill-box exampleItem">
+                <div class="pill-box exampleItem">
                     A Pill Box: The Sequel
                 </div>
-                <!-- Pill Folder Example -->
-                
-            </div>  <!--container persists on all pages (/sidebar)-->
+            </div>
 
-            <!-- Content Portion of Page)-->
             <div id="main-content">
-                <div class=hotbar>
-                    *buttons*
+                <div class="hotbar">
+                    <button id="split-screen-button" onclick="toggleSplitScreen()">Toggle Split Screen</button>
+                    <button id="exit-split-screen-button" onclick="exitSplitScreen()">Exit Split Screen</button>
                 </div>
 
                 Shit goes here...
-        
-            </div>  
-
-        </div>  <!--container persists on all pages (/main-containter)-->
-    </div>  
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+<script>
+    function toggleSplitScreen() {
+        const body = document.body;
+        body.classList.toggle('split-screen');
+    }
+
+    function exitSplitScreen() {
+        const body = document.body;
+        body.classList.remove('split-screen');
+    }
+</script>

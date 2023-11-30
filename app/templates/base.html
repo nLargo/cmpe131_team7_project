@@ -24,23 +24,34 @@
     
             #main-container {
                 display: flex;
-                width: 100vw;
+                flex: 1;
+                overflow: hidden; /* To prevent content overflow */
             }
     
-            #sidebar {   
+            #sidebar {
+                width: 20vw;
                 background-color: var(--background-light);
+                overflow-y: auto;
             }
     
             #main-content {
                 color: #3E424B; /* use variable later*/
                 background-color: var(--text);  /* use better variable later*/
-            
-                flex:3;
+                flex:1;
+                overflow: auto;
                 height: 100vh;
-            
+                
                 padding: 10px;
             }
-    
+            .split-screen #main-content {
+                flex: 1;
+                overflow: auto;
+            }
+
+            .split-screen #sidebar {
+                width: 50vw; /* Adjust as needed */
+            } 
+
             .column {
                 width: 20vw;
                 height: 100vh;
@@ -156,4 +167,3 @@
         {% block content %} {% endblock %}
     </body>
 </html>
-
