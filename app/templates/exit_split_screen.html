@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exit Split Screen</title>
+    <!-- Add any additional styles or meta tags as needed -->
+</head>
+<body>
+    <div id="app-container">
+        <h1>Exit Split Screen</h1>
+
+        <div id="exit-split-screen-content">
+            <!-- Add content for the exit split-screen layout -->
+        </div>
+
+        <form method="post" action="{{ url_for('create_note') }}">
+            <button type="submit" name="action" value="split_screen">Split Screen</button>
+        </form>
+
+        <div class="button-container">
+            <!-- Add any additional buttons or links as needed -->
+        </div>
+    </div>
+</body>
+</html>

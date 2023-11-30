@@ -1,29 +1,30 @@
-from flask import render_template, redirect, flash
+from flask import render_template, redirect, flash, request
 from .forms import LoginForm
 from .forms import CreateAccountForm
 from app import myapp_obj, db
-from app.models import User
-from .models import User  # Assuming your models are in a file named models.py
-from flask_login import login_user
+from .models import Users, Notes, Folders    #Updated  
+from flask_login import login_user, current_user, logout_user, login_required
+from sqlalchemy import asc, desc
 
-@myapp_obj.route("/")
+@myapp_obj.route("/", methods=['GET', 'POST'])
 @myapp_obj.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+
     if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
+        print("Form is valid and submitted")
 
-        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(username=form.username.data).first()
 
-        if user is not None and user.check_password(password):
+        if user and user.check_password(form.password.data):
             # Valid login
             login_user(user, remember=form.remember_me.data)
-            flash(f'Login successful for user: {username}', 'success')
+            print('True')
+            flash(f'Login successful for user: {user.username}', 'success')
             return redirect('/home')  
-        else:
-            # Invalid login
-            flash('Invalid username or password. Please try again.', 'error')
+
+        # Invalid login
+        flash('Invalid username or password. Please try again.', 'error')
 
     return render_template('login.html', form=form)
 
@@ -35,7 +36,7 @@ def createaccount():
             print('do something')
             print(f'this is the username of the user {form.username.data}')
             print(f'this is the password of the user {form.password.data}')
-            u = User(username=form.username.data, password=form.password.data, email=form.email.data)
+            u = Users(username=form.username.data, password=form.password.data, email=form.email.data)
             db.session.add(u)
             db.session.commit()
             return redirect('/home')
@@ -48,10 +49,38 @@ def createaccount():
 def home():
     return render_template('home_blank.html')
 
+@myapp_obj.route("/home", methods=['GET', 'POST'])
+def home():
+    return render_template('home_blank.html')
+
+@myapp_obj.route("/create_note", methods=['GET', 'POST'])
+def create_note():
+    if request.method == 'POST':
+        if request.form.get('action') == 'split_screen':
+            # Handle split-screen logic here if needed
+            # You might want to pass any necessary data to the split_screen template
+            return render_template('split_screen.html')
+
+        elif request.form.get('action') == 'exit_split_screen':
+            # Redirect to the create_note page
+            return render_template('create_note.html')
+
+#route for the split screen feature separately
+    return render_template('create_note.html')  # Replace with the actual template name for creating a new note
+
+@myapp_obj.route("/logout")
+@login_required  # This decorator ensures that the user is logged in before logging out
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'success')
+    return redirect('/')
+
+
 @myapp_obj.route("/my-notes", methods=['GET', 'POST'])
 def my_notes():
-    return render_template('notes_directory.html')
+    #user_id = current_user.id if current_user.is_authenticated else None
+    user_id = 1
+    user_notes = Notes.query.filter_by(user_id=user_id).order_by(desc(Notes.modified_at)).all()
+    user_folders = Folders.query.filter_by(user_id=user_id).order_by(asc(Folders.folder_name)).all()
 
-@myapp_obj.route('/create_note')
-def create_note():
-    return render_template('create_note.html')  # Replace with the actual template name for creating a new note
+    return render_template('notes_directory.html', notes=user_notes, folders=user_folders)

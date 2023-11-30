@@ -1,85 +1,147 @@
+{% extends "home_blank.html"%}
+
+<title>My Notes</title>
+
 {% block content %}
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Courier New, sans-serif;
-        }
-      
-        #app-container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-      
-        #header {
-            background-color: #333333;
-            color: #656d4f;
-            padding: 10px;
-            text-align: center;
-        }
-  
-        #main-container {
-            display: flex;
-            flex: 1;
-        }
-      
-        #sidebar {
-            width: 250px;
-            background-color: #41424C;
-            overflow-y: auto;
-            padding: 10px;
-        }
-      
-        #notes-column {
-            flex:1;
-            padding: 10px;
-        }
-      
-        #workspace {
-            flex: 2;
-            padding: 10px;
-            border-left: 1px solid #333333;
-        }
-      
-        .folder {
-            cursor: pointer;
-            margin-bottom: 5px;
-        }
-      
-        .note {
-            cursor: pointer;
-            margin-bottom: 10px;
-            padding: 5px;
-            background-color: #f0f0f0;
-            border: 1px solid #333333;
-        }
-    </style>
-</head>
-  
-<body>
     <div id="app-container">
-        <h1>Home</h1>
-    </div>
+        <h1>Large Label</h1>
     
-    <div id="main-container">
-        <div id="sidebar">
-            <div class="folder">Folder 1</div>
-            <div class="folder">Folder 2</div>
-            <!--Example Folders^-->
-        </div>
-        <div id="notes-column">
-            <div class="note">Note 1</div>
-            <div class="note">Note 2</div>
-            <!--Example Notes^-->
+        <div id="main-container">
+
+            <div id="sidebar" class="column">
+                <div class=hotbar>
+                    <b>My Notes</b>
+                </div>
+
+                <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes(); showNotesDir()">
+                    All Notes
+                </a>
+
+                {% for folder in folders %}
+                    <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}'); showNotesDir()" data-folder-id="{{ folder.folder_id }}">
+                        {{ folder.folder_name }}
+                    </a>
+                {% endfor %}
+
+                <a id="new-folder-button" class="pill-box">
+                    New Folder
+                </a>
+
             </div>
-        <div id="workspace">
-            <!--Editable Notes Area-->
-        </div>
-    </div>
-</body>
-</html>
+        
+
+            <div id="notes-directory" class="column">
+                <div class=hotbar>
+
+                    <select id="sort-by-button" class="pill-box hotbar-button">
+                            <option value="date-edited">Date Edited</option>
+                            <option value="date-created">Date Created</option>
+                            <option value="title">Title</option>
+                    </select>
+
+                </div>
+                
+                {% for note in notes %}
+                    <a class="pill-box note" data-folder-id="{{ note.folder_id }}" onclick="showNoteContent(this, '{{ note.note_content }}')"> <!--showNoteContentName(this, '{{ note.note_content.splitlines()[0] }}')"--> <!--style="display: none;"-->
+                        {{ note.note_content.splitlines()[0] }}
+                    </a>
+                {% endfor %} 
+
+
+                <!--Right Click WIP-->
+                <div id="context-menu">
+                    <ul>
+                      <li onclick="handleContextMenuAction('Option 1')">Option 1</li>
+                      <li onclick="handleContextMenuAction('Option 2')">Option 2</li>
+                      <li onclick="handleContextMenuAction('Option 3')">Option 3</li>
+                    </ul>
+                </div>
+                <!---->
+        
+
+            </div>
+        
+
+            <div id="main-content">
+                <b><div id="current-note-title" class=hotbar>
+                    Current Note
+                </div></b>
+
+                <div id="current-note">
+                </div>
+
+            </div>
+        
+        </div>  
+    </div> 
+
+    
+    <script>
+        var allNotes = document.querySelectorAll('.pill-box.note');
+        var notesArray = Array.from(allNotes);
+
+        function showNotesDir() {
+            var notesDir = document.querySelector('#notes-directory'); 
+            notesDir.style.display = 'block'; 
+        }
+
+        function showAllNotes() {
+            allNotes.forEach(function (note) {
+                note.style.display = 'block';
+            });
+        }
+
+        function showFolderNotes(link) {
+            allNotes.forEach(function (note) {
+                note.style.display = 'block';
+            });
+
+            var excludedNotes = document.querySelectorAll('.pill-box.note:not([data-folder-id="' + link + '"])');
+            excludedNotes.forEach(function (note) { 
+                note.style.display = 'none';
+            });
+        }
+
+
+        function showNoteContent(selectedNote, content) {
+            var currentNoteContainer = document.getElementById('current-note');
+            
+            currentNoteContainer.innerHTML = content;
+
+            selectedNote.classList.add('selected');
+        }
+
+        /* Display Content Name WIP */
+        function showNoteContentName(selectedNote, noteTitle) {
+            var currentNoteContainer = document.getElementById('current-note-title');
+            
+            currentNoteContainer.innerHTML = noteTitle;
+
+            selectedNote.classList.add('selected');
+        }
+        /* Display Content Name WIP END */
+
+
+        /* Right Click WIP */
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            const contextMenu = document.getElementById('context-menu');
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = e.pageX + 'px';
+            contextMenu.style.top = e.pageY + 'px';
+
+            document.addEventListener('click', function hideContextMenu() {
+            contextMenu.style.display = 'none';
+            document.removeEventListener('click', hideContextMenu);
+            });
+        });
+        function handleContextMenuAction(option) {
+            
+        }
+        /* Right Click WIP END */
+
+    </script>
 {% endblock %}
+
+<!--STOP-->
+<!--STOP2-->

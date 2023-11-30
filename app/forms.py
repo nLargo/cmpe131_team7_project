@@ -12,6 +12,6 @@ class CreateAccountForm(FlaskForm):
     name = StringField('Full name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password',validators=[DataRequired(), EqualTo('confirm', message='Passwords must match')])
-    confirm  = PasswordField('Repeat Password')
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm  = PasswordField('Repeat Password',validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
     submit = SubmitField('Create Account')
