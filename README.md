@@ -40,13 +40,9 @@ Some of the available features include:
 6. Deleting notes to get rid of text that is no longer needed.
 7. Logout which allows you to sign out and login the next time when you are finished using the app for the time being.
 
-Requirements:
+# Requirements:
 
 Vinh: login, create account, create new note, logout
-
 Emma: split view
-
 Nathan: create new folder, sort notes
-
 Priya: save notes, delete notes 
-

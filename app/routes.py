@@ -50,8 +50,19 @@ def home():
     return render_template('home_blank.html')
 
 
-@myapp_obj.route('/create_note')
+@myapp_obj.route("/create_note", methods=['GET', 'POST'])
 def create_note():
+    if request.method == 'POST':
+        if request.form.get('action') == 'split_screen':
+            # Handle split-screen logic here if needed
+            # You might want to pass any necessary data to the split_screen template
+            return render_template('split_screen.html')
+
+        elif request.form.get('action') == 'exit_split_screen':
+            # Redirect to the create_note page
+            return render_template('create_note.html')
+
+#route for the split screen feature separately
     return render_template('create_note.html')  # Replace with the actual template name for creating a new note
 
 @myapp_obj.route("/logout")
@@ -70,5 +81,3 @@ def my_notes():
     user_folders = Folders.query.filter_by(user_id=user_id).order_by(asc(Folders.folder_name)).all()
 
     return render_template('notes_directory.html', notes=user_notes, folders=user_folders)
-
-

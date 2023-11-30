@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Screen Sample</title>
+    <!-- Add any additional styles or meta tags as needed -->
+</head>
+
+{% block content %}
+    <div id="app-container">
+        <h1>Split Screen</h1>
+
+        <div id="split-screen-content">
+            <!-- Add content for the split-screen layout -->
+            <div id="leftPanel" class="panel">
+                <form method="post">
+                    <!-- Add form fields for the note content -->
+                    <textarea name="note_content" rows="20" cols="70" placeholder="Type your note here"></textarea>
+                    <br>
+                </form>
+            </div>
+            <div id="rightPanel" class="panel">
+                <form method="post">
+                    <!-- Add form fields for the note content -->
+                    <textarea name="note_content" rows="20" cols="70" placeholder="Type your note here"></textarea>
+                    <br>
+                </form>
+            </div>
+        </div>
+
+        <form method="post" action="{{ url_for('create_note') }}" id="exit-split-screen-form">
+            <button type="submit">Exit Split Screen</button>
+        </form>
+
+        <div class="button-container">
+            <!-- Add any additional buttons or links as needed -->
+        </div>
+    </div>
+{% endblock %}
