@@ -32,7 +32,7 @@
                 <div class="btn">
                     <button id="create-note-button">
                         <i class="fas fa-plus"></i>
-
+                        Create Note
                     </button>
                 </div>
             </div> 
@@ -46,14 +46,31 @@
                     crossorigin="anonymous"> 
                 </script> 
 
-                <script src="./script.js"></script>
+            <script src="https://kit.fontawesome.com/bf520e6492.js" crossorigin="anonymous"> 
+            </script> 
+            <script src="./script.js"></script>
 
-                <script>
-                    const addBtn = document.querySelector("#create-note-button"); 
-                    const main = document.querySelector("#main"); 
-                    
-                    addBtn.addEventListener("click", function () { 
-                        addNote(); 
+            <script>
+                const addBtn = document.querySelector("#create-note-button"); 
+                const main = document.querySelector("#main"); 
+                
+                addBtn.addEventListener("click", function () { 
+                    addNote(); 
+                }); 
+  
+                const saveNotes = () => {  
+                    const notes = document.querySelectorAll(".note .content");
+                    const titles = document.querySelectorAll(".note .title");
+                
+                    const data = []; 
+                
+                    notes.forEach((note, index) => { 
+                        const content = note.value; 
+                        const title = titles[index].value; 
+                        console.log(title); 
+                        if (content.trim() !== "") { 
+                            data.push({ title, content }); 
+                        } 
                     }); 
     
                     const saveNotes = () => {  
@@ -178,15 +195,6 @@
             box-sizing: border-box; 
 
         } 
-            
-        #main { 
-            width: 100%; 
-            min-height: 100vh; 
-            padding-bottom: 50px; 
-          /*  background-color: #81ecec; */
-            display: flex; 
-            flex-wrap: wrap; 
-        } 
   
         #addBtn { 
             position: fixed; 
@@ -215,16 +223,6 @@
             height: 130px; 
             background-color: var(--background-light);
             margin-bottom: 0px; 
-          /* old settings before merge
-            width: 380px; 
-            height: 260px; 
-            background-color: white; 
-            margin: 15px; 
-            margin-top: 55px; 
-            border-radius: 10px; 
-            margin-left: 20px; 
-            margin-bottom: 30px; 
-          */
         } 
   
         .icons { 
@@ -281,7 +279,6 @@
             border: 0; 
             outline: 0; 
         }
-        */
 
     </style>
           
