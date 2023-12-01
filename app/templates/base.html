@@ -18,8 +18,8 @@
     
             /*home_blank.html (ran into style inheritance issues -- leaving here for now)*/
             #app-container {
-                width: 100vw;
-                height: 100vh;
+                /*width: 100vw;
+                height: 100vh;*/
                 display: flex;
                 flex-direction: column;
             }
@@ -43,7 +43,20 @@
             
                 padding: 10px;
             }
-    
+            
+            #right-menu {
+                width: 200px; /* Adjust the width as needed */
+                /*border-right: 1px solid #ccc; /* Optional: Add border between the menu and content */
+                overflow: auto;
+            }
+
+            .right-menu-note {
+                cursor: pointer;
+                padding: 8px;
+                display: block;
+                /*border-bottom: 1px solid #ccc; /* Optional: Add border between notes */
+            }
+
             .split-buttons {
                 display: flex;
                 justify-content: space-between;
@@ -62,7 +75,7 @@
                 flex: 1;
                 height: 100%;
                 overflow: auto;
-                border: 1px solid #ccc; /* Optional: Add border between the two sides */
+                /*border: 1px solid #ccc; /* Optional: Add border between the two sides */
             }
             
             /* Initially hide the right side */

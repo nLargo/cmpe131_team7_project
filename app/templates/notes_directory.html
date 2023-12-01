@@ -127,7 +127,7 @@
                         </div>
                 
                         {% for note in notes %}
-                            <a class="pill-box note" data-folder-id="{{ note.folder_id }}" onclick="showNoteContent(this, '{{ note.note_content }}')"> <!--showNoteContentName(this, '{{ note.note_content.splitlines()[0] }}')"--> <!--style="display: none;"-->
+                            <a class="pill-box note right-menu-note" data-folder-id="{{ note.folder_id }}" onclick="showNoteOnRightSide('{{ note.note_content }}')">
                                 {{ note.note_content.splitlines()[0] }}
                             </a>
                         {% endfor %} 
@@ -147,7 +147,7 @@
                     </div>
         
 
-                    <div id="main-content">
+                    <div class="split-content" id="right-menu">
                         <b><div id="current-note-title" class=hotbar>
                             Current Note
                         </div></b>
@@ -245,6 +245,12 @@
         function exitSplitScreen() {
             const rightSide = document.getElementById('right-side');
             rightSide.classList.add('hidden');
+        }
+
+        function showNoteOnRightSide(content) {
+            const rightSide = document.getElementById('right-side');
+            rightSide.innerHTML = content;
+            rightSide.classList.remove('hidden');
         }
         /* Right Click WIP END */
 
