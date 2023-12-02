@@ -23,8 +23,9 @@ def login():
             print('True')
             return redirect('/home')  
 
-        # Invalid login
-        flash('Invalid username or password. Please try again.', 'error')
+        else:
+            # Invalid login
+            flash('Invalid username or password. Please try again.', 'error')
 
     return render_template('login.html', form=form)
 
