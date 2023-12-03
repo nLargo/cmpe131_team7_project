@@ -31,6 +31,8 @@ You will first be displayed with the login page and an option to create an accou
 
 Once you create an account or login in, you have all access to the notes app.
 
+Please note: There currently is not button that goes to /my-notes page so you will need to manually enter that into the URL to test the requirements on that page.
+
 Some of the available features include:
 1. Creating a new note that will have a fresh blank page for you to type on.
 2. Save a note after you type whatever you want in the note so you can refer to it again in the future.
