@@ -1,25 +1,26 @@
 <html>
-    <head>
+    <head> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home Page - my blog</title>
+
+        <title>{% block title %}My Notes{% endblock %}</title>
+
         <style>
-            /*base.html (ran into style inheritance issues -- leaving here for now)*/
-            :root {
+            /* #region general */
+            :root { /* make color changes here -- project pallete should be fully present here */
                 --background: #264653;
                 --background-light: #345360;
                 --text: #F0EAD6; 
+                --line-border: rgba(127, 127, 127, 0.5);
+                --translucent:  rgba(127, 127, 127, 0.5);
+                --smallFont: 14px;
             }
 
             body {
                 color: var(--text);
                 background-color: var(--background);
             }
-            /*base.html END*/
     
-            /*home_blank.html (ran into style inheritance issues -- leaving here for now)*/
             #app-container {
-                /*width: 100vw;
-                height: 100vh;*/
                 display: flex;
                 flex-direction: column;
             }
@@ -43,44 +44,18 @@
             
                 padding: 10px;
             }
-            
-            #right-menu {
-                width: 200px; /* Adjust the width as needed */
-                /*border-right: 1px solid #ccc; /* Optional: Add border between the menu and content */
-                overflow: auto;
-            }
 
-            .right-menu-note {
-                cursor: pointer;
-                padding: 8px;
-                display: block;
-                /*border-bottom: 1px solid #ccc; /* Optional: Add border between notes */
-            }
-
-            .split-buttons {
-                display: flex;
-                justify-content: space-between;
-                padding: 10px;
-                background-color: #f0f0f0;
-            }
-
-            .split-container {
-                display: flex;
-                width: 100%;
-                flex: 1;
-                overflow: hidden;
-            }
-
-            .split-content {
-                flex: 1;
-                height: 100%;
-                overflow: auto;
-                /*border: 1px solid #ccc; /* Optional: Add border between the two sides */
-            }
-            
-            /* Initially hide the right side */
-            .hidden {
+            #side-content {
                 display: none;
+                color: #3E424B; /* use variable later*/
+                background-color: var(--text);  /* use better variable later*/
+            
+                flex:1;
+                overflow: auto;
+                height: 100vh;
+            
+                padding: 10px;
+                border-left: 2px dotted var(--line-border);
             }
 
             .column {
@@ -91,42 +66,9 @@
               
                 overflow-y: auto;
             }
+            /* #endregion general */
 
-            .hotbar {
-                display: flex;
-                background-color: rgba(0,0,0,0);
-                
-                width: 100%;
-                height: 30px;
-
-                border-bottom: 1px solid rgba(127, 127, 127, 0.5);
-                margin-bottom: 10px;
-                padding-bottom: 10px;
-                justify-content: space-between;
-
-                line-height: 30px;   
-            }
-
-            .hotbar-button {
-                color: var(--text);
-                background-color: rgba(127, 127, 127, 0.5);
-
-                height: 20px;
-                width: fit-content;
-                margin: 5px;
-            }
-
-            select.pill-box {
-                border: none;
-                background-color: rgba(0,0,0,0);
-
-                padding-left: 0px;
-                padding-right: 0px;
-            }
-            select:focus.pill-box {
-                outline: none;          
-            }
-
+            /* #region pill-box */
             .pill-box {
                 cursor: pointer;
     
@@ -146,22 +88,63 @@
                 text-overflow: ellipsis;
             }
 
+            .pill-box:active {
+                opacity: 0.7;
+            }
+
+            select.pill-box {
+                border: none;
+                background-color: rgba(0,0,0,0);
+
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+
+            select:focus.pill-box {
+                outline: none;          
+            }
+
             a.pill-box {
                 display: block; 
                 text-decoration: none;
                 color: inherit; 
             }
+            /* #endregion pill-box */
+
+            /* #region hotbar */
+            .hotbar {
+                display: flex;
+                background-color: rgba(0,0,0,0);
+                
+                width: 100%;
+                height: 30px;
+
+                border-bottom: 1px solid var(--line-border);
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                justify-content: space-between;
+
+                line-height: 30px;   
+            }
+
+            .hotbar-button {
+                color: var(--text);
+                background-color: solid var(--translucent);
+
+                height: 20px;
+                width: fit-content;
+                margin: 5px;
+            }
+            /* #endregion hotbar */
     
-            .pill-box:active {
-                opacity: 0.7;
+            .note {
+                background-color: var(--background-light);
             }
     
-            .exampleItem {          
-                background-color: #DAA520;
+            .folder {          
+                background-color: var(--background);
             }
-            /*home_blank.html END*/
-    
-            /*notes_directory.html (ran into style inheritance issues -- leaving here for now)*/
+
             #notes-directory {
                 /*display: none;*/
                 background-color: #3E424B;      
@@ -185,21 +168,11 @@
                 justify-content: center;
             }
     
-            .note {
-                background-color: var(--background-light);
+            #split-view-button {
+                font-size: var(--smallFont);
             }
-    
-            .folder {          
-                background-color: var(--background);
-            }
-    
-            .subfolder {
-                display: none;
-                margin-left: 10px;
-            }  
-            /*notes_directory.html END*/
-            
-            /*split.html*/
+
+
             .container {
                 display: flex;
                 height: 100vh;
@@ -215,6 +188,28 @@
             form {
                 margin: 10px;
             }
+
+            .split-buttons {/**/
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                background-color: #f0f0f0;
+            }
+
+            .split-container {/**/
+                display: flex;
+                width: 100%;
+                flex: 1;
+                overflow: hidden;
+            }
+
+            .split-content {/**/
+                flex: 1;
+                height: 100%;
+                overflow: auto;
+                /*border: 1px solid #ccc; /* Optional: Add border between the two sides */
+            }
+        
             /*split.html END*/
           
             /*home_blank.html post-merge*/
@@ -251,16 +246,6 @@
             }
             /*home_blank.html post-merge*/
 
-            #context-menu {
-                display: none;
-                position: absolute;
-                background-color: #3E424B;
-                border: none;
-                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-                padding: 8px;
-                z-index: 1000;
-            }
-    
         </style>
     </head>
     <body>

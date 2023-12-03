@@ -52,6 +52,10 @@ def createaccount():
 def home():
     return render_template('home_blank.html')
 
+
+
+
+
 @myapp_obj.route("/create_note", methods=['GET', 'POST'])
 def create_note():
     if request.method == 'POST':
@@ -75,6 +79,9 @@ def logout():
     return redirect('/')
 
 
+
+
+
 @myapp_obj.route("/my-notes", methods=['GET', 'POST'])
 def my_notes():
     form = NewFolderForm()
@@ -92,3 +99,22 @@ def my_notes():
         db.session.commit()
 
     return render_template('notes_directory.html', notes=user_notes, folders=user_folders, form=form)
+
+
+@myapp_obj.route("/home-revamp", methods=['GET', 'POST'])
+def homeRevamp():
+    form = NewFolderForm()
+
+    #user_id = current_user.id if current_user.is_authenticated else None
+    user_id = 1
+    user_notes = Notes.query.filter_by(user_id=user_id).order_by(desc(Notes.modified_at)).all()
+    user_folders = Folders.query.filter_by(user_id=user_id).order_by(asc(Folders.folder_name)).all()
+
+    if form.validate_on_submit():
+        folder_name = form.new_folder_name.data
+
+        new_folder = Folders(folder_name=folder_name, user_id=user_id)
+        db.session.add(new_folder)
+        db.session.commit()
+
+    return render_template('homepage.html', notes=user_notes, folders=user_folders, form=form)
