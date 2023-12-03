@@ -4,7 +4,7 @@
 
 {% block content %}
     <div id="app-container">
-        <div style="display: inline-block;">
+        <div style="display: inline-block">
             <h1 style="display: inline-block;">Home</h1>
 
             <input type="text" id="search-bar" placeholder="Search notes..." oninput="searchNotes()" style="display: inline-block;">
@@ -12,15 +12,6 @@
             <div id="logout-button" class="pill-box" style="display: inline-block">
                 <a href="/" class="small-text">Logout</a>
             </div>
-
-
-
-            <div class="split-buttons">
-                <button id="split-screen-button" onclick="toggleSplitScreen()">Split View</button>
-                <!--<button id="exit-split-screen-button" onclick="exitSplitScreen()">Exit Split Screen</button>-->
-            </div>
-
-
 
         </div>
 
@@ -41,12 +32,13 @@
                     </a>
                 {% endfor %}
 
-                <form method="post" style="max-width: 20px">
-                    {{ form.hidden_tag() }}
-                    {{ form.new_folder_name(size=32, placeholder="New Folder Name", required=true) }}
-                    <button type="submit">Create</button>
-                </form>
-
+                <div class="pill-box">
+                    <form id="new-folder-box" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.new_folder_name(size=32, placeholder="New Folder Name", required=true) }}
+                        <button id="new-folder-button" class="pill-box" type="submit"><i class="fas fa-plus"></i></button>
+                    </form>
+                </div>
             </div>
 
 
@@ -58,6 +50,10 @@
                             <option value="date-created">Date Created</option>
                             <option value="title">Title</option>
                     </select>
+
+                    <a id="create-note-button" class="pill-box hotbar-button">
+                        <i class="fas fa-plus"></i>
+                    </a>
 
                 </div>
         
@@ -160,4 +156,10 @@
         }
 
     </script>
+
+    <!-- FROM home_blank.html <script> -->
+        <script src="https://kit.fontawesome.com/bf520e6492.js" crossorigin="anonymous"></script> 
+
+    <!-- FROM home_blank.html <script> END -->
+
 {% endblock %}
