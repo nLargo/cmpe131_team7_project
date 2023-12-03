@@ -9,7 +9,7 @@
 8. User will be able to view multiple notes in split-screen mode.
 9. User will be able to log out of their account using a logout button.
 10. User will be able to add photos from their photo library into the note page.
-11. User will be able to add audio files that are playable inside the body of the notes page.
+11. User will be able to search for notes.
 12. Notes app should allow user to create an account.
 13. Notes app should allow user to log into their account.
 14. Notes app should allow users to create notes.
@@ -36,10 +36,6 @@
 4. Site sorts the notes according to the user’s selection.
 - **Primary Postconditions:** The user’s notes are ordered according to their selection.
 - **Alternate Sequence I:**
-2. User toggles the ascending/descending order button beside the current sort option.
-3. The dropdown menu closes.
-4. Site sorts the notes according to the user’s selection.
-- **Alternate Sequence II:**
 2. User toggles the ascending/descending order button beside a sort option that isn’t currently selected.
 3. Site auto-selects the sort option beside the toggled button.
 4. The dropdown menu closes.
@@ -92,17 +88,12 @@
 ## Use Cases - Priya Nahal (@PriyaNahal)
 ### 5) Save login information
 - **Pre-condition:** User enters valid login information.
-- **Trigger:** User clicks on the "Login" icon.
+- **Trigger:** User checks on the "Remember Me" icon.
 - **Primary Sequence:**
-1. A pop-up asks whether the user wants to save their login information or not.
-2. User selects "Yes" if they do want their information saved.
-3. Application will save the user's login information.
-- **Primary Postconditions:** User is able to use the app and remain signed in.
-- **Alternate Sequence:**
-1. A pop-up asks whether the user wants to save their login information or not.
-2. User selects "No" if they do not want their information saved.
-
-	**a)** Application will not save the user's login information.
+1. User clicks "Login".
+2. Application saves user login information.
+3. Next time user logs in, user selects their username under username and password will automatically be entered.
+- **Primary Postconditions:** User is able to use the app and remains signed in.
 
 ### 6) Save notes
 - **Pre-condition:** User creates a note.
@@ -113,10 +104,6 @@
 3. Note is saved in the application.
 
 - **Primary Postconditions:** User views the home page with all the saved notes shown.
-- **Alternate Sequence:** 
-1. User clicks the save button.
-2. User enters a title.
-3. Note is not saved because there was no text.
 
 ### 7) Delete notes
 - **Pre-condition:** User saves a note. 
@@ -124,98 +111,81 @@
 - **Primary Sequence:**
 1. User clicks on the delete note icon.
 2. User selects note that they want to delete.
-3. Application deletes the note.
+3. Application permanently deletes the note.
+4. User will not be able to view the note on the home page.
 
 - **Primary Postconditions:** User is directed to the home page.  
 - **Alternate Sequence:** 
-1. There are no existing notes to delete or user doesn't create a new note.
-  
-	**a)** User has to create new files. 
+1. User attempts to delete a note when there is no note to delete.
+2. Application does not delete any files.
+3. User must create a new note before trying to delete a note.
 
 ## Use Cases - Emma Dunbach (@edunbach)
 ### 8) Split View
-- Summary: user will be able to navigate between multiple, pre-existing notes with the option to view multiple at the at the same time
-- Actors: User and Note App
-- Pre-Condition: User must be logged in with one note page already open and another note file already saved
-- Trigger: User clicks on another file from the side bar
-- Primary Sequence:
-	1. Notes app prompts user to choose to view full screen or split screen
+- **Pre-condition:** User must be logged in with one note page already open and another note file already saved.
+- **Trigger:** User clicks on another file from the side bar.
+- **Primary Sequence:**
+	1. Notes app prompts user to choose to view full screen or split screen.
 	2. User chooses to split screen view
-	3. Notes app automatically opens the selected file next to the open file
-- Alternative Sequence: 
-	1. User chooses to view notes in full screen view
-	2. Notes app opens selected file in full screen
-	3. Previously open file is idling in background
-- Post Conditions: 
-	1. User is able to view multiple notes in split screen mode
-	2. User views newly selected note file in full screen mode
+	3. Notes app opens page with an identical screen on the same page.
+	4. User can multitask with working on two different notes on the same page.
+- **Primary Postconditions:** 
+	1. User is able to view multiple notes in split screen mode OR user views newly selected note file in full screen mode.
 
 ### 9) Log Out
-- Summary: User will be able to log out of their account using a logout button
-- Actors: User, note app
-- Pre-Conditions: User must be logged in 
-- Trigger: User clicks on logout icon in window
-- Primary Sequence: 
-	1. Notes app opens a window asking if the user would like to save the current file(s)
-	2. User saves the file
-	3. Notes app shows logout screen
- 	4. Notes app will have a button to go back to login page
-- Alternative Sequence:
-	1. User does not save the file
-	2. Notes app asks user if they wish to proceed
-	3. Notes app shows logout screen
-	4. Notes app will have a button to go back to login page
-- Post Conditions: 
-	1. User's account will be logged out
- 	2. User can log in and log out as many times as they please
+- **Pre-condition:** User must be logged in 
+- **Trigger:** User clicks on logout icon in window
+- **Primary Sequence:** 
+	1. Notes app logs user out of account.
+	2. User will be redirected to the login page.
+	3. User will need to log in again if they want to access their notes.
+- **Primary Postconditions:** 
+	1. User has been logged out of their account.
 
 ### 10) Add Photos
-- Summary: User will be able to import photos into the open note page
-- Pre-Condition: User must be logged in and have photos on the device
-- Trigger: User selects the photo button 
-- Primary Sequence: 
-	1. Notes app opens photo album from the device
-	2. User selects photo from personal photo library
-	3. Notes app imports the photo into the note file with options to resize and move within the page
- - Alternative Sequence: 
+- **Pre-condition:** User must be logged in and have photos on the device
+- **Trigger:** User selects the photo button 
+- **Primary Sequence:**
+	1. Notes app opens a collection of various photos that can be added to the note.
+	2. User selects photo they want to add.
+	3. Notes app imports the photo into the note file.
+ 	4. The selected photo is displayed in the note and can be saved.
+ - **Alternate Sequence:** 
 	1. User chooses to cancel insert photo option
-	2. Notes app will close user's photo album
-- Post Conditions: 
-	1. Notes app shows User's photos that were imported into the specified note file
-	2. Photos can be resized and moveable
+	2. Notes app will close the photo album.
+- **Primary Postconditions:** 
+	1. User's note displays photos that were imported into the specified note file.
 
-### 11) Add Audio
-- Summary: User will be able to import audio files into the selected note
-- Pre-Condition: User must be logged in and have mp3 files on the device
-- Trigger: User selects button to add audio file
-- Primary Sequence:
-	1. Notes app opens files in device
-	2. User selects audio file to import
-	3. Notes app will insert file into the body of the note page
-	4. Audio file will have the option to play inside the note page
-- Alternative Sequence: 
-	1. User decides not to insert file
-	2. User cancels insert function
-	3. Notes app will close out the user's file page
-- Post Conditions:
-	1. User will have audio file within the body of the note page
-	2. Audio file will be playable
+### 11) Search Notes
+- **Pre-condition:** User must be logged in and have existing notes.
+- **Trigger:** User hovers over to the search bar and clicks it.
+- **Primary Sequence:**
+	1. User types the title of the note they are looking for.
+	2. Application sorts through notes based on the characters entered.
+	3. Application displays a list of note titles that match the characters entered.
+	4. User clicks on the note they want to view.
+- **Alternate Sequence:** 
+	1. User types the title of the note they are looking for.
+	2. Application sorts through notes based on the characters entered.
+	3. Application cannot find any notes based on the characters entered.
+	4. Application does not display any notes found.
+- **Primary Postconditions:**
+	1. Application displays the note user searched for OR application stays on home page.
   
-
 ## Use Cases - Vinh Huynh (@vinhhuynh09)
 ### 12) Create Account
 - **Pre-condition:** User launches the notes application.
 - **Trigger:** User clicks the "Create Account" icon if they do not have an account.
 - **Primary Sequence:**
-1. Application displays a pop-up that asks for the user's first name, last name, email/username, and password.
-2. User enters these following information.
-3. User clicks on the "Create Account" icon.
-
+1. Application displays a create account page.
+2. Application asks for user's name, email, username, password, and confirm password.
+3. User enters these following information.
+4. User clicks on the "Create Account" icon.
 - **Primary Postconditions:** Application logs the user into their new account and has access to the application.
 - **Alternate Sequence:**
-1. Application displays a pop-up that asks for the user's first name, last name, email/username, and password.
-2. User decides not to create an account.
-	a. User clicks on the "X" icon to exit the pop-up.
+1. User enters an invalid email or the passwords entered do not match.
+2. Application will prompt the user that email is not valid and/or passwords do not match.
+3. User will not be able to successfully create an account until information is entered correctly.
 
 ### 13) Login Account
 - **Pre-condition:** User launches the notes application.
@@ -225,26 +195,18 @@
 2. User hovers over the password text bar and clicks on it.
 3. User types their password.
 4. User clicks the "LOGIN" icon.
-5. Application successfully logs the user into their account if correct information is entered.
-
-- **Primary Postconditions:** User can begin to use the application.
+5. Application validates that username and password entered are correct.
+6. Application successfully logs the user into their account.
+- **Primary Postconditions:** User gets redicted to the home page.
 - **Alternate Sequence:**
-1. User types their username.
-2. User hovers over the password text bar and clicks on it.
-3. User types their password.
-4. User clicks the "LOGIN" icon.
-5. Application prompts user that invalid information is entered and cannot log user in.
+1. User enters invalid username and/or password.
+2. Application prompts user that the wrong username and/or password has been invalid and does not log user in.
 
 ### 14) Create Notes
 - **Pre-condition:** User loads all their existing notes.
 - **Trigger:** User clicks on the icon “+” icon to create a new note.
 - **Primary Sequence:**
-1. Application displays a pop-up that asks the user for the name of the note.
-2. User enters the name of the note.
-3. User clicks “OK”.
-
+1. Application displays a new empty note.
+2. User enters the title of the note.
+3. User enters information in the note.
 - **Primary Postconditions:** Application creates the new note and can be viewed.
-- **Alternate Sequence:**
-1. Application displays a pop-up that asks the user for the name of the note.
-2. User decides to not create a new note.
-3. User clicks “CANCEL”.
