@@ -1,0 +1,163 @@
+{% extends "base.html"%}
+
+{% block title %}My Notes{% endblock %}
+
+{% block content %}
+    <div id="app-container">
+        <div style="display: inline-block;">
+            <h1 style="display: inline-block;">Home</h1>
+
+            <input type="text" id="search-bar" placeholder="Search notes..." oninput="searchNotes()" style="display: inline-block;">
+
+            <div id="logout-button" class="pill-box" style="display: inline-block">
+                <a href="/" class="small-text">Logout</a>
+            </div>
+
+
+
+            <div class="split-buttons">
+                <button id="split-screen-button" onclick="toggleSplitScreen()">Split View</button>
+                <!--<button id="exit-split-screen-button" onclick="exitSplitScreen()">Exit Split Screen</button>-->
+            </div>
+
+
+
+        </div>
+
+
+        <div id="main-container">
+            <div id="sidebar" class="column">
+                <div class=hotbar>
+                    <b>My Notes</b>
+                </div>
+
+                <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes()">
+                    All Notes
+                </a>
+
+                {% for folder in folders %}
+                    <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}')" data-folder-id="{{ folder.folder_id }}">
+                        {{ folder.folder_name }}
+                    </a>
+                {% endfor %}
+
+                <form method="post" style="max-width: 20px">
+                    {{ form.hidden_tag() }}
+                    {{ form.new_folder_name(size=32, placeholder="New Folder Name", required=true) }}
+                    <button type="submit">Create</button>
+                </form>
+
+            </div>
+
+
+            <div id="notes-directory" class="column">
+                <div class=hotbar>
+
+                    <select id="sort-by-button" class="pill-box">
+                            <option value="date-edited">Date Edited</option>
+                            <option value="date-created">Date Created</option>
+                            <option value="title">Title</option>
+                    </select>
+
+                </div>
+        
+                {% for note in notes %}
+                    <a class="pill-box note" data-folder-id="{{ note.folder_id }}" onclick="showNoteContent(this, '{{ note.note_content }}')">
+                        {{ note.note_content.splitlines()[0] }}
+                    </a>
+                {% endfor %} 
+
+
+            </div>
+
+
+            <div id="main-content">
+                <div class=hotbar>
+                    <b><div id="current-note-title">
+                    Note
+                    </div></b>
+                    <!--Split View Button-->
+                    <a id="split-view-button" class="pill-box hotbar-button" onclick="toggleSplitScreen()">Split View</a>
+                </div></b>
+                
+                <div id="current-note">
+                </div>
+
+            </div>
+
+            <div id="side-content"> <!-- hidden by default-->
+                <b><div id="second-note-title" class=hotbar>
+                    My Other Note
+                </div></b>
+                
+                <div id="second-note">
+                </div>
+            </div>
+
+        </div> 
+    </div> 
+
+    
+    <script>
+        var allNotes = document.querySelectorAll('.pill-box.note');
+        function showAllNotes() {
+            allNotes.forEach(function (note) {
+                note.style.display = 'block';
+            });
+        }
+
+        function showFolderNotes(link) {
+            allNotes.forEach(function (note) {
+                note.style.display = 'block';
+            });
+
+            var excludedNotes = document.querySelectorAll('.pill-box.note:not([data-folder-id="' + link + '"])');
+            excludedNotes.forEach(function (note) { 
+                note.style.display = 'none';
+            });
+        }
+        
+        var secondNoteLastSet = false
+        function showNoteContent(selectedNote, content) {
+            var noteContainer = document.getElementById('current-note');
+            var secondNoteContainer = document.getElementById('second-note');
+            var sideContentContainer = document.getElementById('side-content');
+
+            if (sideContentContainer.style.display === 'block' && !secondNoteLastSet) {
+                secondNoteContainer.innerHTML = content;
+                secondNoteLastSet = true;
+            } else {
+                noteContainer.innerHTML = content;
+                secondNoteLastSet = false;
+            }
+        }
+
+        function toggleSplitScreen() {
+            const secondNoteContainer = document.getElementById('side-content');
+            secondNoteContainer.style.display = (secondNoteContainer.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function searchNotes() {    /* Note filtering technically*/
+            var searchInput = document.getElementById('search-bar').value.toLowerCase();
+
+            allNotes.forEach(function (note) {
+                var noteContent = note.innerText.toLowerCase();
+                if (noteContent.includes(searchInput)) {
+                    note.style.display = 'block';
+                } else {
+                    note.style.display = 'none';
+                }
+            });
+        }
+
+        /* Display Content Name WIP */
+        function showNoteContentName(selectedNote, noteTitle) {
+            var currentNoteContainer = document.getElementById('current-note-title');
+            
+            currentNoteContainer.innerHTML = noteTitle;
+
+            //selectedNote.classList.add('selected');
+        }
+
+    </script>
+{% endblock %}
