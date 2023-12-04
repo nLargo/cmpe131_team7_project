@@ -35,7 +35,7 @@
 3. The dropdown menu closes.
 4. Site sorts the notes according to the user’s selection.
 - **Primary Postconditions:** The user’s notes are ordered according to their selection.
-- **Alternate Sequence I:**
+- **Alternate Sequence:**
 2. User toggles the ascending/descending order button beside a sort option that isn’t currently selected.
 3. Site auto-selects the sort option beside the toggled button.
 4. The dropdown menu closes.
