@@ -107,14 +107,32 @@ def homeRevamp():
 
     #user_id = current_user.id if current_user.is_authenticated else None
     user_id = 1
-    user_notes = Notes.query.filter_by(user_id=user_id).order_by(desc(Notes.modified_at)).all()
-    user_folders = Folders.query.filter_by(user_id=user_id).order_by(asc(Folders.folder_name)).all()
+    user_notes = (
+        db.session.query(
+            #Notes.user_id,
+            Notes.note_id,
+            Notes.note_content,
+            Notes.created_at,
+            Notes.modified_at,
+            Notes.folder_id
+        )
+        .filter_by(user_id=user_id)
+        .order_by(desc(Notes.modified_at))
+        .all()
+    )   
+    user_folders = (
+        Folders.query.filter_by(user_id=user_id)
+        .order_by(asc(Folders.folder_name))
+        .all()
+    )
 
     if form.validate_on_submit():
         folder_name = form.new_folder_name.data
-
         new_folder = Folders(folder_name=folder_name, user_id=user_id)
         db.session.add(new_folder)
         db.session.commit()
+        form.processed = False
+        return redirect(request.url)
+        
 
     return render_template('homepage.html', notes=user_notes, folders=user_folders, form=form)

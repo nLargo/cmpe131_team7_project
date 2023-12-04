@@ -22,30 +22,37 @@
                     <b>My Notes</b>
                 </div>
 
-                <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes()">
+                <a href="#all" id="full-directory-folder" 
+                class="pill-box folder" 
+                onclick="showAllNotes()">
                     All Notes
                 </a>
 
                 {% for folder in folders %}
-                    <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}')" data-folder-id="{{ folder.folder_id }}">
+                    <a href="#{{ folder.folder_name }}" 
+                    class="pill-box folder" 
+                    onclick="showFolderNotes('{{ folder.folder_id }}')">
                         {{ folder.folder_name }}
                     </a>
                 {% endfor %}
 
-                <div class="pill-box">
-                    <form id="new-folder-box" method="post">
+                <div id="new-folder-container" class="pill-box">
+                    <div class="pill-box" style="position:relative; background-color:white; position:absolute; left:9px; margin-top:10px; border-radius:3px; width:2px; padding:0;"></div>
+                    <form id="new-folder-text-box" method="post">
                         {{ form.hidden_tag() }}
-                        {{ form.new_folder_name(size=32, placeholder="New Folder Name", required=true) }}
-                        <button id="new-folder-button" class="pill-box" type="submit"><i class="fas fa-plus"></i></button>
+                        {{ form.new_folder_name(size=32, placeholder="Name New Folder", required=true) }}
                     </form>
+                    <button id="new-folder-button" class="pill-box" onclick="submitForm()">
+                        <i class="fas fa-plus"></i>
+                    </button>
                 </div>
             </div>
 
-
+ 
             <div id="notes-directory" class="column">
                 <div class=hotbar>
 
-                    <select id="sort-by-button" class="pill-box">
+                    <select id="sort-by-button" class="pill-box" onchange="sortNotes()">
                             <option value="date-edited">Date Edited</option>
                             <option value="date-created">Date Created</option>
                             <option value="title">Title</option>
@@ -56,16 +63,31 @@
                     </a>
 
                 </div>
-        
+
+               
                 {% for note in notes %}
-                    <a class="pill-box note" data-folder-id="{{ note.folder_id }}" onclick="showNoteContent(this, '{{ note.note_content }}')">
-                        {{ note.note_content.splitlines()[0] }}
+                    <!--class="pill-box note" -->
+                    <a class="note item" 
+                    data-noteId="{{ note.note_id}}"
+                    data-title="{{ note.note_content.splitlines()[0] }}" 
+                    data-content="{{ note.note_content }}"
+                    data-createdAt="{{ note.created_at }}" 
+                    data-modifiedAt="{{ note.modified_at }}" 
+                    data-folderId="{{ note.folder_id }}"
+                    onclick="showNoteContent(this, '{{ note.note_content }}')">
+                    <!--
+                        <p>ID: {{ note.note_id }}</p>
+                        <p>Title: {{ note.note_content.splitlines()[0] }}</p>
+                        <p>Content: {{ note.note_content }}</p>
+                        <p>Date Created: {{ note.created_at }}</p>
+                        <p>Date Modified: {{ note.modified_at }}</p>
+                        <p>Folder ID: {{ note.folder_id }}</p>
+                    -->
                     </a>
-                {% endfor %} 
+                {% endfor %}
 
-
+                <div id="notes-container"></div>
             </div>
-
 
             <div id="main-content">
                 <div class=hotbar>
@@ -95,24 +117,58 @@
 
     
     <script>
-        var allNotes = document.querySelectorAll('.pill-box.note');
+        var notesArray = [];
+        {% for note in notes %}
+            var noteObject = {
+                noteId: "{{ note.note_id }}",
+                title: "{{ note.note_content.splitlines()[0] }}",
+                content: "{{ note.note_content }}",
+                createdAt: "{{ note.created_at }}",
+                modifiedAt: "{{ note.modified_at }}",
+                folderId: "{{ note.folder_id }}"
+            };
+            notesArray.push(noteObject);
+        {% endfor %}
+        console.log(notesArray);
+
+        /* Note Show/Hide --------------------------------------------------------- */
+        var targetFolderId = null
         function showAllNotes() {
-            allNotes.forEach(function (note) {
-                note.style.display = 'block';
-            });
+            targetFolderId = null
+            updateHTML();
         }
-
-        function showFolderNotes(link) {
-            allNotes.forEach(function (note) {
-                note.style.display = 'block';
-            });
-
-            var excludedNotes = document.querySelectorAll('.pill-box.note:not([data-folder-id="' + link + '"])');
-            excludedNotes.forEach(function (note) { 
-                note.style.display = 'none';
-            });
+        function showFolderNotes(id) {   
+            targetFolderId = id;
+            updateHTML();
         }
-        
+        function searchNotes() {    /* Note filtering technically */
+            var searchInput = document.getElementById('search-bar').value.toLowerCase();
+            notesArray.forEach(note =>  {
+                var noteContent = note.content.toLowerCase();
+                if (noteContent.includes(searchInput)) {
+                    
+                } else {
+                    
+                }
+            })
+        }
+        function searchNotes() {
+            var searchInput = document.getElementById('search-bar').value.toLowerCase();
+            notesArray.forEach(note => {
+                var noteContent = note.content.toLowerCase();
+                var noteElement = document.querySelector(`[data-noteId="${note.noteId}"]`);
+                if ((noteContent.includes(searchInput) || searchInput === '') &&
+                    (targetFolderId === null || note.folderId === targetFolderId)) {
+                    noteElement.style.display = 'block';
+                } else {
+                    noteElement.style.display = 'none';
+                }
+            });
+            updateHTML();
+        }
+        /* Note Show/Hide END ----------------------------------------------------- */
+
+        /* Content ---------------------------------------------------------------- */
         var secondNoteLastSet = false
         function showNoteContent(selectedNote, content) {
             var noteContainer = document.getElementById('current-note');
@@ -127,34 +183,80 @@
                 secondNoteLastSet = false;
             }
         }
-
         function toggleSplitScreen() {
             const secondNoteContainer = document.getElementById('side-content');
             secondNoteContainer.style.display = (secondNoteContainer.style.display === 'block') ? 'none' : 'block';
         }
+        /* Content END ------------------------------------------------------------ */
 
-        function searchNotes() {    /* Note filtering technically*/
-            var searchInput = document.getElementById('search-bar').value.toLowerCase();
+        /* Sorting ---------------------------------------------------------------- */
+        var isOrderAsc = true;
+        function toggleAscDesc() {
+            isOrderAsc = !isOrderAsc;
+        }
+        function sortNotes() {
+            const selectedOption = document.getElementById("sort-by-button").value;
+            switch (selectedOption) {
+                case "date-edited":
+                    sortByDateEdited();
+                    break;
+                case "date-created":
+                    sortByDateCreated();
+                    break;
+                case "title":
+                    sortByTitle();
+                    break;
+                default:
+                    sortByDateEdited();
+            }
+            updateHTML();
+        }
+        function sortByDateEdited() {
+            notesArray.sort((a, b) => {
+                return new Date(b.modifiedAt) - new Date(a.modifiedAt);
+            });
+        }
+        function sortByDateCreated() {
+            notesArray.sort((a, b) => {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+        }
+        function sortByTitle() {
+            notesArray.sort((a, b) => {
+                return a.title.localeCompare(b.title, 'en', { sensitivity: 'base' });
+            });
+        }
+        sortNotes();
+        /* Sorting END ------------------------------------------------------------ */
 
-            allNotes.forEach(function (note) {
-                var noteContent = note.innerText.toLowerCase();
-                if (noteContent.includes(searchInput)) {
-                    note.style.display = 'block';
-                } else {
-                    note.style.display = 'none';
+        function updateHTML() {
+            const container = document.getElementById('notes-container');
+            container.innerHTML = '';
+            notesArray.forEach(note => {    
+                console.log(note.folderId)
+                console.log(targetFolderId)
+                if (targetFolderId === null || note.folderId === targetFolderId) {
+                    const noteObject = document.createElement('div');
+                    noteObject.innerHTML = `
+                        <a class="pill-box note item"                         
+                        data-noteId="${note.noteId}"
+                        data-title="${note.title}" 
+                        data-content="${note.content}"
+                        data-createdAt="${note.createdAt}" 
+                        data-modifiedAt="${note.modifiedAt}" 
+                        data-folderId="${note.folderId}"
+                        onclick="showNoteContent(this, '${note.content}')">
+                        ${note.title}
+                    `;
+                    container.appendChild(noteObject);
                 }
             });
         }
+        updateHTML();
 
-        /* Display Content Name WIP */
-        function showNoteContentName(selectedNote, noteTitle) {
-            var currentNoteContainer = document.getElementById('current-note-title');
-            
-            currentNoteContainer.innerHTML = noteTitle;
-
-            //selectedNote.classList.add('selected');
+        function submitForm() {
+            document.getElementById("new-folder-text-box").submit();
         }
-
     </script>
 
     <!-- FROM home_blank.html <script> -->
