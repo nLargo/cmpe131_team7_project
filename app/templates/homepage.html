@@ -39,10 +39,10 @@
                 <div id="new-folder-container" class="pill-box">
                     <div class="pill-box" style="position:relative; background-color:white; position:absolute; left:9px; margin-top:10px; border-radius:3px; width:2px; padding:0;"></div>
                     <form id="new-folder-text-box" method="post">
-                        {{ form.hidden_tag() }}
-                        {{ form.new_folder_name(size=32, placeholder="Name New Folder", required=true) }}
+                        {{ form1.hidden_tag() }}
+                        {{ form1.new_folder_name(size=32, placeholder="Name New Folder", required=true) }}
                     </form>
-                    <button id="new-folder-button" class="pill-box" onclick="submitForm()">
+                    <button id="new-folder-button" class="pill-box" onclick="submitFolderForm()">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
@@ -58,9 +58,13 @@
                             <option value="title">Title</option>
                     </select>
 
-                    <a id="create-note-button" class="pill-box hotbar-button">
+                    <form id="new-note-submit-button" method="post">     <!-- newNoteForm ID not customized -->
+                        {{ form2.hidden_tag() }}
+                        <button type="submit" style="display: none;">Submit</button>
+                    </form>
+                    <button id="create-note-button" class="pill-box hotbar-button" onclick="submitNoteForm()">
                         <i class="fas fa-plus"></i>
-                    </a>
+                    </button>
 
                 </div>
 
@@ -141,7 +145,7 @@
             targetFolderId = id;
             updateHTML();
         }
-        function searchNotes() {    /* Note filtering technically */
+        function searchNotes() {    /* WIP */
             var searchInput = document.getElementById('search-bar').value.toLowerCase();
             notesArray.forEach(note =>  {
                 var noteContent = note.content.toLowerCase();
@@ -152,7 +156,7 @@
                 }
             })
         }
-        function searchNotes() {
+        function searchNotes() {     /* WIP */
             var searchInput = document.getElementById('search-bar').value.toLowerCase();
             notesArray.forEach(note => {
                 var noteContent = note.content.toLowerCase();
@@ -176,10 +180,19 @@
             var sideContentContainer = document.getElementById('side-content');
 
             if (sideContentContainer.style.display === 'block' && !secondNoteLastSet) {
-                secondNoteContainer.innerHTML = content;
+                secondNoteContainer.innerHTML = ` 
+                    <textarea class="note-body" placeholder="Note down your thoughts ...">
+                        ${content} 
+                    </textarea>
+                    `; 
+                content;
                 secondNoteLastSet = true;
             } else {
-                noteContainer.innerHTML = content;
+                noteContainer.innerHTML = ` 
+                    <textarea class="note-body" placeholder="Note down your thoughts ...">
+                        ${content} 
+                    </textarea>
+                    `; 
                 secondNoteLastSet = false;
             }
         }
@@ -248,19 +261,125 @@
                         onclick="showNoteContent(this, '${note.content}')">
                         ${note.title}
                     `;
-                    container.appendChild(noteObject);
+                    container.appendChild(noteObject); 
                 }
             });
         }
         updateHTML();
 
-        function submitForm() {
+        function submitFolderForm() {
             document.getElementById("new-folder-text-box").submit();
         }
+
+        function submitNoteForm() {
+            document.getElementById("new-note-submit-button").submit();
+        }
+
+        /*
+        document.getElementById('create-note-button').addEventListener('click', function() {
+            document.getElementById('newNoteSubmitButton').click();
+        });
+        */
     </script>
+
+
+
 
     <!-- FROM home_blank.html <script> -->
         <script src="https://kit.fontawesome.com/bf520e6492.js" crossorigin="anonymous"></script> 
+
+
+        <script>
+            const addBtn = document.getElementById("create-note-button");   //const addBtn = document.querySelector("#create-note-button"); 
+            const noteBody = document.getElementById("#current-note");  //second-note     //sconst main = document.querySelector("#main"); 
+            
+            addBtn.addEventListener("click", function () { 
+                addNote(); 
+            }); 
+
+
+            
+            const saveNotes = () => {  
+                const notes = document.querySelectorAll(".note .content");
+                const titles = document.querySelectorAll(".note .title");
+            
+                const data = []; 
+            
+                notes.forEach((note, index) => { 
+                    const content = note.value; 
+                    const title = titles[index].value; 
+                    console.log(title); 
+                    if (content.trim() !== "") { 
+                        data.push({ title, content }); 
+                    } 
+                });
+
+                const titlesData = data.map((item) => item.title); 
+
+                console.log(titlesData); 
+                localStorage.setItem("titles", JSON.stringify(titlesData)); 
+            
+                const contentData = data.map((item) => item.content); 
+                localStorage.setItem("notes", JSON.stringify(contentData)); 
+            }; 
+
+
+
+            const addNote = (text = "", title = "") => { 
+                const note = document.createElement("div"); 
+                note.classList.add("note"); 
+                note.innerHTML = ` 
+                    <div class="icons"> 
+                        <i class="save fas fa-save" 
+                            style="color:blue"> 
+                        </i> 
+                        <i class="trash fas fa-trash" 
+                            style="color:grey"> 
+                        </i>  
+                    </div> 
+                    <div class="title-div"> 
+                        <textarea class="title" 
+                            placeholder="Write the title ...">${title} 
+                        </textarea> 
+                    </div> 
+                    <textarea class="content" 
+                        placeholder="Note down your thoughts ...">${text} 
+                    </textarea>
+                    `; 
+
+
+                function trashCan() { 
+                    note.remove(); 
+                    saveNotes(); 
+                } 
+                function saveIcon() { 
+                    saveNotes(); 
+                } 
+
+                const deleteB = note.querySelector(".trash"); 
+                const saveB = note.querySelector(".save"); 
+                const textareas = note.querySelectorAll("textarea"); 
+            
+                deleteB.addEventListener("click", trashCan); 
+                saveB.addEventListener("click", saveIcon); 
+            
+                //noteBody.appendChild(note); 
+                saveNotes(); 
+            }; 
+
+            /* NOT USABLE
+            function loadNotes() {                          /* should not use local storage 
+                const titlesData = JSON.parse(localStorage.getItem("titles")) || []; 
+                const contentData = JSON.parse(localStorage.getItem("notes")) || []; 
+                    
+                for (let i = 0; i < Math.max(titlesData.length, contentData.length); i++) {  
+                    addNote(contentData[i], titlesData[i]); 
+                } 
+            } 
+            loadNotes();
+            */
+
+        </script>
 
     <!-- FROM home_blank.html <script> END -->
 

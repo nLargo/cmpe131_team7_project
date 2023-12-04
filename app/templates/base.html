@@ -255,12 +255,43 @@
                 text-decoration: none;
             }
 
-            #create-note-button pill-box hotbar-button{
+            #create-note-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                scale: 105%;
+
+                background-color: transparent;
+                color: var(--text-light);
+                cursor: pointer;
+
+                width: 30px;
+
                 overflow: hidden;
                 white-space: nowrap;
-                white-space: nowrap;
                 text-overflow: unset;
+
+                border: none;
             }
+
+            textarea.note-body {
+                resize: none; 
+                background-color: transparent;
+                color: var(--text-dark);
+                font: inherit;
+
+                width: 100%;
+                height: 100%;
+                border: none;
+                padding-top: 15px;
+                padding-left: 15px;
+                padding-right: 15x;
+            }
+
+            textarea.note-body:focus, input:focus {
+                outline:none
+            }
+
             /* #endregion button ids */
 
             /* Old styles that seemed to be irrelevant
