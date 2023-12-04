@@ -181,18 +181,12 @@
 
             if (sideContentContainer.style.display === 'block' && !secondNoteLastSet) {
                 secondNoteContainer.innerHTML = ` 
-                    <textarea class="note-body" placeholder="Note down your thoughts ...">
-                        ${content} 
-                    </textarea>
-                    `; 
+                    <textarea class="note-body">${content}</textarea>`; 
                 content;
                 secondNoteLastSet = true;
             } else {
                 noteContainer.innerHTML = ` 
-                    <textarea class="note-body" placeholder="Note down your thoughts ...">
-                        ${content} 
-                    </textarea>
-                    `; 
+                    <textarea class="note-body">${content}</textarea>`; 
                 secondNoteLastSet = false;
             }
         }
