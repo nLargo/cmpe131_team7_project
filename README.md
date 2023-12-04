@@ -1,6 +1,6 @@
 # cmpe131_team7_project
 - Emma Dunbach (@edunbach): Split View
-- Nathan Largo (@nLargo): Create New Folder, Sort Notes
+- Nathan Largo (@nLargo): Create New Folder, Sort Notes, Search Notes
 - Priya Nahal (@PriyaNahal): Save Notes, Delete Notes
 - Vinh Huynh (@vinhhuynh09) (Team Lead): Login, Create Account, Create New Note, Logout 
 
