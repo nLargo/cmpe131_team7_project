@@ -339,5 +339,21 @@
             {% endif %}
         {% endwith %}
         {% block content %} {% endblock %}
+
+            <div id="google_translate_element" style="position: fixed; bottom: 12px; left: 12px;"></div>
     </body>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                exclude: ['.notranslate']
+            }, 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    
 </html>
