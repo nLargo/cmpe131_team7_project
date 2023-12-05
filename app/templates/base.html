@@ -1,25 +1,28 @@
 <html>
-    <head>
+    <head> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home Page - my blog</title>
+
+        <title>{% block title %}My Notes{% endblock %}</title>
+
         <style>
-            /*base.html (ran into style inheritance issues -- leaving here for now)*/
-            :root {
+            :root { /* make color changes here -- project pallete should be fully present here */
                 --background: #264653;
                 --background-light: #345360;
-                --text: #F0EAD6; 
+                --accent: #DAA520;
+                --text-dark: #3E424B;
+                --text-light: #F0EAD6; 
+                --line-border: rgba(127, 127, 127, 0.5);
+                --translucent:  rgba(127, 127, 127, 0.5);
+                --small-font: 14px;
             }
 
+            /* #region general */
             body {
-                color: var(--text);
+                color: var(--text-light);
                 background-color: var(--background);
             }
-            /*base.html END*/
     
-            /*home_blank.html (ran into style inheritance issues -- leaving here for now)*/
             #app-container {
-                /*width: 100vw;
-                height: 100vh;*/
                 display: flex;
                 flex-direction: column;
             }
@@ -35,7 +38,7 @@
     
             #main-content {
                 color: #3E424B; /* use variable later*/
-                background-color: var(--text);  /* use better variable later*/
+                background-color: var(--text-light);
             
                 flex:1;
                 overflow: auto;
@@ -43,48 +46,22 @@
             
                 padding: 10px;
             }
-            
-            #right-menu {
-                width: 200px; /* Adjust the width as needed */
-                /*border-right: 1px solid #ccc; /* Optional: Add border between the menu and content */
-                overflow: auto;
-            }
 
-            .right-menu-note {
-                cursor: pointer;
-                padding: 8px;
-                display: block;
-                /*border-bottom: 1px solid #ccc; /* Optional: Add border between notes */
-            }
-
-            .split-buttons {
-                display: flex;
-                justify-content: space-between;
-                padding: 10px;
-                background-color: #f0f0f0;
-            }
-
-            .split-container {
-                display: flex;
-                width: 100%;
-                flex: 1;
-                overflow: hidden;
-            }
-
-            .split-content {
-                flex: 1;
-                height: 100%;
-                overflow: auto;
-                /*border: 1px solid #ccc; /* Optional: Add border between the two sides */
-            }
-            
-            /* Initially hide the right side */
-            .hidden {
+            #side-content {
                 display: none;
+                color: var(--text-dark); 
+                background-color: var(--text-light);
+            
+                flex:1;
+                overflow: auto;
+                height: 100vh;
+            
+                padding: 10px;
+                border-left: 2px dotted var(--line-border);
             }
 
             .column {
-                width: 20vw;
+                width: 17vw;
                 height: 100vh;
     
                 padding: 10px;
@@ -92,41 +69,12 @@
                 overflow-y: auto;
             }
 
-            .hotbar {
-                display: flex;
-                background-color: rgba(0,0,0,0);
-                
-                width: 100%;
-                height: 30px;
-
-                border-bottom: 1px solid rgba(127, 127, 127, 0.5);
-                margin-bottom: 10px;
-                padding-bottom: 10px;
-                justify-content: space-between;
-
-                line-height: 30px;   
+            form {
+                margin: 10px;
             }
+            /* #endregion general */
 
-            .hotbar-button {
-                color: var(--text);
-                background-color: rgba(127, 127, 127, 0.5);
-
-                height: 20px;
-                width: fit-content;
-                margin: 5px;
-            }
-
-            select.pill-box {
-                border: none;
-                background-color: rgba(0,0,0,0);
-
-                padding-left: 0px;
-                padding-right: 0px;
-            }
-            select:focus.pill-box {
-                outline: none;          
-            }
-
+            /* #region pill-box */
             .pill-box {
                 cursor: pointer;
     
@@ -146,45 +94,61 @@
                 text-overflow: ellipsis;
             }
 
+            .pill-box:active {
+                opacity: 0.7;
+            }
+
+            select.pill-box {
+                border: none;
+                background-color: rgba(0,0,0,0);
+
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+
+            select:focus.pill-box {
+                outline: none;          
+            }
+
             a.pill-box {
                 display: block; 
                 text-decoration: none;
                 color: inherit; 
             }
-    
-            .pill-box:active {
-                opacity: 0.7;
-            }
-    
-            .exampleItem {          
-                background-color: #DAA520;
-            }
-            /*home_blank.html END*/
-    
-            /*notes_directory.html (ran into style inheritance issues -- leaving here for now)*/
-            #notes-directory {
-                /*display: none;*/
-                background-color: #3E424B;      
-            }
-    
-            #full-directory-folder { /*All Files Folder mofdfier (temp)*/
-                background-color: #DAA520;
+
+            /* #endregion pill-box */
+
+            /* #region hotbar */
+            .hotbar {
+                display: flex;
+                background-color: rgba(0,0,0,0);
+                
+                width: 100%;
+                height: 30px;
+
+                border-bottom: 1px solid var(--line-border);
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                justify-content: space-between;
+
+                line-height: 30px;   
             }
 
-            #new-folder-button {
-                display: flex;
-                color: var(--text);
-                background-color: rgba(127, 127, 127, 0.25);
+            a.hotbar-button {
+                cursor: pointer;
+                color: var(--text-light);
+                background-color: var(--text-dark);
 
                 height: 20px;
                 width: fit-content;
                 margin: 5px;
 
-                text-align:center;
-                align-items: center;
-                justify-content: center;
+                line-height: 20px;  
             }
+
+            /* #endregion hotbar */
     
+            /* #region directory colors */
             .note {
                 background-color: var(--background-light);
             }
@@ -192,19 +156,150 @@
             .folder {          
                 background-color: var(--background);
             }
+
+            #notes-directory {
+                /*display: none;*/
+                background-color: var(--text-dark);      
+            }
     
-            .subfolder {
-                display: none;
+            #full-directory-folder { 
+                background-color: var(--accent);
+            }
+            /* #endregion directory colors */
+
+            /* #region button ids */
+            #sort-by-button {
+                color: var(--text);
+                background-color: solid var(--translucent);
+
+                height: 20px;
+                width: fit-content;
+                margin: 5px;
+            }
+
+            #new-folder-container {
+                display: flex; 
+                justify-content: left;
+                align-items: center;
+
+                position: relative;
+
+                background-color: white;
+                cursor: pointer;
+                max-height: 30px;
+
+                padding: 0;
+                margin: 0;
+                border: none;
+            }
+
+            #new-folder-text-box {
+                display: flex; 
+                justify-content: left;
+                align-items: left;
+
+                background-color: none;
+                cursor: pointer;
+
+                padding: 0px;
+                margin: 0;
                 margin-left: 10px;
-            }  
-            /*notes_directory.html END*/
-            
-            /*split.html*/
+                border: none;
+                outline: none;
+    
+                height: 40px;
+                max-width: 100%;
+
+                border-radius: 40px; 
+                padding-right: 15px;
+
+                line-height: 30px;   
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            #new-folder-text-box:focus, input:focus {
+                outline:none
+            }
+
+            #new-folder-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                scale: 105%;
+
+                background: var(--background);
+                color: var(--text-light);
+                cursor: pointer;
+
+                min-width: 30px;
+                line-height: 30px;
+
+                padding: 5px;
+                margin: 5px;
+                margin-right: 0px;
+            }
+
+            #split-view-button {
+                font-size: var(--smallFont);
+            }
+
+            #logout-button a {
+                color: var(--text-light);
+                display: inline-block;
+                position: fixed;
+                top: 15px;
+                right: 30px;
+
+                text-decoration: none;
+            }
+
+            #create-note-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                scale: 105%;
+
+                background-color: transparent;
+                color: var(--text-light);
+                cursor: pointer;
+
+                width: 30px;
+
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: unset;
+
+                border: none;
+            }
+
+            textarea.note-body {
+                resize: none; 
+                background-color: transparent;
+                color: var(--text-dark);
+                font: inherit;
+
+                width: 100%;
+                height: 100%;
+                border: none;
+                padding-top: 15px;
+                padding-left: 15px;
+                padding-right: 15x;
+            }
+
+            textarea.note-body:focus, input:focus {
+                outline:none
+            }
+
+            /* #endregion button ids */
+
+            /* Old styles that seemed to be irrelevant
             .container {
                 display: flex;
                 height: 100vh;
             }
-
+ 
             .panel {
                 flex: 1;
                 border: 1px solid #ccc;
@@ -212,12 +307,6 @@
                 overflow: hidden;
             }
 
-            form {
-                margin: 10px;
-            }
-            /*split.html END*/
-          
-            /*home_blank.html post-merge*/
             #create-note-button {
                 position: fixed;
                 bottom: 20px;
@@ -226,7 +315,7 @@
 
             #create-note-button button {
                 background-color: #007bff;
-                color: #fff;
+                color: var(--text-light);
                 padding: 10px;
                 border: none;
                 border-radius: 5px;
@@ -236,31 +325,7 @@
             #create-note-button button i {
                 margin-right: 5px;
             }
-
-            #logout-button {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                display: inline-block;
-            }
-
-            #logout-button a {
-                color: #007bff;
-                text-decoration: none;
-                display: inline-block;
-            }
-            /*home_blank.html post-merge*/
-
-            #context-menu {
-                display: none;
-                position: absolute;
-                background-color: #3E424B;
-                border: none;
-                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-                padding: 8px;
-                z-index: 1000;
-            }
-    
+            */
         </style>
     </head>
     <body>

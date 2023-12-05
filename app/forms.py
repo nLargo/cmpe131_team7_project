@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, HiddenField
 from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms.fields import DateTimeField
+from datetime import datetime
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -19,3 +21,10 @@ class CreateAccountForm(FlaskForm):
 class NewFolderForm(FlaskForm):
     new_folder_name = StringField('New Folder Name', validators=[DataRequired()])
     submit = SubmitField('Create Folder')
+
+class NewNoteForm(FlaskForm):
+    default_note_content = 'New Note' #\n causing issues
+    note_content = TextAreaField('Note Content', validators=[DataRequired()], default=default_note_content)
+    folder_id = HiddenField('Folder ID', default=None) 
+    created_at = DateTimeField('Created At', default=datetime.utcnow)
+    modified_at = DateTimeField('Modified At', default=datetime.utcnow)

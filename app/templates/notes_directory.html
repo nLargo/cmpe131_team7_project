@@ -1,6 +1,6 @@
 {% extends "home_blank.html"%}
 
-<title>My Notes</title>
+{% block title %}My Notes{% endblock %}
 
 {% block content %}
     <div id="app-container">
@@ -12,11 +12,15 @@
             <div id="logout-button" style="display: inline-block;">
                 <a href="/" class="small-text">Logout</a>
             </div>
+
             <div class="split-buttons">
                 <button id="split-screen-button" onclick="toggleSplitScreen()">Toggle Split Screen</button>
                 <button id="exit-split-screen-button" onclick="exitSplitScreen()">Exit Split Screen</button>
             </div>
+
         </div>
+
+
         <div class="split-container">
             <div class="split-content">    
                 
@@ -26,12 +30,12 @@
                             <b>My Notes</b>
                         </div>
 
-                        <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes(); showNotesDir()">
+                        <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes()">
                             All Notes
                         </a>
 
                         {% for folder in folders %}
-                            <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}'); showNotesDir()" data-folder-id="{{ folder.folder_id }}">
+                            <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}')" data-folder-id="{{ folder.folder_id }}">
                                 {{ folder.folder_name }}
                             </a>
                         {% endfor %}
@@ -61,17 +65,6 @@
                                 {{ note.note_content.splitlines()[0] }}
                             </a>
                         {% endfor %} 
-
-
-                        <!--Right Click WIP-->
-                        <div id="context-menu">
-                            <ul>
-                              <li onclick="handleContextMenuAction('Option 1')">Option 1</li>
-                              <li onclick="handleContextMenuAction('Option 2')">Option 2</li>
-                              <li onclick="handleContextMenuAction('Option 3')">Option 3</li>
-                            </ul>
-                        </div>
-                        <!---->
         
 
                     </div>
@@ -89,6 +82,8 @@
         
                 </div> 
             </div>
+
+
             <div class="split-content hidden" id="right-side">
                 <div id="main-container">
                     <div id="sidebar" class="column">
@@ -96,12 +91,12 @@
                             <b>My Notes</b>
                         </div>
 
-                        <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes(); showNotesDir()">
+                        <a href="#all" id="full-directory-folder" class="pill-box folder folder-link" onclick="showAllNotes()">
                             All Notes
                         </a>
 
                         {% for folder in folders %}
-                            <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}'); showNotesDir()" data-folder-id="{{ folder.folder_id }}">
+                            <a href="#{{ folder.folder_name }}" class="pill-box folder folder-link" onclick="showFolderNotes('{{ folder.folder_id }}')" data-folder-id="{{ folder.folder_id }}">
                                 {{ folder.folder_name }}
                             </a>
                         {% endfor %}
@@ -132,18 +127,6 @@
                             </a>
                         {% endfor %} 
 
-
-                        <!--Right Click WIP-->
-                        <div id="context-menu">
-                            <ul>
-                              <li onclick="handleContextMenuAction('Option 1')">Option 1</li>
-                              <li onclick="handleContextMenuAction('Option 2')">Option 2</li>
-                              <li onclick="handleContextMenuAction('Option 3')">Option 3</li>
-                            </ul>
-                        </div>
-                        <!---->
-        
-
                     </div>
         
 
@@ -167,11 +150,6 @@
         var allNotes = document.querySelectorAll('.pill-box.note');
         var notesArray = Array.from(allNotes);
 
-        function showNotesDir() {
-            var notesDir = document.querySelector('#notes-directory'); 
-            notesDir.style.display = 'block'; 
-        }
-
         function showAllNotes() {
             allNotes.forEach(function (note) {
                 note.style.display = 'block';
@@ -188,8 +166,7 @@
                 note.style.display = 'none';
             });
         }
-
-
+        
         function showNoteContent(selectedNote, content) {
             var currentNoteContainer = document.getElementById('current-note');
             
@@ -199,17 +176,20 @@
         }
 
         function searchNotes() {
-        var searchInput = document.getElementById('search-bar').value.toLowerCase();
+            var searchInput = document.getElementById('search-bar').value.toLowerCase();
 
-        allNotes.forEach(function (note) {
-            var noteContent = note.innerText.toLowerCase();
-            if (noteContent.includes(searchInput)) {
-                note.style.display = 'block';
-            } else {
-                note.style.display = 'none';
-            }
-        });
-    }
+            allNotes.forEach(function (note) {
+                var noteContent = note.innerText.toLowerCase();
+                if (noteContent.includes(searchInput)) {
+                    note.style.display = 'block';
+                } else {
+                    note.style.display = 'none';
+                }
+            });
+        }
+
+
+
         /* Display Content Name WIP */
         function showNoteContentName(selectedNote, noteTitle) {
             var currentNoteContainer = document.getElementById('current-note-title');
@@ -218,25 +198,9 @@
 
             selectedNote.classList.add('selected');
         }
-        /* Display Content Name WIP END */
 
 
-        /* Right Click WIP */
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-            const contextMenu = document.getElementById('context-menu');
-            contextMenu.style.display = 'block';
-            contextMenu.style.left = e.pageX + 'px';
-            contextMenu.style.top = e.pageY + 'px';
 
-            document.addEventListener('click', function hideContextMenu() {
-            contextMenu.style.display = 'none';
-            document.removeEventListener('click', hideContextMenu);
-            });
-        });
-        function handleContextMenuAction(option) {
-            
-        }
         function toggleSplitScreen() {
             const rightSide = document.getElementById('right-side');
             rightSide.classList.toggle('hidden');
@@ -252,10 +216,6 @@
             rightSide.innerHTML = content;
             rightSide.classList.remove('hidden');
         }
-        /* Right Click WIP END */
 
     </script>
 {% endblock %}
-
-<!--STOP-->
-<!--STOP2-->

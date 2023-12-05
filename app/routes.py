@@ -1,7 +1,7 @@
 from flask import render_template, redirect, flash, request
 from .forms import LoginForm
 from .forms import CreateAccountForm
-from .forms import NewFolderForm 
+from .forms import NewFolderForm, NewNoteForm 
 from app import myapp_obj, db
 from .models import Users, Notes, Folders    #Updated  
 from flask_login import login_user, current_user, logout_user, login_required
@@ -52,6 +52,10 @@ def createaccount():
 def home():
     return render_template('home_blank.html')
 
+
+
+
+
 @myapp_obj.route("/create_note", methods=['GET', 'POST'])
 def create_note():
     if request.method == 'POST':
@@ -75,6 +79,9 @@ def logout():
     return redirect('/')
 
 
+
+
+
 @myapp_obj.route("/my-notes", methods=['GET', 'POST'])
 def my_notes():
     form = NewFolderForm()
@@ -92,3 +99,59 @@ def my_notes():
         db.session.commit()
 
     return render_template('notes_directory.html', notes=user_notes, folders=user_folders, form=form)
+
+
+@myapp_obj.route("/home-revamp", methods=['GET', 'POST'])
+def homeRevamp():
+    #user_id = current_user.id if current_user.is_authenticated else None
+    user_id = 1
+    user_notes = (
+        db.session.query(
+            #Notes.user_id,
+            Notes.note_id,
+            Notes.note_content,
+            Notes.created_at,
+            Notes.modified_at,
+            Notes.folder_id
+        )
+        .filter_by(user_id=user_id)
+        .order_by(desc(Notes.modified_at))
+        .all()
+    )   
+    user_folders = (
+        Folders.query.filter_by(user_id=user_id)
+        .order_by(asc(Folders.folder_name))
+        .all()
+    )
+
+
+    form1 = NewFolderForm()
+    form2 = NewNoteForm()
+
+    if form1.validate_on_submit():
+        #user_id = current_user.id if current_user.is_authenticated else None ???
+        folder_name = form1.new_folder_name.data
+        new_folder = Folders(
+            user_id=user_id,
+            folder_name=folder_name)
+        db.session.add(new_folder)
+        db.session.commit()
+        form1.processed = False
+        return redirect(request.url)
+        
+    if form2.validate_on_submit():
+        #user_id = current_user.id if current_user.is_authenticated else None
+        #folder_id = ???
+        new_note = Notes(
+            user_id=user_id,
+            note_content=form2.note_content.data,
+            folder_id=form2.folder_id.data,
+            created_at=form2.created_at.data,
+            modified_at=form2.modified_at.data,
+        )
+        db.session.add(new_note)
+        db.session.commit()
+        #flash('Note created successfully', 'success')
+        return redirect(request.url)
+
+    return render_template('homepage.html', notes=user_notes, folders=user_folders, form1=form1, form2=form2)
