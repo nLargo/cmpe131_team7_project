@@ -36,7 +36,7 @@
     </style>
 </head>
 
-<form action="" method="POST" novalidate>
+<form id="LoginForm" action="" method="POST" novalidate>
     <h1 class="centered-text">Login</h1>
     {{ form.hidden_tag() }}
     <p>
@@ -53,11 +53,11 @@
     </p>
 
     <p>
-        {{ form.remember_me.label }} <br>
-        {{ form.remember_me() }}
+        <label for="remember_me">Remember Me</label>
+        <input type="checkbox" id="remember_me" name="remember_me">
     </p>
 
-    <p>{{ form.submit() }}</p>
+    <button type="submit" onclick="storeInfo()">Login</button>
 
     <body>
         {% if form.errors.username %}
@@ -68,5 +68,23 @@
         <a href="createaccount" class="small-text"> Create Account</a>
     </body>
 </form>
+
+<script>
+    function storeInfo() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var remember_me = document.getElementById('remember_me').checked;
+
+        if (remember_me) {
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+        } else {
+            localStorage.removeItem('username');
+            localStorage.removeItem('password');
+        }
+
+        window.location.href = '/home';
+    }
+</script>
 
 {% endblock %}
