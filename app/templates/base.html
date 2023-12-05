@@ -291,41 +291,6 @@
             textarea.note-body:focus, input:focus {
                 outline:none
             }
-
-            /* #endregion button ids */
-
-            /* Old styles that seemed to be irrelevant
-            .container {
-                display: flex;
-                height: 100vh;
-            }
- 
-            .panel {
-                flex: 1;
-                border: 1px solid #ccc;
-                box-sizing: border-box;
-                overflow: hidden;
-            }
-
-            #create-note-button {
-                position: fixed;
-                bottom: 20px;
-                left: 20px;
-            }
-
-            #create-note-button button {
-                background-color: #007bff;
-                color: var(--text-light);
-                padding: 10px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            #create-note-button button i {
-                margin-right: 5px;
-            }
-            */
         </style>
     </head>
     <body>
@@ -339,5 +304,21 @@
             {% endif %}
         {% endwith %}
         {% block content %} {% endblock %}
+
+            <div id="google_translate_element" style="position: fixed; bottom: 12px; left: 12px;"></div>
     </body>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                exclude: ['.notranslate']
+            }, 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    
 </html>
