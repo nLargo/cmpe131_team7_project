@@ -47,7 +47,7 @@ def createaccount():
             print('Invalid email format. Please enter a valid email address.')
         return render_template('create_account.html', form=form)
 
-@myapp_obj.route("/home", methods=['GET', 'POST'])
+@myapp_obj.route("/home-old", methods=['GET', 'POST'])
 @login_required
 def home():
     return render_template('home_blank.html')
@@ -101,7 +101,7 @@ def my_notes():
     return render_template('notes_directory.html', notes=user_notes, folders=user_folders, form=form)
 
 
-@myapp_obj.route("/home-revamp", methods=['GET', 'POST'])
+@myapp_obj.route("/home", methods=['GET', 'POST'])
 def homeRevamp():
     #user_id = current_user.id if current_user.is_authenticated else None
     user_id = 1
