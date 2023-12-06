@@ -103,11 +103,11 @@ def my_notes():
 
 @myapp_obj.route("/home", methods=['GET', 'POST'])
 def homeRevamp():
-    #user_id = current_user.id if current_user.is_authenticated else None
-    user_id = 1
+    user_id = current_user.id if current_user.is_authenticated else None
+    #user_id = 1
     user_notes = (
         db.session.query(
-            #Notes.user_id,
+            Notes.user_id,
             Notes.note_id,
             Notes.note_content,
             Notes.created_at,
@@ -129,10 +129,11 @@ def homeRevamp():
     form2 = NewNoteForm()
 
     if form1.validate_on_submit():
-        #user_id = current_user.id if current_user.is_authenticated else None ???
+        form1.user_id.data = current_user.id if current_user.is_authenticated else None, 
+        #user_id = current_user.id if current_user.is_authenticated else None, ???
         folder_name = form1.new_folder_name.data
         new_folder = Folders(
-            user_id=user_id,
+            user_id = user_id,
             folder_name=folder_name)
         db.session.add(new_folder)
         db.session.commit()
@@ -140,10 +141,11 @@ def homeRevamp():
         return redirect(request.url)
         
     if form2.validate_on_submit():
-        #user_id = current_user.id if current_user.is_authenticated else None
+        form2.user_id.data = current_user.id if current_user.is_authenticated else None, 
+        #user_id = current_user.id if current_user.is_authenticated else None,
         #folder_id = ???
         new_note = Notes(
-            user_id=user_id,
+            user_id = user_id,
             note_content=form2.note_content.data,
             folder_id=form2.folder_id.data,
             created_at=form2.created_at.data,

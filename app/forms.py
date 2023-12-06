@@ -19,10 +19,12 @@ class CreateAccountForm(FlaskForm):
     submit = SubmitField('Create Account')
 
 class NewFolderForm(FlaskForm):
+    user_id = HiddenField('User ID', default=None)
     new_folder_name = StringField('New Folder Name', validators=[DataRequired()])
     submit = SubmitField('Create Folder')
 
 class NewNoteForm(FlaskForm):
+    user_id = HiddenField('User ID', default=None)
     default_note_content = 'New Note' #\n causing issues
     note_content = TextAreaField('Note Content', validators=[DataRequired()], default=default_note_content)
     folder_id = HiddenField('Folder ID', default=None) 
