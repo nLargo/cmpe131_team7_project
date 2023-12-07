@@ -21,16 +21,16 @@
                 <div class=hotbar>
                     <b>My Notes</b>
                 </div>
-
-                <a href="#all" id="full-directory-folder" 
+                <a href="#all"
+                id="full-directory-folder" 
                 class="pill-box folder" 
                 onclick="showAllNotes()">
                     All Notes
                 </a>
 
-                {% for folder in folders %}
-                    <a href="#{{ folder.folder_name }}" 
-                    class="pill-box folder" 
+                {% for folder in folders %} 
+                    <a href="#{{ folder.folder_name }}"
+                    class="pill-box folder"
                     onclick="showFolderNotes('{{ folder.folder_id }}')">
                         {{ folder.folder_name }}
                     </a>
@@ -61,8 +61,9 @@
                     <form id="new-note-submit-button" method="post">     <!-- newNoteForm ID not customized -->
                         {{ form2.hidden_tag() }}
                         <button type="submit" style="display: none;">Submit</button>
+                        <input type="hidden" id="theFolderId" value="targetFolderId">
                     </form>
-                    <button id="create-note-button" class="pill-box hotbar-button" onclick="submitNoteForm()">
+                    <button id="create-note-button" class="pill-box hotbar-button" onclick="submitNoteForm(targetFolderId)">
                         <i class="fas fa-plus"></i>
                     </button>
 
@@ -79,15 +80,7 @@
                     data-createdAt="{{ note.created_at }}" 
                     data-modifiedAt="{{ note.modified_at }}" 
                     data-folderId="{{ note.folder_id }}"
-                    onclick="showNoteContent(this, '{{ note.note_content }}')">
-                    <!--
-                        <p>ID: {{ note.note_id }}</p>
-                        <p>Title: {{ note.note_content.splitlines()[0] }}</p>
-                        <p>Content: {{ note.note_content }}</p>
-                        <p>Date Created: {{ note.created_at }}</p>
-                        <p>Date Modified: {{ note.modified_at }}</p>
-                        <p>Folder ID: {{ note.folder_id }}</p>
-                    -->
+                    onclick="showNoteContent(this, '{{ note.note_content }}', '{{ note.note_content.splitlines()[0] }}')">
                     </a>
                 {% endfor %}
 
@@ -147,36 +140,14 @@
             targetFolderId = id;
             updateHTML();
         }
-        function searchNotes() {    /* WIP */
-            var searchInput = document.getElementById('search-bar').value.toLowerCase();
-            notesArray.forEach(note =>  {
-                var noteContent = note.content.toLowerCase();
-                if (noteContent.includes(searchInput)) {
-                    
-                } else {
-                    
-                }
-            })
-        }
-        function searchNotes() {     /* WIP */
-            var searchInput = document.getElementById('search-bar').value.toLowerCase();
-            notesArray.forEach(note => {
-                var noteContent = note.content.toLowerCase();
-                var noteElement = document.querySelector(`[data-noteId="${note.noteId}"]`);
-                if ((noteContent.includes(searchInput) || searchInput === '') &&
-                    (targetFolderId === null || note.folderId === targetFolderId)) {
-                    noteElement.style.display = 'block';
-                } else {
-                    noteElement.style.display = 'none';
-                }
-            });
+        function searchNotes() {
             updateHTML();
         }
         /* Note Show/Hide END ----------------------------------------------------- */
 
         /* Content ---------------------------------------------------------------- */
         var secondNoteLastSet = false
-        function showNoteContent(selectedNote, content) {
+        function showNoteContent(selectedNote, content, noteTitle) {
             var noteContainer = document.getElementById('current-note');
             var secondNoteContainer = document.getElementById('second-note');
             var sideContentContainer = document.getElementById('side-content');
@@ -195,6 +166,12 @@
         function toggleSplitScreen() {
             const secondNoteContainer = document.getElementById('side-content');
             secondNoteContainer.style.display = (secondNoteContainer.style.display === 'block') ? 'none' : 'block';
+        }
+        function saveNote() {
+            var noteContent = document.querySelector('.note-body').value; // Get the content from the textarea
+            
+            updateHTML();
+            console.log('Saving note:', noteContent);
         }
         /* Content END ------------------------------------------------------------ */
 
@@ -239,12 +216,12 @@
         /* Sorting END ------------------------------------------------------------ */
 
         function updateHTML() {
+            var searchInput = document.getElementById('search-bar').value.toLowerCase();
             const container = document.getElementById('notes-container');
             container.innerHTML = '';
-            notesArray.forEach(note => {    
-                console.log(note.folderId)
-                console.log(targetFolderId)
-                if (targetFolderId === null || note.folderId === targetFolderId) {
+            notesArray.forEach(note => {   
+                var noteContent = note.content.toLowerCase(); 
+                if ((targetFolderId === null || note.folderId === targetFolderId) && (noteContent.includes(searchInput) || searchInput === '')) {
                     const noteObject = document.createElement('div');
                     noteObject.innerHTML = `
                         <a class="pill-box note item"    
@@ -262,122 +239,17 @@
                 }
             });
         }
-        updateHTML();
+        /*updateHTML();*/
 
         function submitFolderForm() {
             document.getElementById("new-folder-text-box").submit();
+            updateHTML();
         }
 
-        function submitNoteForm() {
+        function submitNoteForm(folderId) {
+            document.getElementById("folder_id").value = folderId;
             document.getElementById("new-note-submit-button").submit();
+            updateHTML();
         }
-
-        /*
-        document.getElementById('create-note-button').addEventListener('click', function() {
-            document.getElementById('newNoteSubmitButton').click();
-        });
-        */
     </script>
-
-
-
-
-    <!-- FROM home_blank.html <script> -->
-        <script src="https://kit.fontawesome.com/bf520e6492.js" crossorigin="anonymous"></script> 
-
-
-        <script>
-            const addBtn = document.getElementById("create-note-button");   //const addBtn = document.querySelector("#create-note-button"); 
-            const noteBody = document.getElementById("#current-note");  //second-note     //sconst main = document.querySelector("#main"); 
-            
-            addBtn.addEventListener("click", function () { 
-                addNote(); 
-            }); 
-
-
-            
-            const saveNotes = () => {  
-                const notes = document.querySelectorAll(".note .content");
-                const titles = document.querySelectorAll(".note .title");
-            
-                const data = []; 
-            
-                notes.forEach((note, index) => { 
-                    const content = note.value; 
-                    const title = titles[index].value; 
-                    console.log(title); 
-                    if (content.trim() !== "") { 
-                        data.push({ title, content }); 
-                    } 
-                });
-
-                const titlesData = data.map((item) => item.title); 
-
-                console.log(titlesData); 
-                localStorage.setItem("titles", JSON.stringify(titlesData)); 
-            
-                const contentData = data.map((item) => item.content); 
-                localStorage.setItem("notes", JSON.stringify(contentData)); 
-            }; 
-
-
-
-            const addNote = (text = "", title = "") => { 
-                const note = document.createElement("div"); 
-                note.classList.add("note"); 
-                note.innerHTML = ` 
-                    <div class="icons"> 
-                        <i class="save fas fa-save" 
-                            style="color:blue"> 
-                        </i> 
-                        <i class="trash fas fa-trash" 
-                            style="color:grey"> 
-                        </i>  
-                    </div> 
-                    <div class="title-div"> 
-                        <textarea class="title" 
-                            placeholder="Write the title ...">${title} 
-                        </textarea> 
-                    </div> 
-                    <textarea class="content" 
-                        placeholder="Note down your thoughts ...">${text} 
-                    </textarea>
-                    `; 
-
-
-                function trashCan() { 
-                    note.remove(); 
-                    saveNotes(); 
-                } 
-                function saveIcon() { 
-                    saveNotes(); 
-                } 
-
-                const deleteB = note.querySelector(".trash"); 
-                const saveB = note.querySelector(".save"); 
-                const textareas = note.querySelectorAll("textarea"); 
-            
-                deleteB.addEventListener("click", trashCan); 
-                saveB.addEventListener("click", saveIcon); 
-            
-                //noteBody.appendChild(note); 
-                saveNotes(); 
-            }; 
-
-            /* NOT USABLE
-            function loadNotes() {                          /* should not use local storage 
-                const titlesData = JSON.parse(localStorage.getItem("titles")) || []; 
-                const contentData = JSON.parse(localStorage.getItem("notes")) || []; 
-                    
-                for (let i = 0; i < Math.max(titlesData.length, contentData.length); i++) {  
-                    addNote(contentData[i], titlesData[i]); 
-                } 
-            } 
-            loadNotes();
-            */
-
-        </script>
-
-    <!-- FROM home_blank.html <script> END -->
-
 {% endblock %}
