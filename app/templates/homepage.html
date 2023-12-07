@@ -99,6 +99,11 @@
                     <b><div id="current-note-title">
                     Note
                     </div></b>
+
+                    <!--Insert Audio Button-->
+                    <a id="insert-audio-button" class="pill-box hotbar-button" onclick="openAudioUploader()">
+                        Insert Audio
+                    </a>
                     <!--Insert Photo Button-->
                     <a id="insert-photo-button" class="pill-box hotbar-button" onclick="openFileUploader()">
                         Insert Photo
@@ -112,6 +117,7 @@
                 </div>
                 
                 <input type="file" id="file-input" style="display: none;" onchange="handleFileUpload()">
+                <input type="file" id="audio-input" style="display: none;" accept="audio/*" onchange="handleAudioUpload()">
             </div>
 
             <div id="side-content"> <!-- hidden by default-->
@@ -155,6 +161,37 @@
             imageElement.src = imageData;
             // Append the image to the note content
             noteContent.appendChild(imageElement);
+        }
+
+        function openAudioUploader() {
+            const audioInput = document.getElementById('audio-input');
+            audioInput.click();
+        }
+
+        function handleAudioUpload() {
+            const audioInput = document.getElementById('audio-input');
+            const selectedAudio = audioInput.files[0];
+
+            if (selectedAudio) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const audioData = e.target.result;
+                    displayAudioInNoteContent(audioData);
+                };
+                reader.readAsDataURL(selectedAudio);
+            }
+        }
+
+        function displayAudioInNoteContent(audioData) {
+            const noteContent = document.getElementById('current-note');
+            // Create an audio element
+            const audioElement = document.createElement('audio');
+            // Set the audio source to the base64 data
+            audioElement.src = audioData;
+            // Set controls to allow playback
+            audioElement.controls = true;
+            // Append the audio element to the note content
+            noteContent.appendChild(audioElement);
         }
 
         var notesArray = [];
