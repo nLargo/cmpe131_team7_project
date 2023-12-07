@@ -31,7 +31,7 @@
                 {% for folder in folders %} 
                     <a href="#{{ folder.folder_name }}"
                     class="pill-box folder"
-                    onclick="showFolderNotes('{{ folder.folder_id }}')">
+                    onclick="showFolderNotes('{{ folder.folder_id }}', this)">
                         {{ folder.folder_name }}
                     </a>
                 {% endfor %}
@@ -136,9 +136,17 @@
             targetFolderId = null
             updateHTML();
         }
-        function showFolderNotes(id) {   
+        function showFolderNotes(id, clickedFolder) {   
             targetFolderId = id;
+            resetFolderAppearance();
+            clickedFolder.classList.add('outline')
             updateHTML();
+        }
+        function resetFolderAppearance() {
+            var allFolders = document.querySelectorAll('.folder');
+            allFolders.forEach(function(folder) {
+                folder.classList.remove('outline');
+            });
         }
         function searchNotes() {
             updateHTML();

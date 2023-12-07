@@ -8,7 +8,7 @@
             :root { /* make color changes here -- project pallete should be fully present here */
                 --background: #264653;
                 --background-light: #345360;
-                --accent: #DAA520;
+                --accent: #c29421;
                 --text-dark: #3E424B;
                 --text-light: #F0EAD6; 
                 --line-border: rgba(127, 127, 127, 0.5);
@@ -107,7 +107,7 @@
             }
 
             select:focus.pill-box {
-                outline: none;          
+                outline: none;      
             }
 
             a.pill-box {
@@ -116,8 +116,9 @@
                 color: inherit; 
             }
 
-            highlight {
-                background-color: var(--accent);
+            .pill-box.folder.outline {
+                outline: 2px solid var(--accent);
+                font-weight: bold;    
             }
             /* #endregion pill-box */
 
@@ -167,6 +168,8 @@
     
             #full-directory-folder { 
                 background-color: var(--accent);
+                outline: 2px solid var(--accent);
+                font-weight: bold;    
             }
             /* #endregion directory colors */
 
