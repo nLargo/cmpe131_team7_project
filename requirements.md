@@ -1,8 +1,8 @@
 ## Functional Requirements
 1. Notes app should allow user to set notes sorting.
 2. Notes app should allow user to create new folder.
-3. Notes app should allow user to pin notes.
-4. Notes app should allow user to type with voice dication.
+3. User will be able to add audio files from their audio library into the note page.
+4. Notes app should allow user to type with voice dictation.
 5. Notes app should allow user to save login information.
 6. Notes app should allow user to save notes.
 7. Notes app should allow user to delete notes.
@@ -57,18 +57,19 @@
 4. Site moves the selection into the new folder.
 5. Site opens the new folder, displaying the selected notes within.
 
-### 3) Pin notes
-- **Pre-condition:** The user must be logged in and have at least 1 note.
-- **Trigger:** The user clicks "Pin" while selecting 1 or more notes.
+### 3) Add audio files
+- **Pre-condition:** User must be logged in and have audio files on the device.
+- **Trigger:** User selects the insert audio file button.
 - **Primary Sequence:**
-1. The site designates a 'pinned' section at the top of the list of notes.
-2. Site moves the selected note to the pinned section.
-3. Site displays a pin icon on the note to indicate it's pinned.
-- **Primary Postconditions:** The selected note is pinned to the upper portion of the list.
-- **Alternate Sequence:**
-1. The pinned section already exists and has pinned notes already.
-2. a) The site moves the selected note to the pinned section.b) Site sorts the pinned section in accordance with the folder's sorting.
-3. Site displays a pin icon on the note to indicate it's pinned.
+	1. Notes app opens a collection of various audio files that can be added to the note.
+	2. User selects audio file they want to add.
+	3. Notes app imports the audio file into the note file.
+ 	4. The selected audio file is displayed in the note and can be saved.
+ - **Alternate Sequence:** 
+	1. User chooses to cancel insert audio file option.
+	2. Notes app will close the audio file album.
+- **Primary Postconditions:** 
+	1. User's note displays audio files that were imported into the specified note file.
 
 ### 4) Type with voice dictation
 - **Pre-condition:** The user must be logged in and have a note open and editable.
@@ -133,8 +134,8 @@
 	1. User is able to view multiple notes in split screen mode OR user views newly selected note file in full screen mode.
 
 ### 9) Log Out
-- **Pre-condition:** User must be logged in 
-- **Trigger:** User clicks on logout icon in window
+- **Pre-condition:** User must be logged in.
+- **Trigger:** User clicks on logout icon in window.
 - **Primary Sequence:** 
 	1. Notes app logs user out of account.
 	2. User will be redirected to the login page.
@@ -143,15 +144,15 @@
 	1. User has been logged out of their account.
 
 ### 10) Add Photos
-- **Pre-condition:** User must be logged in and have photos on the device
-- **Trigger:** User selects the photo button 
+- **Pre-condition:** User must be logged in and have photos on the device.
+- **Trigger:** User selects the photo button.
 - **Primary Sequence:**
 	1. Notes app opens a collection of various photos that can be added to the note.
 	2. User selects photo they want to add.
 	3. Notes app imports the photo into the note file.
  	4. The selected photo is displayed in the note and can be saved.
  - **Alternate Sequence:** 
-	1. User chooses to cancel insert photo option
+	1. User chooses to cancel insert photo option.
 	2. Notes app will close the photo album.
 - **Primary Postconditions:** 
 	1. User's note displays photos that were imported into the specified note file.
