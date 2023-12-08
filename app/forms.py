@@ -25,9 +25,9 @@ class NewFolderForm(FlaskForm):
 
 class NewNoteForm(FlaskForm):
     user_id = HiddenField('User ID', default=None)
-    default_note_content = 'New Note' #\n causing issues
+    default_note_content = 'New Note'
     note_id = HiddenField('Note ID', default=None)
     note_content = TextAreaField('Note Content', validators=[DataRequired()], default=default_note_content)
-    folder_id = HiddenField('Folder ID', id='folder_id',default=None) 
+    folder_id = HiddenField('Folder ID', id='folder_id', default=None) 
     created_at = DateTimeField('Created At', default=datetime.utcnow)
     modified_at = DateTimeField('Modified At', default=datetime.utcnow)
