@@ -39,3 +39,8 @@
 - Further progress was made on the project as the group discussed the requirements they are done with and almost done with. Vinh has completed the create account, create note, logout, and still making progress on the login requirements. Nathan has made progress and almost completed creating folders for the notes and sorting the notes according. Emma has successfully implemented the split-view notes requirement and is currently working on adding given photos to notes. Lastly, Priya is currently in the process of implementing saving a note. 
 
 - Each individual is striving to complete their respective requirements they are responsible for and successfully complete milestone 2.
+
+- ### 2023-12-7 at 21:00
+- All members attended
+
+- Every group member completed all of the requirements they were responsible for. We met up to clean up some of the unnecessary stuff from our code that was included throughout the project and tested the code to make sure everything worked. Small touchups and changes were made to make the UI more appealing. We also did a screen recording of our website that is included in the README.md file to showcase what our website looks like. 
