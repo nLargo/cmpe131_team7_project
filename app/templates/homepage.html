@@ -252,17 +252,16 @@
         console.log(notesArray);
 
         /* Note Show/Hide --------------------------------------------------------- */
-        var targetFolderId = null
+        var targetFolderId = null;
         function showAllNotes() {
-            targetFolderId = null
+            targetFolderId = null;
             resetFolderAppearance();
-            updateHTML();
         }
+        showAllNotes();
         function showFolderNotes(id, clickedFolder) {   
             targetFolderId = id;
             resetFolderAppearance();
             clickedFolder.classList.add('outline')
-            updateHTML();
         }
         function resetFolderAppearance() {
             var allFolders = document.querySelectorAll('.folder');
@@ -287,7 +286,6 @@
             var secondNoteContainer = document.getElementById('second-note');
             var secondContentContainer = document.getElementById('second-content');
 
-            // Update the content based on your conditions
             if (secondContentContainer.style.display === 'block' && !secondNoteLastSet) {
                 secondNoteTextarea.value = content;
                 secondNoteLastSet = true;
@@ -391,7 +389,6 @@
         }
         sortNotes();
         /* Sorting END ------------------------------------------------------------ */
-
         function updateHTML() {
             var searchInput = document.getElementById('search-bar').value.toLowerCase();
             const container = document.getElementById('notes-container');
@@ -436,9 +433,9 @@
             } else {
                 targetFolderId = null;
             }
-            updateHTML();
         });
-
+        updateHTML();
+        
         /*TRANSCRIBE*/
         let recognition = new webkitSpeechRecognition();
         recognition.continuous = true;
