@@ -34,6 +34,7 @@
     
             #sidebar {   
                 background-color: var(--background-light);
+                max-width: 275px;
             }
     
             #main-content {
@@ -47,7 +48,7 @@
                 padding: 10px;
             }
 
-            #side-content {
+            #second-content {
                 display: none;
                 color: var(--text-dark); 
                 background-color: var(--text-light);
@@ -150,6 +151,10 @@
                 line-height: 20px;  
             }
 
+            #hotbar-options {
+                display: flex;
+                width: fit-content;
+            }
             /* #endregion hotbar */
     
             /* #region directory colors */
@@ -247,7 +252,10 @@
                 margin-right: 0px;
             }
 
-            #split-view-button {
+            #split-view-button-1 {
+                font-size: var(--smallFont);
+            }
+            #split-view-button-2 {
                 font-size: var(--smallFont);
             }
 
@@ -262,13 +270,23 @@
             }
 
             #create-note-button {
+                color: var(--text-light);
+            }
+            #save-note-button {
+                color: var(--text-dark);
+            }
+            #delete-note-button {
+                color: var(--text-dark);
+            }
+
+
+            .icon-button {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 scale: 105%;
 
                 background-color: transparent;
-                color: var(--text-light);
                 cursor: pointer;
 
                 width: 30px;

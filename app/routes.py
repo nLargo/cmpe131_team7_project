@@ -138,3 +138,17 @@ def homeRevamp():
         return redirect(request.url)
 
     return render_template('homepage.html', notes=user_notes, folders=user_folders, form1=form1, form2=form2)
+
+@myapp_obj.route("/save_note/<int:note_id>", methods=['POST'])
+def save_note(note_id):
+    note_to_save = Notes.query.get_or_404(note_id)
+    note_to_save.note_content = request.form.get('new_content')
+    db.session.commit()
+    return redirect('/home')
+    
+@myapp_obj.route("/delete_note/<int:note_id>", methods=['POST'])
+def delete_note(note_id):
+    note_to_delete = Notes.query.get_or_404(note_id)
+    db.session.delete(note_to_delete)
+    db.session.commit()
+    return redirect('/home')

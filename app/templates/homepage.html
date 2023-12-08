@@ -58,12 +58,12 @@
                             <option value="title">Title</option>
                     </select>
 
-                    <form id="new-note-submit-button" method="post">     <!-- newNoteForm ID not customized -->
+                    <form id="new-note-submit-button" method="post"> 
                         {{ form2.hidden_tag() }}
                         <button type="submit" style="display: none;">Submit</button>
                         <input type="hidden" id="theFolderId" value="targetFolderId">
                     </form>
-                    <button id="create-note-button" class="pill-box hotbar-button" onclick="submitNoteForm(targetFolderId)">
+                    <button id="create-note-button" class="pill-box hotbar-button icon-button" onclick="submitNoteForm(targetFolderId)">
                         <i class="fas fa-plus"></i>
                     </button>
 
@@ -80,7 +80,7 @@
                     data-createdAt="{{ note.created_at }}" 
                     data-modifiedAt="{{ note.modified_at }}" 
                     data-folderId="{{ note.folder_id }}"
-                    onclick="showNoteContent(this, '{{ note.note_content }}', '{{ note.note_content.splitlines()[0] }}')">
+                    onclick="showNoteContent(this, '{{ note.note_content }}', '{{ note.note_id}}')">
                     </a>
                 {% endfor %}
 
@@ -89,36 +89,75 @@
 
             <div id="main-content">
                 <div class=hotbar>
-                    <b><div id="current-note-title">
+                    <b><div id="main-note-title">
                     Note
                     </div></b>
 
-                    <!--Insert Audio Button-->
-                    <a id="insert-audio-button" class="pill-box hotbar-button" onclick="openAudioUploader()">
-                        Insert Audio
-                    </a>
-                    <!--Insert Photo Button-->
-                    <a id="insert-photo-button" class="pill-box hotbar-button" onclick="openFileUploader()">
-                        Insert Photo
-                    </a>
-                    <!--Split View Button-->
-                    <a id="split-view-button" class="pill-box hotbar-button" onclick="toggleSplitScreen()">Split View</a>
+                    <div id="hotbar-options">
+                        <!--Insert Audio Button-->
+                        <a id="insert-audio-button" class="pill-box hotbar-button" onclick="openAudioUploader()">
+                            Insert Audio
+                        </a>
+                        <!--Insert Photo Button-->
+                        <a id="insert-photo-button" class="pill-box hotbar-button" onclick="openFileUploader()">
+                            Insert Photo
+                        </a>
+                        <!--Save Note Button-->
+                        <button type="submit" name="save_note" id="save-note-button"  onclick="saveNote('main')"
+                        class="pill-box hotbar-button icon-button">
+                            <i class="save fas fa-save"></i>
+                        </button>
+                        <!--Delete Note Button-->
+                        <button type="submit" name="delete_note" id="delete-note-button" onclick="deleteNote('main')" 
+                        class="pill-box hotbar-button icon-button">
+                            <i class="trash fas fa-trash"></i>
+                        </button>
+                        <!--Split View Button-->
+                        <a id="split-view-button-1" class="pill-box hotbar-button" onclick="toggleSplitScreen()">Split View</a>
+                    </div>
                     
-                </div></b>
+                </div>
                 
-                <div id="current-note">
+                <div id="main-note">
+                    <textarea id="main-note-body" class="note-body"></textarea>
                 </div>
                 
                 <input type="file" id="file-input" style="display: none;" onchange="handleFileUpload()">
                 <input type="file" id="audio-input" style="display: none;" accept="audio/*" onchange="handleAudioUpload()">
             </div>
 
-            <div id="side-content"> <!-- hidden by default-->
-                <b><div id="second-note-title" class=hotbar>
-                    My Other Note
-                </div></b>
-                
+            <div id="second-content"> <!-- hidden by default-->
+                <div class=hotbar>
+                    <b><div id="second-note-title">
+                    Other Note
+                    </div></b>
+
+                    <div id="hotbar-options">
+                        <!--Insert Audio Button-->
+                        <a id="insert-audio-button" class="pill-box hotbar-button" onclick="openAudioUploader()">
+                            Insert Audio
+                        </a>
+                        <!--Insert Photo Button-->
+                        <a id="insert-photo-button" class="pill-box hotbar-button" onclick="openFileUploader()">
+                            Insert Photo
+                        </a>
+                        <!--Save Note Button-->
+                        <button type="submit" name="save_note" id="save-note-button"  onclick="saveNote('second')"
+                        class="pill-box hotbar-button icon-button">
+                            <i class="save fas fa-save"></i>
+                        </button>
+                        <!--Delete Note Button-->
+                        <button type="submit" name="delete_note" id="delete-note-button" onclick="deleteNote('second')" 
+                        class="pill-box hotbar-button icon-button">
+                            <i class="trash fas fa-trash"></i>
+                        </button>
+                        <!--Split View Button-->
+                        <a id="split-view-button-2" class="pill-box hotbar-button" onclick="toggleSplitScreen()">Split View</a>
+                    </div>
+                </div>
+
                 <div id="second-note">
+                    <textarea id="second-note-body" class="note-body"></textarea>
                 </div>
             </div>
 
@@ -147,7 +186,7 @@
         }
         
         function displayImageInNoteContent(imageData) {
-            const noteContent = document.getElementById('current-note');
+            const noteContent = document.getElementById('main-note');
             // Create an img element
             const imageElement = document.createElement('img');
             // Set the image source to the base64 data
@@ -176,7 +215,7 @@
         }
 
         function displayAudioInNoteContent(audioData) {
-            const noteContent = document.getElementById('current-note');
+            const noteContent = document.getElementById('main-note');
             // Create an audio element
             const audioElement = document.createElement('audio');
             // Set the audio source to the base64 data
@@ -228,31 +267,97 @@
 
         /* Content ---------------------------------------------------------------- */
         var secondNoteLastSet = false
-        function showNoteContent(selectedNote, content, noteTitle) {
-            var noteContainer = document.getElementById('current-note');
+        var mainNoteId = null;
+        var secondNoteId = null;/*
+        function showNoteContent(selectedNote, content, selectedNoteId) {
+            var noteContainer = document.getElementById('main-note');
             var secondNoteContainer = document.getElementById('second-note');
-            var sideContentContainer = document.getElementById('side-content');
+            var sideContentContainer = document.getElementById('second-content');
 
             if (sideContentContainer.style.display === 'block' && !secondNoteLastSet) {
                 secondNoteContainer.innerHTML = ` 
-                    <textarea class="note-body">${content}</textarea>`; 
-                content;
+                    <textarea class="note-body .main-note-body">${content}</textarea>`; 
                 secondNoteLastSet = true;
+                secondNoteId = selectedNoteId;
+                console.log("selectedNoteID", selectedNoteId);
             } else {
                 noteContainer.innerHTML = ` 
-                    <textarea class="note-body">${content}</textarea>`; 
+                    <textarea class="note-body .second-note-body">${content}</textarea>`; 
                 secondNoteLastSet = false;
+                mainNoteId = selectedNoteId;
+                console.log("selectedNoteID", selectedNoteId);
+            }
+        } */
+        function showNoteContent(selectedNote, content, selectedNoteId) {
+            var mainNoteTextarea = document.getElementById('main-note-body');
+            var secondNoteTextarea = document.getElementById('second-note-body');
+
+            var noteContainer = document.getElementById('main-note');
+            var secondNoteContainer = document.getElementById('second-note');
+            var secondContentContainer = document.getElementById('second-content');
+
+            // Update the content based on your conditions
+            if (secondContentContainer.style.display === 'block' && !secondNoteLastSet) {
+                secondNoteTextarea.value = content;
+                secondNoteLastSet = true;
+                secondNoteId = selectedNoteId;
+                console.log("selectedNoteID", selectedNoteId);
+            } else {
+                mainNoteTextarea.value = content;
+                secondNoteLastSet = false;
+                mainNoteId = selectedNoteId;
+                console.log("selectedNoteID", selectedNoteId);
             }
         }
         function toggleSplitScreen() {
-            const secondNoteContainer = document.getElementById('side-content');
+            const splitViewBtn1 = document.getElementById('split-view-button-1');
+            splitViewBtn1.style.display = (splitViewBtn1.style.display === 'none') ? 'block' : 'none';
+
+            const secondNoteContainer = document.getElementById('second-content');
             secondNoteContainer.style.display = (secondNoteContainer.style.display === 'block') ? 'none' : 'block';
         }
-        function saveNote() {
-            var noteContent = document.querySelector('.note-body').value; // Get the content from the textarea
-            
-            updateHTML();
-            console.log('Saving note:', noteContent);
+
+
+        function saveNote(contentSide) {  
+            var id = (contentSide == 'main') ? mainNoteId : secondNoteId;
+            var dynamicId = (contentSide == 'main') ? 'main-note-body' : 'second-note-body';
+            var textarea = document.getElementById(dynamicId);
+
+            if (textarea) {
+                var newContent = textarea.value;
+
+                fetch(`/save_note/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `new_content=${encodeURIComponent(newContent)}`,
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Note saved successfully');
+                        setTimeout(() => location.reload(), 500);
+                    } else {
+                        console.error('Failed to save note');
+                    }
+                });
+            } else {
+                console.error('Textarea element not found');
+            }
+        }
+
+        
+        function deleteNote(contentSide) {         
+            var id = (contentSide == 'main') ? mainNoteId : secondNoteId;
+            fetch(`/delete_note/${id}`, { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Note deleted successfully');
+                        setTimeout(location.reload(), 500);
+                    } else {
+                        console.error('Failed to delete note');
+                    }
+                })
         }
         /* Content END ------------------------------------------------------------ */
 
@@ -313,14 +418,13 @@
                         data-createdAt="${note.createdAt}" 
                         data-modifiedAt="${note.modifiedAt}" 
                         data-folderId="${note.folderId}"
-                        onclick="showNoteContent(this, '${note.content}')">
+                        onclick="showNoteContent(this, '${note.content}', '${note.noteId}')">
                         ${note.title}
                     `;
                     container.appendChild(noteObject); 
                 }
             });
         }
-        /*updateHTML();*/
 
         function submitFolderForm() {
             document.getElementById("new-folder-text-box").submit();
@@ -328,10 +432,21 @@
         }
 
         function submitNoteForm(folderId) {
+            localStorage.setItem('currentFolderId', folderId);
             document.getElementById("folder_id").value = folderId;
             document.getElementById("new-note-submit-button").submit();
             updateHTML();
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var storedFolderId = localStorage.getItem('currentFolderId');
+            if (storedFolderId) {
+                targetFolderId = storedFolderId;
+            } else {
+                targetFolderId = null;
+            }
+            updateHTML();
+        });
     </script>
 
     <script src="https://kit.fontawesome.com/bf520e6492.js" crossorigin="anonymous"></script> 
