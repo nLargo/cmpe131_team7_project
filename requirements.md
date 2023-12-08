@@ -22,7 +22,7 @@
 [12, 13](images/ui-login-page.png)
 
 ## Non-functional Requirements
-1. Notes app should save file within 30 seconds.
+1. Notes app should be able to manually save files within 30 seconds.
 2. Notes app should include multilingual support.
 
 ## Use Cases - Nathan Largo (@nLargo)
