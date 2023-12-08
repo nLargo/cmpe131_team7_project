@@ -94,6 +94,16 @@
                     </div></b>
 
                     <div id="hotbar-options">
+                         <!--Save Note Button-->
+                         <button type="submit" name="save_note" id="save-note-button"  onclick="saveNote('main')"
+                         class="pill-box hotbar-button icon-button">
+                             <i class="save fas fa-save"></i>
+                         </button>
+                         <!--Delete Note Button-->
+                         <button type="submit" name="delete_note" id="delete-note-button" onclick="deleteNote('main')" 
+                         class="pill-box hotbar-button icon-button">
+                             <i class="trash fas fa-trash"></i>
+                         </button>
                         <!--Insert Audio Button-->
                         <a id="insert-audio-button" class="pill-box hotbar-button" onclick="openAudioUploader()">
                             Insert Audio
@@ -102,16 +112,6 @@
                         <a id="insert-photo-button" class="pill-box hotbar-button" onclick="openFileUploader()">
                             Insert Photo
                         </a>
-                        <!--Save Note Button-->
-                        <button type="submit" name="save_note" id="save-note-button"  onclick="saveNote('main')"
-                        class="pill-box hotbar-button icon-button">
-                            <i class="save fas fa-save"></i>
-                        </button>
-                        <!--Delete Note Button-->
-                        <button type="submit" name="delete_note" id="delete-note-button" onclick="deleteNote('main')" 
-                        class="pill-box hotbar-button icon-button">
-                            <i class="trash fas fa-trash"></i>
-                        </button>
                         <!--Split View Button-->
                         <a id="split-view-button-1" class="pill-box hotbar-button" onclick="toggleSplitScreen()">Split View</a>
                     </div>
@@ -133,14 +133,6 @@
                     </div></b>
 
                     <div id="hotbar-options">
-                        <!--Insert Audio Button-->
-                        <a id="insert-audio-button" class="pill-box hotbar-button" onclick="openAudioUploader()">
-                            Insert Audio
-                        </a>
-                        <!--Insert Photo Button-->
-                        <a id="insert-photo-button" class="pill-box hotbar-button" onclick="openFileUploader()">
-                            Insert Photo
-                        </a>
                         <!--Save Note Button-->
                         <button type="submit" name="save_note" id="save-note-button"  onclick="saveNote('second')"
                         class="pill-box hotbar-button icon-button">
@@ -151,6 +143,14 @@
                         class="pill-box hotbar-button icon-button">
                             <i class="trash fas fa-trash"></i>
                         </button>
+                        <!--Insert Audio Button--
+                        <a id="insert-audio-button" class="pill-box hotbar-button" onclick="openAudioUploader()">
+                            Insert Audio
+                        </a>
+                        <!--Insert Photo Button--
+                        <a id="insert-photo-button" class="pill-box hotbar-button" onclick="openFileUploader()">
+                            Insert Photo
+                        </a>-->
                         <!--Split View Button-->
                         <a id="split-view-button-2" class="pill-box hotbar-button" onclick="toggleSplitScreen()">Split View</a>
                     </div>
